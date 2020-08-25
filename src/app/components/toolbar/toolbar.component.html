@@ -1,0 +1,92 @@
+<div class="toolbarContainer">
+    <mat-toolbar color="primary" class="mat-elevation-z8" style="z-index: 10;">
+        <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon"
+            (click)="snav.toggle()">
+            <mat-icon>menu</mat-icon>
+        </button>
+        <span>Video Intelligent Console</span>
+        <span class="nav-space"></span>
+        <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+            <mat-icon>favorite</mat-icon>
+        </button>
+    </mat-toolbar>
+    <mat-sidenav-container class="sidenavContainer">
+        <mat-sidenav #snav>
+            <mat-nav-list>
+                <mat-accordion [displayMode]="'flat'">
+                    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                <img src="../../../assets/images/server.svg" style="width: 30px; height: 30px;" />Data
+                                Processing
+                            </mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <div style="padding-left: 5%;">
+                            <button mat-flat-button color="basic"
+                                style="width: 100%; text-align: left; font-weight: normal;">Data
+                                Exchange</button>
+                            <mat-divider style="width: 100%;"></mat-divider>
+                            <button mat-flat-button color="basic"
+                                style="width: 100%; text-align: left; font-weight: normal;">Preprocessing</button>
+                            <mat-divider style="width: 100%;"></mat-divider>
+                        </div>
+
+                    </mat-expansion-panel>
+                    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                <img src="../../../assets/images/server.svg"
+                                    style="width: 30px; height: 30px;" />Training
+                            </mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <div style="padding-left: 5%;">
+                            <button mat-raised-button color="primary">Demo 23333333333333333</button>
+                        </div>
+
+                    </mat-expansion-panel>
+                    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                <img src="../../../assets/images/server.svg" style="width: 30px; height: 30px;" />
+                                Serving
+                            </mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <div style="padding-left: 5%;">
+                            <button mat-raised-button color="primary">Demo 23333333333333333</button>
+                        </div>
+
+                    </mat-expansion-panel>
+                    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                <img src="../../../assets/images/configure.png"
+                                    style="width: 30px; height: 30px;" />Configuration
+                            </mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <div style="padding-left: 5%;">
+                            <p color="primary">Demo</p>
+                        </div>
+
+                    </mat-expansion-panel>
+                </mat-accordion>
+                <!-- <a mat-list-item routerLink=".">Demo 1</a>
+                <mat-divider></mat-divider>
+                <a mat-list-item routerLink=".">Demo 2</a>
+                <mat-divider></mat-divider>
+                <a mat-list-item routerLink=".">Demo 3</a>
+                <mat-divider></mat-divider>
+                <a mat-list-item routerLink=".">Demo 4</a>
+                <mat-divider></mat-divider>
+                <a mat-list-item routerLink=".">Demo 5</a> -->
+            </mat-nav-list>
+        </mat-sidenav>
+
+        <mat-sidenav-content>
+            <p>Hi there 1!!!</p>
+            <p>Hi there 2!!!</p>
+            <p>Hi there 3!!!</p>
+            <p>Hi there 4!!!</p>
+            <p>Hi there 5!!!</p>
+        </mat-sidenav-content>
+    </mat-sidenav-container>
+</div>
