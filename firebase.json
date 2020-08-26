@@ -1,11 +1,16 @@
 {
   "hosting": {
-    "site": "vision-ai-intelligence",
-    "public": "public",
+    "public": "dist/finalGraduation",
     "ignore": [
       "firebase.json",
       "**/.*",
       "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
     ]
   }
 }
