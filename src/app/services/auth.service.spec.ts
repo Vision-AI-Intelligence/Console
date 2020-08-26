@@ -1,12 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { AuthService } from './auth.service';
+import { UserAuthentication } from './auth.service';
 
 describe('AuthService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: AuthService = TestBed.get(AuthService);
+    // tslint:disable-next-line: deprecation
+    const service: UserAuthentication = TestBed.get(UserAuthentication);
     expect(service).toBeTruthy();
   });
 });
