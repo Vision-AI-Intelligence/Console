@@ -14,13 +14,40 @@
 // hue. Available color palettes: https://material.io/design/color/
 $primary-blue: (
     P1: #0081FF,
+    P2: #00D563,
+    P3: #F12B2B,
+    P4: #7E7E7E,
+    P5: #F7F7F7,
     contrast: (
-        P1: white
+        P1: white,
+        P2: white,
+        P3: white,
+        P4: white,
+        P5: white,
     )
 );
+$mat-green:(
+    P2: #00D563,
+    contrast: (
+        P2: white,
+    )
+);
+$mat-red:(
+    P3: #F12B2B,
+    contrast: (
+        P3: white,
+    )
+);
+// $mat-basic:(
+//     B1: white,
+//     contrast: (
+//         B1: #0081FF,
+//     )
+// );
 $finalGraduation-primary: mat-palette($primary-blue, P1);
-$finalGraduation-accent: mat-palette($mat-pink, A200, A100, A400);
-
+$finalGraduation-accent: mat-palette($mat-green, P2);
+// $finalGraduation-accent: mat-palette($mat-pink, A200, A100, A400);
+// $finalGraduation-basic: mat-palette($mat-basic);
 // The warn palette is optional (defaults to red).
 $finalGraduation-warn: mat-palette($mat-red);
 
@@ -35,4 +62,4 @@ $finalGraduation-theme: mat-light-theme($finalGraduation-primary, $finalGraduati
 /* You can add global styles to this file, and also import other style files */
 
 html, body { height: 100%; }
-body { margin: 0; font-family: OpenSans, "", sans-serif; }
+body { margin: 0; font-family: 'Open Sans', "", sans-serif; }

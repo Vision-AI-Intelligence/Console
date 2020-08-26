@@ -1,5 +1,6 @@
 {
   "hosting": {
+    "site": "vision-ai-intelligence",
     "public": "public",
     "ignore": [
       "firebase.json",

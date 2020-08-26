@@ -3,38 +3,25 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ToolbarComponent } from './components/toolbar/toolbar.component';
+import { HomeComponent } from '../app/pages/home/home.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {
-  MatToolbarModule,
-  MatMenuModule,
-  MatIconModule,
-  MatButtonModule,
-  MatSidenavModule,
-  MatListModule,
-  MatExpansionModule
-} from '@angular/material/';
-import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
-import { SnackbarComponent } from './components/snackbar/snackbar.component';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFireModule } from '@angular/fire';
+import { environment } from 'src/environments/environment';
+import { HomeModule } from './pages/home/home.module';
 @NgModule({
   declarations: [
     AppComponent,
-    ToolbarComponent,
-    BreadcrumbComponent,
-    SnackbarComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
-    MatToolbarModule,
-    MatMenuModule,
-    MatIconModule,
-    MatButtonModule,
-    MatSidenavModule,
-    MatListModule,
-    MatExpansionModule
+    AngularFireAuthModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    HomeModule
   ],
+  entryComponents: [HomeComponent],
   providers: [],
   bootstrap: [AppComponent]
 })
