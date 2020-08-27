@@ -9,6 +9,7 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireModule } from '@angular/fire';
 import { environment } from 'src/environments/environment';
 import { HomeModule } from './pages/home/home.module';
+import { DataprocessingModule } from './pages/dataprocessing/dataprocessing.module';
 @NgModule({
   declarations: [
     AppComponent,
@@ -19,7 +20,8 @@ import { HomeModule } from './pages/home/home.module';
     AppRoutingModule,
     AngularFireAuthModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
-    HomeModule
+    HomeModule,
+    DataprocessingModule
   ],
   entryComponents: [HomeComponent],
   providers: [],
