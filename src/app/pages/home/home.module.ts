@@ -18,7 +18,7 @@ import {
 } from '@angular/material';
 import { from } from 'rxjs';
 @NgModule({
-  declarations: [HomeComponent, ToolbarComponent],
+  declarations: [HomeComponent],
   imports: [
     CommonModule,
     HomeRoutingModule,
