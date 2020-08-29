@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserAuthentication } from 'src/app/services/auth.service';
 import { AngularFireAuth } from '@angular/fire/auth';
@@ -10,8 +10,9 @@ import { User } from '../../models/user.model';
 })
 export class ToolbarComponent implements OnInit {
 
-  panelOpenState = false;
+  // panelOpenState = false;
   userDetails: User = null;
+  @Output() SidenavToggle = new EventEmitter();
   constructor(
     public userAuth: UserAuthentication,
     private router: Router,
@@ -20,5 +21,9 @@ export class ToolbarComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  onSidenavToggle() {
+    this.SidenavToggle.emit();
   }
 }

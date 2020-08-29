@@ -13,7 +13,8 @@
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
 $primary-blue: (
-    P1: #0081FF,
+    // P1: #0081FF,
+    P1: #FF6500,
     P2: #00D563,
     P3: #F12B2B,
     P4: #7E7E7E,
@@ -24,6 +25,13 @@ $primary-blue: (
         P3: white,
         P4: white,
         P5: white,
+    )
+);
+$secondary-orange: (
+    // P1: #0081FF,
+    S1: #FF9237,
+    contrast: (
+        S1: white,
     )
 );
 $mat-green:(
@@ -45,6 +53,7 @@ $mat-red:(
 //     )
 // );
 $finalGraduation-primary: mat-palette($primary-blue, P1);
+$finalGraduation-secondary: mat-palette($secondary-orange, S1);
 $finalGraduation-accent: mat-palette($mat-green, P2);
 // $finalGraduation-accent: mat-palette($mat-pink, A200, A100, A400);
 // $finalGraduation-basic: mat-palette($mat-basic);

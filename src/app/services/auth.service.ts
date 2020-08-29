@@ -43,10 +43,17 @@ export class UserAuthentication {
   async signInWithGoogle() {
     await this.afAuth.signInWithPopup(new auth.GoogleAuthProvider()).then(
       () => {
-        this.snackBar.open('Login Successfully', '', { duration: 3000 });
+        this.snackBar.open('Login Successfully', '✔️', {
+          duration: 3000,
+          horizontalPosition: 'center',
+          verticalPosition: 'bottom'
+        });
         this.router.navigate(['home']);
       }, err => {
-        this.snackBar.open('Login Failed, Please try it again!!!', '', { duration: 3000 });
+        this.snackBar.open('Login Failed, Please try it again!!!', '❌', {
+          duration: 3000, horizontalPosition: 'center',
+          verticalPosition: 'bottom'
+        });
       }
     );
     this.userDetails = this.afAuth.currentUser; // kiểm tra xem user nãy subscribe có phải là nó hong
@@ -66,7 +73,11 @@ export class UserAuthentication {
 
   async signOut() {
     await this.afAuth.signOut().then(() => {
-      this.snackBar.open('OK bye', '', { duration: 3000 });
+      this.snackBar.open('OK bye', '😘', {
+        duration: 3000,
+        horizontalPosition: 'center',
+        verticalPosition: 'bottom'
+      });
     });
     this.userDetails = null;
     this.user = null;

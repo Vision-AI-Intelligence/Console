@@ -1,19 +1,16 @@
 <div class="toolbarContainer">
     <mat-toolbar color="primary" class="mat-elevation-z8" style="z-index: 10;">
-        <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
-            <!-- (click)="snav.toggle()"> -->
+        <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon"
+            (click)="onSidenavToggle()">
             <mat-icon>menu</mat-icon>
         </button>
         <span>Vision Intelligent Console</span>
         <span class="nav-space"></span>
         <div id="btnLog">
             <div *ngIf="userDetails == null">
-                <!-- <a (click)="userAuth.signInWithGoogle()" id="btnSignin">
-                <button mat-flat-button color="basic">Sign In</button>
-            </a> -->
-                <button mat-button id="btnPhoto" (click)="userAuth.signInWithGoogle()"
-                    style="height: 50px; width: 50px; outline: none;">
-                    <img src="https://image.flaticon.com/icons/svg/1077/1077063.svg" alt="" />
+                <button mat-button id="btnPhoto" (click)="userAuth.signInWithGoogle()">
+                    <img src="https://image.flaticon.com/icons/svg/1077/1077063.svg" alt=""
+                        style="width: 30px; height: 30px;" />
                 </button>
             </div>
             <div *ngIf="userDetails != null" style="display: flex; flex-direction: row;">
@@ -21,14 +18,16 @@
                 <button mat-button [matMenuTriggerFor]="menu"
                     style=" height: fit-content; width: fit-content; outline: none;"
                     *ngIf="userDetails.photoURL != null">
-                    <img style="vertical-align: text-top;" class="userLoggedin" [src]="userDetails.photoURL" alt="" />
+                    <div style="display: flex; flex-direction: row; width: fit-content;">
+                        <img class="userLoggedin" [src]="userDetails.photoURL" alt="" />
+                        <p id="displayName">{{userDetails.displayName}}</p>
+                    </div>
+
                 </button>
-
-                <p id="displayName">{{userDetails.displayName}}</p>
-
                 <mat-menu #menu="matMenu" xPosition="before">
                     <div style="padding: 10px 20px 10px 20px">
                         <div (click)="userAuth.signOut()">
+
                             <button mat-flat-button color="primary">Sign out</button>
 
                         </div>
@@ -38,94 +37,7 @@
         </div>
 
 
-        <!-- <mat-sidenav-container class="sidenavContainer">
-            <mat-sidenav #snav>
-                <mat-nav-list>
-                    <mat-accordion [displayMode]="'flat'">
-                        <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
-                            <mat-expansion-panel-header>
-                                <mat-panel-title>
-                                    <img src="../../../assets/images/server.svg"
-                                        style="width: 30px; height: 30px;" />Data
-                                    Processing
-                                </mat-panel-title>
-                            </mat-expansion-panel-header>
-                            <div style="padding-left: 5%;">
-                                <button mat-flat-button color="basic"
-                                    style="width: 100%; text-align: left; font-weight: normal;">Data
-                                    Exchange</button>
-                                <mat-divider style="width: 100%;"></mat-divider>
-                                <button mat-flat-button color="basic"
-                                    style="width: 100%; text-align: left; font-weight: normal;">Preprocessing</button>
-                                <mat-divider style="width: 100%;"></mat-divider>
-                            </div>
-                        </mat-expansion-panel>
-                        <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
-                            <mat-expansion-panel-header>
-                                <mat-panel-title>
-                                    <img src="../../../assets/images/server.svg"
-                                        style="width: 30px; height: 30px;" />Training
-                                </mat-panel-title>
-                            </mat-expansion-panel-header>
-                            <div style="padding-left: 5%;">
-                                <button mat-flat-button color="basic"
-                                    style="width: 100%; text-align: left; font-weight: normal;">Data
-                                    Exchange</button>
-                                <mat-divider style="width: 100%;"></mat-divider>
-                                <button mat-flat-button color="basic"
-                                    style="width: 100%; text-align: left; font-weight: normal;">Preprocessing</button>
-                                <mat-divider style="width: 100%;"></mat-divider>
-                            </div>
 
-                        </mat-expansion-panel>
-                        <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
-                            <mat-expansion-panel-header>
-                                <mat-panel-title>
-                                    <img src="../../../assets/images/server.svg" style="width: 30px; height: 30px;" />
-                                    Serving
-                                </mat-panel-title>
-                            </mat-expansion-panel-header>
-                            <div style="padding-left: 5%;">
-                                <button mat-flat-button color="basic"
-                                    style="width: 100%; text-align: left; font-weight: normal;">Data
-                                    Exchange</button>
-                                <mat-divider style="width: 100%;"></mat-divider>
-                                <button mat-flat-button color="basic"
-                                    style="width: 100%; text-align: left; font-weight: normal;">Preprocessing</button>
-                                <mat-divider style="width: 100%;"></mat-divider>
-                            </div>
-
-                        </mat-expansion-panel>
-                        <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
-                            <mat-expansion-panel-header>
-                                <mat-panel-title>
-                                    <img src="../../../assets/images/configure.png"
-                                        style="width: 30px; height: 30px;" />Configuration
-                                </mat-panel-title>
-                            </mat-expansion-panel-header>
-                            <div style="padding-left: 5%;">
-                                <button mat-flat-button color="basic"
-                                    style="width: 100%; text-align: left; font-weight: normal;">Data
-                                    Exchange</button>
-                                <mat-divider style="width: 100%;"></mat-divider>
-                                <button mat-flat-button color="basic"
-                                    style="width: 100%; text-align: left; font-weight: normal;">Preprocessing</button>
-                                <mat-divider style="width: 100%;"></mat-divider>
-                            </div>
-
-                        </mat-expansion-panel>
-                    </mat-accordion>
-                </mat-nav-list>
-
-            </mat-sidenav>
-            <mat-sidenav-content>
-                <button mat-flat-button>Basic</button>
-                <button mat-flat-button color="primary">Primary</button>
-                <button mat-flat-button color="accent">Accent</button>
-                <button mat-flat-button color="warn">Warn</button>
-                <button mat-flat-button disabled>Disabled</button>
-                <a mat-raised-button href="https://www.google.com/" target="_blank">Link</a>
-            </mat-sidenav-content>
-        </mat-sidenav-container> -->
     </mat-toolbar>
+
 </div>
