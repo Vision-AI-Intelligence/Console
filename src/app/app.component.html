@@ -1,11 +1,14 @@
-<mat-sidenav-container>
-    <mat-sidenav #sidenav>
-        <app-sidenav (closeSidenav)='sidenav.close()'></app-sidenav>
-    </mat-sidenav>
-    <mat-sidenav-content>
-        <app-toolbar (SidenavToggle)="sidenav.toggle()"></app-toolbar>
-        <main>
+<main style="height:100vh; overflow-y: hidden;">
+    <app-toolbar (SidenavToggle)="sidenav.toggle()"></app-toolbar>
+    <mat-sidenav-container style="top: 60px;">
+
+        <mat-sidenav #sidenav>
+            <app-sidenav (closeSidenav)='sidenav.close()'></app-sidenav>
+        </mat-sidenav>
+        <mat-sidenav-content style="padding: 10px">
+
             <router-outlet></router-outlet>
-        </main>
-    </mat-sidenav-content>
-</mat-sidenav-container>
+
+        </mat-sidenav-content>
+    </mat-sidenav-container>
+</main>
