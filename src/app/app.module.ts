@@ -10,9 +10,14 @@ import { AngularFireModule } from '@angular/fire';
 import { environment } from 'src/environments/environment';
 import { HomeModule } from './pages/home/home.module';
 import { DataprocessingModule } from './pages/dataprocessing/dataprocessing.module';
+import { ToolbarComponent } from '../app/components/toolbar/toolbar.component';
+import { MaterialModule } from './material.module';
+import { SidenavComponent } from './components/sidenav/sidenav.component';
 @NgModule({
   declarations: [
     AppComponent,
+    ToolbarComponent,
+    SidenavComponent,
   ],
   imports: [
     BrowserModule,
@@ -21,9 +26,10 @@ import { DataprocessingModule } from './pages/dataprocessing/dataprocessing.modu
     AngularFireAuthModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     HomeModule,
-    DataprocessingModule
+    DataprocessingModule,
+    MaterialModule
   ],
-  entryComponents: [HomeComponent],
+  // entryComponents: [HomeComponent],
   providers: [],
   bootstrap: [AppComponent]
 })
