@@ -9,8 +9,7 @@
         <div id="btnLog">
             <div *ngIf="userDetails == null">
                 <button mat-button id="btnPhoto" (click)="userAuth.signInWithGoogle()">
-                    <img src="https://image.flaticon.com/icons/svg/1077/1077063.svg" alt=""
-                        style="width: 30px; height: 30px;" />
+                    <img src="../../../assets/images/user.png" alt="" style="width: 30px; height: 30px;" />
                 </button>
             </div>
             <div *ngIf="userDetails != null" style="display: flex; flex-direction: row;">
