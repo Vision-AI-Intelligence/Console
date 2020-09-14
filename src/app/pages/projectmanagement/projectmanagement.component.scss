@@ -1,0 +1,16 @@
+#custom-button{
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    width: 15vh;
+    height: 15vh;
+    border-radius: 10px;
+    flex-flow: column-reverse;
+    align-items: stretch;
+    margin: 1%;
+}
+.button-rendered{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
