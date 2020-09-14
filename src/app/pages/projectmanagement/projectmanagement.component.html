@@ -3,12 +3,15 @@
         Create new project
     </p>
 
-    <div #buttonsContainer class="button-rendered">
-        <button mat-flat-button color="primary" id="custom-button" class="mat-elevation-z6" (click)='generateButton()'>
-            <mat-icon style="color: #FF9237; width: fit-content; font-size: 50px;">
-                add
-            </mat-icon>
-            <p style="color: black;">Create</p>
-        </button>
-    </div>
+  <div #buttonsContainer class="button-rendered">
+    <button mat-raised-button color="primary" id="custom-button" class="mat-elevation-z6" (click)='generateButton()'>
+      <mat-icon style="color: #FF9237; width: fit-content; font-size: 50px;">
+        add
+      </mat-icon>
+      <p style="color: black;">Create</p>
+    </button>
+    <button *ngFor="let proj of projects" class="project-button mat-elevation-z6" mat-raised-button color="primary">
+      {{proj["name"]}}
+    </button>
+  </div>
 </div>
