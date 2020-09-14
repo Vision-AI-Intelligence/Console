@@ -9,21 +9,17 @@
     text-align: left; 
     font-weight: normal;
   }
-  .sidenavContainer{
-    flex: 1;
-  }
-  .nav-space {
-      flex: 1 0 auto;
-    }
+  // .sidenavContainer{
+  //   flex: 1;
+  // }
+  // .nav-space {
+  //     flex: 1 0 auto;
+  //   }
   
-    mat-toolbar-row {
-      // background-color: #0F9D58;
-      // color: #ffffff;
-      position: fixed;
-    }
     
     button{
       outline: none;
+      margin: 5px;
     }
     
     #btnSignin{

@@ -69,6 +69,19 @@ $finalGraduation-theme: mat-light-theme($finalGraduation-primary, $finalGraduati
 @include angular-material-theme($finalGraduation-theme);
 
 /* You can add global styles to this file, and also import other style files */
-
+$custom-typography: mat-typography-config(
+      $font-family: "Open Sans" sans-serif !important,
+);
+@include angular-material-typography($custom-typography);
 html, body { height: 100%; }
-body { margin: 0; font-family: 'Open Sans', "", sans-serif; }
+body { 
+    margin: 0; 
+    // font-family: 'Open Sans', "", sans-serif; 
+    font-family: 'Open Sans' sans-serif !important;
+}
+// * {
+//     font-family: 'Open Sans' sans-serif !important;
+// }
+// .material-icons {
+//     font-family: 'Material Icons';
+//   }
