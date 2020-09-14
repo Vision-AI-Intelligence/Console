@@ -54,6 +54,7 @@ export class UserAuthentication {
           duration: 3000, horizontalPosition: 'center',
           verticalPosition: 'bottom'
         });
+        // console.log(err);
       }
     );
     this.userDetails = this.afAuth.currentUser; // kiểm tra xem user nãy subscribe có phải là nó hong
