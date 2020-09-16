@@ -6,25 +6,29 @@
 #custom-button {
   display: flex;
   flex-direction: column;
+//   justify-items: center;
   background-color: white;
-  width: 30vh;
-  height: 15vh;
+  width: 40vh;
+  height: 25vh;
   border-radius: 10px;
-  flex-flow: column-reverse;
-  align-items: stretch;
+  place-items: normal;
+//   flex-flow: column-reverse;
+//   align-items: stretch;
   margin: 1%;
+  justify-content: center;
 }
 .button-rendered {
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
   align-items: center;
+  justify-content: center;
 }
 
 .project-button {
   color: #fff;
-  width: 30vh;
-  height: 15vh;
+  width: 40vh;
+  height: 25vh;
   border-radius: 10px;
   border: 0;
   margin: 1%;

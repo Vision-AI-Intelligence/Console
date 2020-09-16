@@ -2,16 +2,31 @@
     <p style="font-size: 25pt; margin-left: 1%;">
         Create new project
     </p>
-
-  <div #buttonsContainer class="button-rendered">
-    <button mat-raised-button color="primary" id="custom-button" class="mat-elevation-z6" (click)='generateButton()'>
-      <mat-icon style="color: #FF9237; width: fit-content; font-size: 50px;">
-        add
-      </mat-icon>
-      <p style="color: black;">Create</p>
-    </button>
-    <button *ngFor="let proj of projects" class="project-button mat-elevation-z6" mat-raised-button color="primary">
-      {{proj["name"]}}
-    </button>
-  </div>
+    <div>
+        <a [routerLink]="['./resources']" routerLinkActive="active">
+            <button mat-raised-button color="primary">Resources</button>
+        </a>
+        <a routerLink='./billing' routerLinkActive="active">
+            <button mat-raised-button color="accent">Billing</button>
+        </a>
+        <a routerLink='./collaboration' routerLinkActive="active">
+            <button mat-raised-button color="warn">Collaboration</button>
+        </a>
+    </div>
+    <div>
+        <router-outlet></router-outlet>
+    </div>
+    <div #buttonsContainer class="button-rendered">
+        <button mat-raised-button color="primary" id="custom-button" class="mat-elevation-z6"
+            (click)='generateButton()'>
+            <mat-icon style="color: #FF9237; width: 50%; height: 50%; font-size: 10vh;">
+                add
+            </mat-icon>
+            <p style="color: black;">Create</p>
+        </button>
+        <button *ngFor="let proj of projects" class="project-button mat-elevation-z6" mat-raised-button
+            style="background-color:#FF9237;" (click)="gotoEdit()">
+            {{proj["name"]}}
+        </button>
+    </div>
 </div>

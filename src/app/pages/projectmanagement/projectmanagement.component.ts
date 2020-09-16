@@ -2,6 +2,7 @@ import {
   Component,
   OnInit,
 } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-projectmanagement',
@@ -10,7 +11,7 @@ import {
 })
 export class ProjectmanagementComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   public projects = [];
 
@@ -18,5 +19,8 @@ export class ProjectmanagementComponent implements OnInit {
 
   generateButton() {
     this.projects.push({ name: 'Project ' + this.projects.length });
+  }
+  async gotoEdit() {
+    await this.router.navigate(['/editproject']);
   }
 }
