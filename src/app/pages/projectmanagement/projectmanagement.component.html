@@ -5,10 +5,10 @@
     <div #buttonsContainer class="button-rendered">
         <button mat-raised-button color="primary" id="custom-button" class="mat-elevation-z6"
             (click)='generateButton()'>
-            <mat-icon style="color: #FF9237; width: 50%; height: 50%; font-size: 10vh;">
+            <mat-icon class="btCreate_icon">
                 add
             </mat-icon>
-            <p style="color: black;">Create</p>
+            <p style="color: black; font-size: x-large;">Create</p>
         </button>
         <button *ngFor="let proj of projects" class="project-button mat-elevation-z6" mat-raised-button
             style="background-color:#FF9237;" (click)="gotoEdit(proj)">
