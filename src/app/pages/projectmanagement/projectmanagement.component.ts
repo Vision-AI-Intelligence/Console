@@ -18,9 +18,9 @@ export class ProjectmanagementComponent implements OnInit {
   ngOnInit(): void { }
 
   generateButton() {
-    this.projects.push({ name: 'Project ' + this.projects.length });
+    this.projects.push({ name: 'Project ' + this.projects.length, id: '' + this.projects.length });
   }
-  async gotoEdit() {
-    await this.router.navigate(['/editproject']);
+  async gotoEdit(proj) {
+    await this.router.navigate(['/editproject/' + proj.id]);
   }
 }

@@ -1,9 +1,36 @@
-<!-- <div style="display: flex; flex-direction: row; justify-content: space-around;">
-    <app-resources></app-resources>
-    <app-billing></app-billing>
-    <app-collaboration></app-collaboration>
-
-    <div>
-        <router-outlet></router-outlet>
-    </div>
+<!-- <div>
+  <a [routerLink]="['./resources']" routerLinkActive="active">
+    <button mat-raised-button color="primary">Resources</button>
+  </a>
+  <a routerLink='./billing' routerLinkActive="active">
+    <button mat-raised-button color="accent">Billing</button>
+  </a>
+  <a routerLink='./collaboration' routerLinkActive="active">
+    <button mat-raised-button color="warn">Collaboration</button>
+  </a>
+</div>
+<div>
+  <router-outlet></router-outlet>
 </div> -->
+<div>
+  <!-- <mat-tab-group mat-stretch-tabs class="mat-elevation-z4" (selectedTabChange)="selectTab($event)">
+    <mat-tab label="Resources" [routerLink]="['./resources']" [routerLinkActive]="'active'">
+      <router-outlet></router-outlet>
+    </mat-tab>
+    <mat-tab label="Billing">
+      <router-outlet></router-outlet>
+    </mat-tab>
+    <mat-tab label="Collaboration">
+      <router-outlet></router-outlet>
+    </mat-tab>
+  </mat-tab-group> -->
+  <nav mat-tab-nav-bar>
+    <a mat-tab-link *ngFor="let link of links" (click)="selectTab(link)" [routerLinkActive]="'active'"
+      [active]="activeLink == link"> {{link}}
+    </a>
+
+  </nav>
+  <div>
+    <router-outlet></router-outlet>
+  </div>
+</div>

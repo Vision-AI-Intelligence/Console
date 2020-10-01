@@ -7,12 +7,14 @@ import { BillingComponent } from '../components/billing/billing.component';
 import { CollaborationComponent } from '../components/collaboration/collaboration.component';
 
 const routes: Routes = [{
-  path: '', component: EditprojectComponent, children: [
+  path: ':id', component: EditprojectComponent, children: [
     {
-      path: 'resources', component: ResourcesComponent
+      path: 'resources', component: ResourcesComponent,
+      // pathMatch: 'full'
     },
     {
-      path: 'billing', component: BillingComponent
+      path: 'billing', component: BillingComponent,
+      // pathMatch: 'full'
     },
     {
       path: 'collaboration', component: CollaborationComponent

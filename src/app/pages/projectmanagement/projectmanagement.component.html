@@ -2,20 +2,6 @@
     <p style="font-size: 25pt; margin-left: 1%;">
         Create new project
     </p>
-    <div>
-        <a [routerLink]="['./resources']" routerLinkActive="active">
-            <button mat-raised-button color="primary">Resources</button>
-        </a>
-        <a routerLink='./billing' routerLinkActive="active">
-            <button mat-raised-button color="accent">Billing</button>
-        </a>
-        <a routerLink='./collaboration' routerLinkActive="active">
-            <button mat-raised-button color="warn">Collaboration</button>
-        </a>
-    </div>
-    <div>
-        <router-outlet></router-outlet>
-    </div>
     <div #buttonsContainer class="button-rendered">
         <button mat-raised-button color="primary" id="custom-button" class="mat-elevation-z6"
             (click)='generateButton()'>
@@ -25,7 +11,7 @@
             <p style="color: black;">Create</p>
         </button>
         <button *ngFor="let proj of projects" class="project-button mat-elevation-z6" mat-raised-button
-            style="background-color:#FF9237;" (click)="gotoEdit()">
+            style="background-color:#FF9237;" (click)="gotoEdit(proj)">
             {{proj["name"]}}
         </button>
     </div>
