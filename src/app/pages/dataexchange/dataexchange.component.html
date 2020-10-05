@@ -20,7 +20,6 @@
         <button mat-flat-button color="primary" class="mat-elevation-z9" style="margin: 2%;">Upload file</button>
     </div>
     <div>
-        <mat-paginator [pageSizeOptions]="[5, 10, 15, 20]" showFirstLastButtons></mat-paginator>
         <div class="mat-elevation-z8" class="table-custom">
             <table mat-table [dataSource]="dataSource">
 
@@ -76,6 +75,6 @@
             </table>
 
         </div>
-
+        <mat-paginator [pageSizeOptions]="[5, 10, 15, 20]" showFirstLastButtons></mat-paginator>
     </div>
 </div>

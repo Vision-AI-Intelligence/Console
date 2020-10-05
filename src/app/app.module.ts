@@ -13,11 +13,17 @@ import { DataprocessingModule } from './pages/dataprocessing/dataprocessing.modu
 import { ToolbarComponent } from '../app/components/toolbar/toolbar.component';
 import { MaterialModule } from './material.module';
 import { SidenavComponent } from './components/sidenav/sidenav.component';
+import { DeleteComponent } from './components/dialogs/delete/delete.component';
+import { UpdateComponent } from './components/dialogs/update/update.component';
+import { CreateComponent } from './components/dialogs/create/create.component';
 @NgModule({
   declarations: [
     AppComponent,
     ToolbarComponent,
     SidenavComponent,
+    DeleteComponent,
+    UpdateComponent,
+    CreateComponent,
   ],
   imports: [
     BrowserModule,
@@ -29,7 +35,7 @@ import { SidenavComponent } from './components/sidenav/sidenav.component';
     DataprocessingModule,
     MaterialModule
   ],
-  // entryComponents: [HomeComponent],
+  entryComponents: [UpdateComponent, CreateComponent],
   providers: [],
   bootstrap: [AppComponent]
 })

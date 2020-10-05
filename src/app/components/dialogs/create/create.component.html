@@ -1,0 +1,33 @@
+<h2>{{title}}</h2>
+<div class="container">
+    <mat-dialog-content>
+        <mat-form-field>
+            <label>Project ID</label>
+            <!-- <input matInput placeholder="Enter your project ID" name> -->
+            <input matInput type="text" [(ngModel)]="data.pid" required>
+            <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="data.pid=''">
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-form-field>
+        <mat-form-field>
+            <label>Name</label>
+            <!-- <input matInput placeholder="Enter your project name" name> -->
+            <input matInput type="text" [(ngModel)]="data.name" required>
+            <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="data.name=''">
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-form-field>
+        <mat-form-field>
+            <label>Description</label>
+            <!-- <input matInput placeholder="Enter your project description" name> -->
+            <input matInput type="text" [(ngModel)]="data.description" required>
+            <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="data.description=''">
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-form-field>
+    </mat-dialog-content>
+    <mat-dialog-actions>
+        <button mat-button color="primary" matDialogClose>Close</button>
+        <button mat-button color="primary" [matDialogClose]="input" (click)="onCreate()">Create</button>
+    </mat-dialog-actions>
+</div>

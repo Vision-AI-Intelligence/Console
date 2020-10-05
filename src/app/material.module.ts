@@ -9,9 +9,12 @@ import {
   MatSidenavModule,
   MatToolbarModule,
   MatDividerModule,
-  MatTabsModule
+  MatTabsModule,
+  MatDialogModule,
+  MatFormFieldModule,
+  MatInputModule
 } from '@angular/material';
-
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [],
@@ -25,7 +28,11 @@ import {
     MatSidenavModule,
     MatToolbarModule,
     MatDividerModule,
-    MatTabsModule
+    MatTabsModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    FormsModule,
+    MatInputModule
   ],
   exports: [
     MatIconModule,
@@ -36,7 +43,11 @@ import {
     MatSidenavModule,
     MatToolbarModule,
     MatDividerModule,
-    MatTabsModule
+    MatTabsModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    FormsModule,
+    MatInputModule
   ]
 })
 export class MaterialModule { }
