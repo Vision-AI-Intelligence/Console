@@ -1,1 +1,5 @@
-<p>breadcrumb works!</p>
+<div *ngIf="this.path.length!=0" style="display: flex; flex-direction: row;">
+  <h2 *ngFor="let p of this.path" style="color: #FF6500;font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+    ⏵ {{p}}
+  </h2>
+</div>

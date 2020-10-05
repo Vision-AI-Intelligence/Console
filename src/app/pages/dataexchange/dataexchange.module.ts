@@ -1,18 +1,18 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { NgModule } from "@angular/core";
+import { CommonModule } from "@angular/common";
 
-import { DataexchangeRoutingModule } from './dataexchange-routing.module';
-import { DataexchangeComponent } from './dataexchange.component';
-import { BreadcrumbComponent } from '../../components/breadcrumb/breadcrumb.component';
+import { DataexchangeRoutingModule } from "./dataexchange-routing.module";
+import { DataexchangeComponent } from "./dataexchange.component";
 import {
   MatTableModule,
   MatCheckboxModule,
   MatButtonModule,
   MatPaginatorModule,
-  MatProgressBarModule
-} from '@angular/material';
+  MatProgressBarModule,
+} from "@angular/material";
+import { AppModule } from "src/app/app.module";
 @NgModule({
-  declarations: [DataexchangeComponent, BreadcrumbComponent],
+  declarations: [DataexchangeComponent],
   imports: [
     CommonModule,
     DataexchangeRoutingModule,
@@ -20,7 +20,7 @@ import {
     MatCheckboxModule,
     MatButtonModule,
     MatPaginatorModule,
-    MatProgressBarModule
-  ]
+    MatProgressBarModule,
+  ],
 })
-export class DataexchangeModule { }
+export class DataexchangeModule {}
