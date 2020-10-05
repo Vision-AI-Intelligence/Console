@@ -7,8 +7,30 @@ button{
 }
 .table-custom{
     
-        position: relative;
-        max-height: 400px;
-        overflow: auto;
+    position: relative;
+    max-height: 400px;
+    overflow: auto;
     
 }
+mat-paginator{
+    background-color:#FF6500;
+    color: white;
+}
+mat-select{
+    background-color:#FF9237;
+    color: white;
+    border-radius: 10px;
+    border: none;
+    text-align: center;
+    outline: none;
+    width: 110px;
+    height: 35px;
+    font-size: 100%;
+    padding-left: 10px;
+}
+.not-empty-select.mat-selected {
+    color: white !important;
+  }
+  use :host ::ng-deep .mat-select-value-text{
+    color: white !important;
+ }

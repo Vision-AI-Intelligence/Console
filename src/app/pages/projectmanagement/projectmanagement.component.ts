@@ -27,16 +27,17 @@ export class ProjectmanagementComponent implements OnInit {
   // generateButton() {
   //   this.projects.push({ name: 'Project ' + this.projects.length, id: '' + this.projects.length });
   // }
-  onCreate() {
+  async onCreate() {
     const inputData = {
-      pid: '',
-      name: '',
-      description: ''
+      pid: '000',
+      name: '000',
+      description: '000'
     };
     const dialogRef = this.dialog.open(CreateComponent, { width: this.dialogWidth, hasBackdrop: true, data: inputData });
     dialogRef.afterClosed().subscribe((data) => {
       this.projectService.createProject(data);
       this.projects.push(data);
+      console.log(this.projects);
     });
   }
   async gotoEdit(proj) {

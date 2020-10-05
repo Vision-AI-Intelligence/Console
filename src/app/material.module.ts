@@ -12,7 +12,12 @@ import {
   MatTabsModule,
   MatDialogModule,
   MatFormFieldModule,
-  MatInputModule
+  MatInputModule,
+  MatProgressBarModule,
+  MatSelectModule,
+  MatCheckboxModule,
+  MatPaginatorModule,
+  MatTableModule,
 } from '@angular/material';
 import { FormsModule } from '@angular/forms';
 
@@ -32,7 +37,12 @@ import { FormsModule } from '@angular/forms';
     MatDialogModule,
     MatFormFieldModule,
     FormsModule,
-    MatInputModule
+    MatInputModule,
+    MatProgressBarModule,
+    MatSelectModule,
+    MatCheckboxModule,
+    MatPaginatorModule,
+    MatTableModule
   ],
   exports: [
     MatIconModule,
@@ -47,7 +57,12 @@ import { FormsModule } from '@angular/forms';
     MatDialogModule,
     MatFormFieldModule,
     FormsModule,
-    MatInputModule
+    MatInputModule,
+    MatProgressBarModule,
+    MatSelectModule,
+    MatCheckboxModule,
+    MatPaginatorModule,
+    MatTableModule
   ]
 })
 export class MaterialModule { }

@@ -24,7 +24,9 @@ export class CreateComponent implements OnInit {
     this.dialogRef.close(this.data);
   }
   get checkInvalid() {
-    if (this.input === '' || this.input == null) {
+    if (this.data.pid === '' || this.data.pid == null
+      || this.data.description === '' || this.data.description == null
+      || this.data.name === '' || this.data.name == null) {
       return true;
     } else {
       return false;

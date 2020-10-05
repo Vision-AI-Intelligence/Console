@@ -1,12 +1,24 @@
 <div style="width: 100%; top: 60px; font-family: 'Open Sans';">
     <app-breadcrumb></app-breadcrumb>
     <div>
-        <div style="display: flex; flex-direction: row; align-items: baseline;">
-            <p>Storage</p>
-            <mat-progress-bar mode="determinate" value="40"
-                style="width: 200px; height: 10px; border-radius: 15px; margin-left: 2%;">
-            </mat-progress-bar>
+        <div style="display: flex; flex-direction: row; align-items: center;">
+            <div style="display: flex; flex-direction: row; align-items: baseline;">
+                <p>Storage</p>
+                <mat-progress-bar mode="determinate" value="40"
+                    style="width: 200px; height: 10px; border-radius: 15px; margin-left: 2%;">
+                </mat-progress-bar>
+            </div>
+            <div style="margin-left: 5%;">
+
+                <mat-select color="accent" [(ngModel)]="selectedGroup">
+                    <mat-option class=".not-empty-select" *ngFor="let group of groups" [value]="group.name"
+                        (click)="getVal()">{{group.name}}
+                    </mat-option>
+                </mat-select>
+
+            </div>
         </div>
+
         <div style="display: flex; flex-direction: row; align-items: center;">
             <p>{{dataUsed}}</p>
             <p>&nbsp;GB</p>
@@ -16,64 +28,48 @@
 
     </div>
     <div>
-        <button mat-flat-button color="primary" class="mat-elevation-z9">Create folder</button>
-        <button mat-flat-button color="primary" class="mat-elevation-z9" style="margin: 2%;">Upload file</button>
+        <button mat-flat-button color="accent" class="mat-elevation-z9" (click)="createFolder()">Create folder</button>
+        <button mat-flat-button color="accent" class="mat-elevation-z9" style="margin: 2%;"
+            (click)="uploadFile()">Upload file</button>
+        <button mat-flat-button color="accent" class="mat-elevation-z9" (click)="downloadFromURL()">Download from
+            URL</button>
     </div>
     <div>
-        <div class="mat-elevation-z8" class="table-custom">
-            <table mat-table [dataSource]="dataSource">
-
-                <!-- Checkbox Column -->
+        <div class="table-custom mat-elevation-z9">
+            <mat-table #table [dataSource]="dataSource">
                 <ng-container matColumnDef="select">
-                    <th mat-header-cell *matHeaderCellDef>
-                        <!-- <mat-checkbox (change)="$event ? masterToggle() : null"
-                            [checked]="selection.hasValue() && isAllSelected()"
-                            [indeterminate]="selection.hasValue() && !isAllSelected()" [aria-label]="checkboxLabel()">
-                        </mat-checkbox> -->
-                        Select
-                    </th>
-                    <td mat-cell *matCellDef="let row">
+                    <mat-header-cell *matHeaderCellDef> Select </mat-header-cell>
+                    <mat-cell *matCellDef="let row">
                         <mat-checkbox (click)="$event.stopPropagation()"
                             (change)="$event ? selection.toggle(row) : null" [checked]="selection.isSelected(row)"
                             [aria-label]="checkboxLabel(row)">
                         </mat-checkbox>
-                    </td>
+                    </mat-cell>
                 </ng-container>
 
-                <!-- Position Column -->
-                <!-- <ng-container matColumnDef="position" [sticky]="true">
-                    <th mat-header-cell *matHeaderCellDef> Position </th>
-                    <td mat-cell *matCellDef="let element"> {{element.position}} </td>
-                </ng-container> -->
-
-                <!-- Name Column -->
-                <ng-container matColumnDef="symbol" [sticky]="true">
-                    <th mat-header-cell *matHeaderCellDef> </th>
-                    <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
+                <ng-container matColumnDef="symbol">
+                    <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.symbol}} </mat-cell>
                 </ng-container>
 
-                <!-- Weight Column -->
                 <ng-container matColumnDef="name">
-                    <th mat-header-cell *matHeaderCellDef> Name </th>
-                    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+                    <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
                 </ng-container>
 
-                <!-- Symbol Column -->
                 <ng-container matColumnDef="date">
-                    <th mat-header-cell *matHeaderCellDef> Date </th>
-                    <td mat-cell *matCellDef="let element"> {{element.date}} </td>
+                    <mat-header-cell *matHeaderCellDef> Date </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.date}} </mat-cell>
                 </ng-container>
 
                 <ng-container matColumnDef="size">
-                    <th mat-header-cell *matHeaderCellDef> Size </th>
-                    <td mat-cell *matCellDef="let element"> {{element.size}} KB</td>
+                    <mat-header-cell *matHeaderCellDef> Size </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.size}} KB</mat-cell>
                 </ng-container>
 
-                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selection.toggle(row)">
-                </tr>
-            </table>
-
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+            </mat-table>
         </div>
         <mat-paginator [pageSizeOptions]="[5, 10, 15, 20]" showFirstLastButtons></mat-paginator>
     </div>

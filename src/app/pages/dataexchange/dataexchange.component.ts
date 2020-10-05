@@ -2,6 +2,7 @@ import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { SelectionModel } from '@angular/cdk/collections';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material';
+import { FormControl } from '@angular/forms';
 
 export interface DataExchange {
   position: number;
@@ -61,15 +62,38 @@ const DATA: DataExchange[] = [
   styleUrls: ['./dataexchange.component.scss']
 })
 export class DataexchangeComponent implements OnInit, AfterViewInit {
-  displayedColumns: string[] = ['select', 'symbol', 'name', 'date', 'size'];
-  dataSource = new MatTableDataSource<DataExchange>(DATA);
-  selection = new SelectionModel<DataExchange>(true, []);
-  @ViewChild(MatPaginator) paginator: MatPaginator;
 
   dataUsed = 20.5;
   dataOverall = 40;
 
+  displayedColumns: string[] = ['select', 'symbol', 'name', 'date', 'size'];
+  dataSource = new MatTableDataSource<DataExchange>(DATA);
+  selection = new SelectionModel<DataExchange>(true, []);
+  disableSelect = new FormControl(false);
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+
+  groups = [{
+    id: 1,
+    name: 'pencils',
+    items: 'red pencil'
+  },
+  {
+    id: 2,
+    name: 'rubbers',
+    items: 'big rubber'
+  },
+  {
+    id: 3,
+    name: 'rubbers111111111111111111111111111111111111111111111111111111111111111111111111111',
+    items: 'big rubber1'
+  }];
+
   constructor() { }
+  selectedGroup = this.groups[0].name;
+
+  getVal() {
+    console.log(this.selectedGroup);
+  }
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
   }
@@ -94,5 +118,14 @@ export class DataexchangeComponent implements OnInit, AfterViewInit {
       return `${this.isAllSelected() ? 'select' : 'deselect'} all`;
     }
     return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.position + 1}`;
+  }
+  createFolder() {
+    console.log('Create Folder clicked!');
+  }
+  uploadFile() {
+    console.log('Upload file clickec!');
+  }
+  downloadFromURL() {
+    console.log('Download from URL clicked!');
   }
 }

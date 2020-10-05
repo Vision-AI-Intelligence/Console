@@ -5,22 +5,14 @@ import { DataexchangeRoutingModule } from './dataexchange-routing.module';
 import { DataexchangeComponent } from './dataexchange.component';
 import { BreadcrumbComponent } from '../../components/breadcrumb/breadcrumb.component';
 import {
-  MatTableModule,
-  MatCheckboxModule,
-  MatButtonModule,
-  MatPaginatorModule,
-  MatProgressBarModule
-} from '@angular/material';
+  MaterialModule
+} from '../../material.module';
 @NgModule({
   declarations: [DataexchangeComponent, BreadcrumbComponent],
   imports: [
     CommonModule,
     DataexchangeRoutingModule,
-    MatTableModule,
-    MatCheckboxModule,
-    MatButtonModule,
-    MatPaginatorModule,
-    MatProgressBarModule
+    MaterialModule
   ]
 })
 export class DataexchangeModule { }
