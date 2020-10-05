@@ -10,7 +10,6 @@ import {
   MatPaginatorModule,
   MatProgressBarModule,
 } from "@angular/material";
-import { AppModule } from "src/app/app.module";
 @NgModule({
   declarations: [DataexchangeComponent],
   imports: [
