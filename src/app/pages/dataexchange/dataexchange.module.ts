@@ -1,14 +1,13 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { NgModule } from "@angular/core";
+import { CommonModule } from "@angular/common";
 
-import { DataexchangeRoutingModule } from './dataexchange-routing.module';
-import { DataexchangeComponent } from './dataexchange.component';
-import { BreadcrumbComponent } from '../../components/breadcrumb/breadcrumb.component';
+import { DataexchangeRoutingModule } from "./dataexchange-routing.module";
+import { DataexchangeComponent } from "./dataexchange.component";
 import {
   MaterialModule
 } from '../../material.module';
 @NgModule({
-  declarations: [DataexchangeComponent, BreadcrumbComponent],
+  declarations: [DataexchangeComponent],
   imports: [
     CommonModule,
     DataexchangeRoutingModule,
