@@ -3,13 +3,15 @@ import { CommonModule } from '@angular/common';
 
 import { DatabucketsRoutingModule } from './databuckets-routing.module';
 import { DatabucketsComponent } from './databuckets.component';
-
+import { MaterialModule } from '../../material.module';
+import { CreatebucketComponent } from './components/dialogs/createbucket/createbucket.component';
 
 @NgModule({
-  declarations: [DatabucketsComponent],
+  declarations: [DatabucketsComponent, CreatebucketComponent],
   imports: [
     CommonModule,
-    DatabucketsRoutingModule
+    DatabucketsRoutingModule,
+    MaterialModule
   ]
 })
 export class DatabucketsModule { }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material';
 import { Router } from '@angular/router';
-import { CreateComponent } from 'src/app/components/dialogs/create/create.component';
+import { CreateComponent } from '../../components/dialogs/create/create.component';
 import { Project } from '../../models/project.model';
 import { ProjectService } from '../../services/project/project.service';
 @Component({
@@ -54,5 +54,11 @@ export class ProjectmanagementComponent implements OnInit {
   }
   async gotoEdit(proj) {
     await this.router.navigate(['/editproject/' + proj.pid + '/resources']);
+  }
+  onAccept() {
+    console.log('accepted');
+  }
+  onReject() {
+    console.log('rejected');
   }
 }

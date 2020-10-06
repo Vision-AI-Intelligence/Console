@@ -11,8 +11,10 @@
           text-align: left;
           margin-top: auto;">X-Ray films</p>
           <div class="btnActionsOfInvitation">
-            <button mat-flat-button style="width: 20%; color: #FF9237; background-color: white;">Accept</button>
-            <button mat-flat-button style="width: 20%; color: #FF9237; background-color: white;">Reject</button>
+            <button mat-flat-button style="width: 20%; color: #FF9237; background-color: white;"
+              (click)="onAccept()">Accept</button>
+            <button mat-flat-button style="width: 20%; color: #FF9237; background-color: white;"
+              (click)="onReject()">Reject</button>
           </div>
         </div>
       </mat-card>

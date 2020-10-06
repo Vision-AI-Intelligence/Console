@@ -1,1 +1,25 @@
-<p>databuckets works!</p>
+<div style="margin-bottom: 50px;">
+    <div style="margin-top: 1%; margin-bottom: 1%;">
+        <button mat-flat-button color="primary" (click)="createBucket()" style="border-radius: 10px;">Create
+            bucket</button>
+    </div>
+    <div *ngFor="let i of buckets">
+        <mat-card style="margin-top: 0.2%">
+            <mat-card-content
+                style="display: flex; flex-direction: row; justify-content: space-between; align-items: center;">
+                <img src="../../../assets/images/bucket.png" width="50px" height="50px" alt="bucket" />
+                <p style="margin-left: 5%; font-size: larger;">{{i.bid}}</p>
+                <button mat-flat-button color="primary" id="actionElement" [matMenuTriggerFor]="menu">
+                    <mat-icon>more_horiz</mat-icon>
+                </button>
+                <mat-menu #menu="matMenu" xPosition="before">
+                    <div *ngFor="let i of menuContext" style="border-radius: 15px;">
+                        <button mat-flat-button style="width: 100%; align-content: flex-start;"
+                            (click)="onClickMenuContext(i)">{{i}}</button>
+                        <mat-divider></mat-divider>
+                    </div>
+                </mat-menu>
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>

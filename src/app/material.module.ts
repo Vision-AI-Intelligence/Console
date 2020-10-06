@@ -18,7 +18,8 @@ import {
   MatCheckboxModule,
   MatPaginatorModule,
   MatTableModule,
-  MatCardModule
+  MatCardModule,
+  MatSlideToggleModule
 } from '@angular/material';
 import { FormsModule } from '@angular/forms';
 
@@ -44,7 +45,8 @@ import { FormsModule } from '@angular/forms';
     MatCheckboxModule,
     MatPaginatorModule,
     MatTableModule,
-    MatCardModule
+    MatCardModule,
+    MatSlideToggleModule
   ],
   exports: [
     MatIconModule,
@@ -65,7 +67,8 @@ import { FormsModule } from '@angular/forms';
     MatCheckboxModule,
     MatPaginatorModule,
     MatTableModule,
-    MatCardModule
+    MatCardModule,
+    MatSlideToggleModule
   ]
 })
 export class MaterialModule { }
