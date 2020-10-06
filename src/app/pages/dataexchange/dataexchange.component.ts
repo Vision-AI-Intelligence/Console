@@ -66,7 +66,7 @@ export class DataexchangeComponent implements OnInit, AfterViewInit {
   dataUsed = 20.5;
   dataOverall = 40;
 
-  displayedColumns: string[] = ['select', 'symbol', 'name', 'date', 'size'];
+  displayedColumns: string[] = ['select', 'symbol', 'name', 'date', 'size', 'action'];
   dataSource = new MatTableDataSource<DataExchange>(DATA);
   selection = new SelectionModel<DataExchange>(true, []);
   disableSelect = new FormControl(false);
@@ -87,7 +87,7 @@ export class DataexchangeComponent implements OnInit, AfterViewInit {
     name: 'rubbers111111111111111111111111111111111111111111111111111111111111111111111111111',
     items: 'big rubber1'
   }];
-
+  menuContext = ['Info', 'Copy', 'Move', 'Rename', 'Zip', 'Download'];
   constructor() { }
   selectedGroup = this.groups[0].name;
 
@@ -127,5 +127,8 @@ export class DataexchangeComponent implements OnInit, AfterViewInit {
   }
   downloadFromURL() {
     console.log('Download from URL clicked!');
+  }
+  onClickMenuContext(menuContent: any) {
+    console.log(menuContent + ' is clicked!');
   }
 }

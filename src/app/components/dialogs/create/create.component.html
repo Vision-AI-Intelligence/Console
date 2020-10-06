@@ -26,8 +26,9 @@
             </button>
         </mat-form-field>
     </mat-dialog-content>
-    <mat-dialog-actions>
-        <button mat-button color="primary" matDialogClose>Close</button>
-        <button mat-button color="primary" [matDialogClose]="data" (click)="onCreate()">Create</button>
+    <mat-dialog-actions style="align-self: flex-end;">
+        <button mat-flat-button matDialogClose style="border: 1px solid #7e7e7e; color: #FF9237;">Close</button>
+        <button mat-flat-button color="accent" [matDialogClose]="true" (click)="onCreate()"
+            cdkFocusInitial>Create</button>
     </mat-dialog-actions>
 </div>
