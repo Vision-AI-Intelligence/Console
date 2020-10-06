@@ -129,6 +129,25 @@ export class DataexchangeComponent implements OnInit, AfterViewInit {
     console.log('Download from URL clicked!');
   }
   onClickMenuContext(menuContent: any) {
-    console.log(menuContent + ' is clicked!');
+    switch (menuContent) {
+      case this.menuContext[0]:
+        console.log(menuContent + ' clicked');
+        break;
+      case this.menuContext[1]:
+        console.log(menuContent + ' clicked');
+        break;
+      case this.menuContext[2]:
+        console.log(menuContent + ' clicked');
+        break;
+      case this.menuContext[3]:
+        console.log(menuContent + ' clicked');
+        break;
+      case this.menuContext[4]:
+        console.log(menuContent + ' clicked');
+        break;
+      case this.menuContext[5]:
+        console.log(menuContent + ' clicked');
+        break;
+    }
   }
 }

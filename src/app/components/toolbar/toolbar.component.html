@@ -5,6 +5,15 @@
             <mat-icon>menu</mat-icon>
         </button>
         <span>Vision Intelligent Console</span>
+        <button mat-flat-button id="btnSelectProject" [matMenuTriggerFor]="menu">Select a
+            project</button>
+        <mat-menu #menu="matMenu" xPosition="before">
+            <div *ngFor="let i of menuContext" style="border-radius: 10px;">
+                <button mat-flat-button style="width: 100%; align-content: flex-start;"
+                    (click)="onClickMenuContext(i)">{{i}}</button>
+                <mat-divider></mat-divider>
+            </div>
+        </mat-menu>
         <span class="nav-space"></span>
         <div id="btnLog">
             <div *ngIf="userDetails == null">
