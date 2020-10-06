@@ -3,14 +3,18 @@
     height: 100%;
     font-family: 'Open Sans';
 }
+.title{
+  font-size: 25pt; 
+  margin-left: 1%;
+}
 #custom-button {
   display: flex;
   flex-direction: column;
 //   justify-items: center;
   background-color: white;
   // width: 40vh;
-  width: 25%;
-  height: 25vh;
+  width: 10%;
+  height: 15vh;
   border-radius: 10px;
   place-items: normal;
 //   flex-flow: column-reverse;
@@ -22,15 +26,15 @@
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
-  align-items: center;
-  justify-content: center;
+  align-items: flex-start;
+  justify-content: left;
   flex-basis: 100%;
 }
 .btCreate_icon{
   color: #FF9237; 
-  min-width: 20%; 
-  width: 50%; 
-  min-height: 20%; 
+  // min-width: 20%; 
+  width: 100%; 
+  // min-height: 20%; 
   height: 50%; 
   font-size: 12vh;
   justify-content: center;
@@ -40,14 +44,15 @@
 .project-button {
   color: #fff;
   // width: 40vh;
-  width: 30%;
-  height: 25vh;
+  width: 15%;
+  height: 15vh;
   border-radius: 10px;
   border: 0;
   margin: 1%;
-  flex: 0 1 25%;
+  flex: 0 1 10%;
   justify-content: space-between;
   justify-self: center;
   justify-content: center;
   list-style: none;
+  word-wrap: break-word;
 }

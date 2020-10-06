@@ -1,35 +1,35 @@
-import { Component, OnInit } from "@angular/core";
-import { MatDialog, MatDialogConfig, MatDialogRef } from "@angular/material";
-import { Router } from "@angular/router";
-import { CreateComponent } from "src/app/components/dialogs/create/create.component";
-import { Project } from "../../models/project.model";
-import { ProjectService } from "../../services/project/project.service";
+import { Component, OnInit } from '@angular/core';
+import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material';
+import { Router } from '@angular/router';
+import { CreateComponent } from 'src/app/components/dialogs/create/create.component';
+import { Project } from '../../models/project.model';
+import { ProjectService } from '../../services/project/project.service';
 @Component({
-  selector: "app-projectmanagement",
-  templateUrl: "./projectmanagement.component.html",
-  styleUrls: ["./projectmanagement.component.scss"],
+  selector: 'app-projectmanagement',
+  templateUrl: './projectmanagement.component.html',
+  styleUrls: ['./projectmanagement.component.scss'],
 })
 export class ProjectmanagementComponent implements OnInit {
-  dialogWidth = "500px";
+  dialogWidth = '500px';
   constructor(
     private router: Router,
     public dialog: MatDialog,
     private projectService: ProjectService
-  ) {}
+  ) { }
 
   public projects = [];
   private dialogRef = null;
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   // generateButton() {
   //   this.projects.push({ name: 'Project ' + this.projects.length, id: '' + this.projects.length });
   // }
   async onCreate() {
     const inputData = {
-      pid: "000",
-      name: "000",
-      description: "000",
+      pid: '',
+      name: '',
+      description: '',
     };
 
     this.dialogRef = this.dialog.open(CreateComponent, {
@@ -38,14 +38,20 @@ export class ProjectmanagementComponent implements OnInit {
       data: inputData,
     });
     this.dialogRef.afterClosed().subscribe((data) => {
-      if (data !== "" && data !== undefined && data !== null) {
+      if (data.pid !== '' && data.pid !== undefined
+        && data.name !== '' && data.description !== '' && data !== '' && data !== undefined && data !== null) {
         this.projectService.createProject(data);
         this.projects.push(data);
         console.log(this.projects);
       }
     });
   }
+  getSubstring(originalString: string) {
+    if (originalString.length > 20) {
+      return originalString.substr(0, 10) + '...';
+    }
+  }
   async gotoEdit(proj) {
-    await this.router.navigate(["/editproject/" + proj.pid + "/resources"]);
+    await this.router.navigate(['/editproject/' + proj.pid + '/resources']);
   }
 }
