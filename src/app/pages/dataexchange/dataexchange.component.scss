@@ -1,14 +1,53 @@
-table{
-    width: 100%;
-    height: 100%;
+table {
+  width: 100%;
+  height: 100%;
 }
-button{ 
-    border-radius: 10px;
+
+button {
+  border-radius: 10px;
 }
-.table-custom{
-    
-        position: relative;
-        max-height: 400px;
-        overflow: auto;
-    
+
+.table-custom {
+
+  position: relative;
+  max-height: 400px;
+  overflow: auto;
+
+}
+
+mat-paginator {
+  background-color: #FF6500;
+  color: white;
+}
+
+// mat-select{
+//     background-color:#FF9237;
+//     color: white;
+//     border-radius: 10px;
+//     border: none;
+//     text-align: center;
+//     outline: none;
+//     width: 110px;
+//     height: 35px;
+//     font-size: 100%;
+//     padding-left: 10px;
+// }
+// .not-empty-select.mat-selected {
+//     color: white !important;
+//   }
+//   use :host ::ng-deep .mat-select-value-text{
+//     color: white !important;
+//  }
+
+#actionElement {
+  width: fit-content;
+  height: fit-content;
+  outline: none;
+  border: none;
+  margin-left: auto;
+}
+
+.custom-cell {
+  padding-left: 1%;
+  justify-content: center;
 }

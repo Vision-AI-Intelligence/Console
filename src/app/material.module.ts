@@ -9,8 +9,17 @@ import {
   MatSidenavModule,
   MatToolbarModule,
   MatDividerModule,
+  MatTabsModule,
+  MatDialogModule,
+  MatFormFieldModule,
+  MatInputModule,
+  MatProgressBarModule,
+  MatSelectModule,
+  MatCheckboxModule,
+  MatPaginatorModule,
+  MatTableModule,
 } from '@angular/material';
-
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [],
@@ -24,6 +33,16 @@ import {
     MatSidenavModule,
     MatToolbarModule,
     MatDividerModule,
+    MatTabsModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    FormsModule,
+    MatInputModule,
+    MatProgressBarModule,
+    MatSelectModule,
+    MatCheckboxModule,
+    MatPaginatorModule,
+    MatTableModule
   ],
   exports: [
     MatIconModule,
@@ -34,6 +53,16 @@ import {
     MatSidenavModule,
     MatToolbarModule,
     MatDividerModule,
+    MatTabsModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    FormsModule,
+    MatInputModule,
+    MatProgressBarModule,
+    MatSelectModule,
+    MatCheckboxModule,
+    MatPaginatorModule,
+    MatTableModule
   ]
 })
 export class MaterialModule { }

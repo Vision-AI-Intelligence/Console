@@ -1,17 +1,24 @@
 <div id="body">
-    <p style="font-size: 25pt; margin-left: 1%;">
-        Create new project
-    </p>
-
-  <div #buttonsContainer class="button-rendered">
-    <button mat-raised-button color="primary" id="custom-button" class="mat-elevation-z6" (click)='generateButton()'>
-      <mat-icon style="color: #FF9237; width: fit-content; font-size: 50px;">
-        add
-      </mat-icon>
-      <p style="color: black;">Create</p>
-    </button>
-    <button *ngFor="let proj of projects" class="project-button mat-elevation-z6" mat-raised-button color="primary">
-      {{proj["name"]}}
-    </button>
+  <div>
+    <p class="title">Invitation of collaboration</p>
   </div>
+  <div>
+    <p class="title">Create new project</p>
+    <div #buttonsContainer class="button-rendered">
+      <button mat-raised-button color="primary" id="custom-button" class="mat-elevation-z6" (click)='onCreate()'>
+        <mat-icon class="btCreate_icon">
+          add
+        </mat-icon>
+        <!-- <p style="color: black; font-size: x-large;">Create</p> -->
+      </button>
+      <button *ngFor="let proj of projects" class="project-button mat-elevation-z6" mat-raised-button
+        style="background-color:#FF9237;" (click)="gotoEdit(proj)">
+        <div *ngIf="proj" style="width: 100%; word-wrap: break-word;">
+          {{getSubstring(proj["name"])}}
+        </div>
+
+      </button>
+    </div>
+  </div>
+
 </div>

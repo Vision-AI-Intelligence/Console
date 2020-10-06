@@ -13,6 +13,9 @@ export class ToolbarComponent implements OnInit {
   // panelOpenState = false;
   userDetails: User = null;
   @Output() SidenavToggle = new EventEmitter();
+
+  menuContext = ['traffic-vid', 'x-ray-img', 'flowers'];
+  selectedProject = 'Selected a project';
   constructor(
     public userAuth: UserAuthentication,
     private router: Router,
@@ -25,5 +28,18 @@ export class ToolbarComponent implements OnInit {
 
   onSidenavToggle() {
     this.SidenavToggle.emit();
+  }
+  onClickMenuContext(menuContent) {
+    switch (menuContent) {
+      case this.menuContext[0]:
+        this.selectedProject = String(menuContent);
+        console.log(menuContent + ' clicked!'); break;
+      case this.menuContext[1]:
+        this.selectedProject = String(menuContent);
+        console.log(menuContent + ' clicked!'); break;
+      case this.menuContext[2]:
+        this.selectedProject = String(menuContent);
+        console.log(menuContent + ' clicked!'); break;
+    }
   }
 }

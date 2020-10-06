@@ -1,15 +1,15 @@
 <!-- <mat-sidenav-container class="sidenavContainer">
     <mat-sidenav #snav> -->
 <mat-nav-list class="sidenavContainer">
-    <mat-accordion [displayMode]="'flat'">
-        <mat-expansion-panel>
-            <mat-expansion-panel-header>
-                <mat-panel-title>
-                    <img src="../../../assets/images/project.png" class="custom-icon" />Project
-                </mat-panel-title>
-            </mat-expansion-panel-header>
-            <!-- <div style="background-color: red;"> -->
-            <!-- <a mat-list-item routerLink='/projectmanagement' (click)="onToggleClose()">
+  <mat-accordion [displayMode]="'flat'">
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <img src="../../../assets/images/project.png" class="custom-icon" />Project
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <!-- <div style="background-color: red;"> -->
+      <!-- <a mat-list-item routerLink='/projectmanagement' (click)="onToggleClose()">
                 <button mat-flat-button class="custom-flat-button" style="background-color: blue;">
 
                     <img src="../../../assets/images/projectmanagement.png" class="custom-icon" />Project
@@ -17,119 +17,132 @@
 
                 </button>
             </a> -->
-            <!-- </div> -->
-            <a routerLink='/projectmanagement' (click)="onToggleClose()">
-                <button mat-flat-button class="custom-flat-button">
-                    <img src="../../../assets/images/projectmanagement.png" class="custom-icon" />
-                    Project Management
-                </button>
-            </a>
-            <mat-divider style="width: 100%;"></mat-divider>
-        </mat-expansion-panel>
+      <!-- </div> -->
+      <a routerLink='/projectmanagement' (click)="onToggleClose(['Project','Management'])">
+        <button mat-flat-button class="custom-flat-button">
+          <img src="../../../assets/images/projectmanagement.png" class="custom-icon" />
+          Project Management
+        </button>
+      </a>
+      <mat-divider style="width: 100%;"></mat-divider>
+    </mat-expansion-panel>
 
-        <mat-expansion-panel>
-            <mat-expansion-panel-header>
-                <mat-panel-title>
-                    <img src="../../../assets/images/dataprocessing.png" class="custom-icon" />Data
-                    Preprocessing
-                </mat-panel-title>
-            </mat-expansion-panel-header>
-            <div style="padding-left: 5%;">
-                <a [routerLink]="['/dataexchange']" (click)="onToggleClose()">
-                    <button mat-flat-button color="basic" class="custom-flat-button"><img
-                            src="../../../assets/images/dataexchange.png" class="custom-icon" />Data
-                        Exchange</button>
-                </a>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <img src="../../../assets/images/dataprocessing.png" class="custom-icon" />Data
+          Preprocessing
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <div style="padding-left: 5%;">
 
-                <mat-divider style="width: 100%;"></mat-divider>
-                <a [routerLink]="['/preprocessing']" (click)="onToggleClose()">
-                    <button mat-flat-button color="basic" class="custom-flat-button"><img
-                            src="../../../assets/images/preprocessing.png" class="custom-icon" />Preprocessing</button>
-                </a>
-                <mat-divider style="width: 100%;"></mat-divider>
-            </div>
+        <a [routerLink]="['/preprocessing']" (click)="onToggleClose(['Data Processing','Data Buckets'])">
+          <button mat-flat-button color="basic" class="custom-flat-button"><img
+              src="../../../assets/images/colorbucket.png" class="custom-icon" />Data Buckets</button>
+        </a>
+        <mat-divider style="width: 100%;"></mat-divider>
 
-        </mat-expansion-panel>
+        <a [routerLink]="['/preprocessing']" (click)="onToggleClose(['Data Processing','Jobs'])">
+          <button mat-flat-button color="basic" class="custom-flat-button"><img src="../../../assets/images/jobs.png"
+              class="custom-icon" />Jobs</button>
+        </a>
+        <mat-divider style="width: 100%;"></mat-divider>
 
-        <mat-expansion-panel>
-            <mat-expansion-panel-header>
-                <mat-panel-title>
-                    <img src="../../../assets/images/server.svg" style="width: 30px; height: 30px;" />
-                    Training
-                </mat-panel-title>
-            </mat-expansion-panel-header>
-            <div style="padding-left: 5%;">
-                <a [routerLink]="['/aijobs']" (click)="onToggleClose()">
-                    <button mat-flat-button color="basic" class="custom-flat-button"><img
-                            src="../../../assets/images/aijobs.png" class="custom-icon" />AI Jobs</button>
-                </a>
+        <a [routerLink]="['/dataexchange']" (click)="onToggleClose(['Data Processing','Data Exchange'])">
+          <button mat-flat-button color="basic" class="custom-flat-button"><img
+              src="../../../assets/images/dataexchange.png" class="custom-icon" />Data
+            Exchange</button>
+        </a>
 
-                <mat-divider style="width: 100%;"></mat-divider>
-                <a [routerLink]="['/modeldesigner']" (click)="onToggleClose()">
-                    <button mat-flat-button color="basic" class="custom-flat-button"><img
-                            src="../../../assets/images/modeldesign.png" class="custom-icon" />Model
-                        Designer</button>
-                </a>
+        <mat-divider style="width: 100%;"></mat-divider>
+        <a [routerLink]="['/preprocessing']" (click)="onToggleClose(['Data Processing','Preprocessing'])">
+          <button mat-flat-button color="basic" class="custom-flat-button"><img
+              src="../../../assets/images/preprocessing.png" class="custom-icon" />Preprocessing</button>
+        </a>
+        <mat-divider style="width: 100%;"></mat-divider>
+      </div>
 
-                <mat-divider style="width: 100%;"></mat-divider>
-                <a [routerLink]="['/artifacts']" (click)="onToggleClose()">
-                    <button mat-flat-button color="basic" class="custom-flat-button"><img
-                            src="../../../assets/images/artifacts.png" class="custom-icon" />Artifacts</button>
-                </a>
+    </mat-expansion-panel>
 
-                <mat-divider style="width: 100%;"></mat-divider>
-            </div>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <img src="../../../assets/images/server.svg" style="width: 30px; height: 30px;" />
+          Training
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <div style="padding-left: 5%;">
+        <a [routerLink]="['/aijobs']" (click)="onToggleClose(['Training', 'AI Jobs' ])">
+          <button mat-flat-button color="basic" class="custom-flat-button"><img src="../../../assets/images/aijobs.png"
+              class="custom-icon" />AI Jobs</button>
+        </a>
 
-        </mat-expansion-panel>
+        <mat-divider style="width: 100%;"></mat-divider>
+        <a [routerLink]="['/modeldesigner']" (click)="onToggleClose(['Training','Model Designer'])">
+          <button mat-flat-button color="basic" class="custom-flat-button"><img
+              src="../../../assets/images/modeldesign.png" class="custom-icon" />Model
+            Designer</button>
+        </a>
 
-        <mat-expansion-panel>
-            <mat-expansion-panel-header>
-                <mat-panel-title>
-                    <img src="../../../assets/images/configure.png" style="width: 30px; height: 30px;" />Serving
-                </mat-panel-title>
-            </mat-expansion-panel-header>
-            <div style="padding-left: 5%;">
-                <a [routerLink]="['/apis-services']" (click)="onToggleClose()">
-                    <button mat-flat-button color="basic" class="custom-flat-button"><img
-                            src="../../../assets/images/apis&services.png" class="custom-icon" />APIs and
-                        Services
-                    </button>
-                </a>
+        <mat-divider style="width: 100%;"></mat-divider>
+        <a [routerLink]="['/artifacts']" (click)="onToggleClose(['Training', 'Artifacts' ])">
+          <button mat-flat-button color="basic" class="custom-flat-button"><img
+              src="../../../assets/images/artifacts.png" class="custom-icon" />Artifacts</button>
+        </a>
 
-                <mat-divider style="width: 100%;"></mat-divider>
-                <a [routerLink]="['/monitoring']" (click)="onToggleClose()">
-                    <button mat-flat-button color="basic" class="custom-flat-button"><img
-                            src="../../../assets/images/mornitoring.png" class="custom-icon" />Monitoring</button>
-                </a>
+        <mat-divider style="width: 100%;"></mat-divider>
+      </div>
 
-                <mat-divider style="width: 100%;"></mat-divider>
-            </div>
+    </mat-expansion-panel>
 
-        </mat-expansion-panel>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <img src="../../../assets/images/serving.png" class="custom-icon" />Serving
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <div style="padding-left: 5%;">
+        <a [routerLink]="['/apis-services']" (click)="onToggleClose(['Serving','APIs and Services'])">
+          <button mat-flat-button color="basic" class="custom-flat-button"><img
+              src="../../../assets/images/apis&services.png" class="custom-icon" />APIs and
+            Services
+          </button>
+        </a>
 
-        <mat-expansion-panel>
-            <mat-expansion-panel-header>
-                <mat-panel-title>
-                    <img src="../../../assets/images/configure.png" style="width: 30px; height: 30px;" />Configuration
-                </mat-panel-title>
-            </mat-expansion-panel-header>
-            <div style="padding-left: 5%;">
-                <a [routerLink]="['/setting']" (click)="onToggleClose()">
-                    <button mat-flat-button color="basic" class="custom-flat-button"><img
-                            src="../../../assets/images/setting.png" class="custom-icon" />Setting
-                    </button>
-                </a>
+        <mat-divider style="width: 100%;"></mat-divider>
+        <a [routerLink]="['/monitoring']" (click)="onToggleClose(['Serving','Monitoring'])">
+          <button mat-flat-button color="basic" class="custom-flat-button"><img
+              src="../../../assets/images/mornitoring.png" class="custom-icon" />Monitoring</button>
+        </a>
 
-                <mat-divider style="width: 100%;"></mat-divider>
-                <a [routerLink]="['/adminzone']" (click)="onToggleClose()">
-                    <button mat-flat-button color="basic" class="custom-flat-button"><img
-                            src="../../../assets/images/adminzone.png" class="custom-icon" />Admin Zone</button>
-                </a>
+        <mat-divider style="width: 100%;"></mat-divider>
+      </div>
 
-            </div>
+    </mat-expansion-panel>
 
-        </mat-expansion-panel>
-    </mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <img src="../../../assets/images/config.png" class="custom-icon" />Configuration
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <div style="padding-left: 5%;">
+        <a [routerLink]="['/setting']" (click)="onToggleClose(['System', 'Setting'])">
+          <button mat-flat-button color="basic" class="custom-flat-button"><img src="../../../assets/images/setting.png"
+              class="custom-icon" />Setting
+          </button>
+        </a>
+
+        <mat-divider style="width: 100%;"></mat-divider>
+        <a [routerLink]="['/adminzone']" (click)="onToggleClose(['System', 'Admin Zone'])">
+          <button mat-flat-button color="basic" class="custom-flat-button"><img
+              src="../../../assets/images/adminzone.png" class="custom-icon" />Admin Zone</button>
+        </a>
+
+      </div>
+
+    </mat-expansion-panel>
+  </mat-accordion>
 </mat-nav-list>
 <!-- </mat-sidenav> -->
 <!-- <mat-sidenav-content>

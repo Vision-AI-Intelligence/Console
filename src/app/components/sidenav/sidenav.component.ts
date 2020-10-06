@@ -1,19 +1,19 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { MiscService } from 'src/app/services/misc.service';
 
 @Component({
   selector: 'app-sidenav',
   templateUrl: './sidenav.component.html',
-  styleUrls: ['./sidenav.component.scss']
+  styleUrls: ['./sidenav.component.scss'],
 })
 export class SidenavComponent implements OnInit {
-
   @Output() closeSidenav = new EventEmitter();
-  constructor() { }
+  constructor(private miscService: MiscService) { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void { }
 
-  onToggleClose() {
+  onToggleClose(path) {
     this.closeSidenav.emit();
+    this.miscService.breadcrum = path;
   }
 }
