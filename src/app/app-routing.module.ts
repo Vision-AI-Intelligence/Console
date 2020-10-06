@@ -24,6 +24,8 @@ const routes: Routes = [
   { path: '404', component: NotfoundComponent },
   // tslint:disable-next-line: max-line-length
   { path: 'editproject', loadChildren: () => import('./pages/projectmanagement/editproject/editproject.module').then(m => m.EditprojectModule) },
+  { path: 'databuckets', loadChildren: () => import('./pages/databuckets/databuckets.module').then(m => m.DatabucketsModule) },
+  { path: 'jobs', loadChildren: () => import('./pages/jobs/jobs.module').then(m => m.JobsModule) },
   { path: '**', redirectTo: '404' },
 ];
 

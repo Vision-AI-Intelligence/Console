@@ -47,9 +47,10 @@ export class ProjectmanagementComponent implements OnInit {
     });
   }
   getSubstring(originalString: string) {
-    if (originalString.length > 20) {
+    if (originalString.length > 15) {
       return originalString.substr(0, 10) + '...';
     }
+    return originalString;
   }
   async gotoEdit(proj) {
     await this.router.navigate(['/editproject/' + proj.pid + '/resources']);
