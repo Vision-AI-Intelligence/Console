@@ -1,89 +1,90 @@
 <div style="width: 100%; top: 60px; font-family: 'Open Sans';">
-    <!-- <app-breadcrumb></app-breadcrumb> -->
-    <div>
-        <div style="display: flex; flex-direction: row; align-items: center;">
-            <div style="display: flex; flex-direction: row; align-items: baseline;">
-                <p>Storage</p>
-                <mat-progress-bar mode="determinate" value="40"
-                    style="width: 200px; height: 10px; border-radius: 15px; margin-left: 2%;">
-                </mat-progress-bar>
-            </div>
-            <div style="margin-left: 5%;">
+  <!-- <app-breadcrumb></app-breadcrumb> -->
+  <div>
+    <div style="display: flex; flex-direction: row; align-items: center;">
+      <div style="display: flex; flex-direction: row; align-items: baseline;">
+        <p>Storage</p>
+        <mat-progress-bar mode="determinate" value="40"
+          style="width: 200px; height: 10px; border-radius: 15px; margin-left: 2%;">
+        </mat-progress-bar>
+      </div>
+      <div style="margin-left: 5%;">
+        <mat-form-field appearance="fill" style="padding: 10px;width: 200px;">
+          <mat-label>Selected Bucket</mat-label>
+          <mat-select color="accent" [(ngModel)]="selectedGroup">
+            <mat-option class=".not-empty-select" *ngFor="let group of groups" [value]="group.name" (click)="getVal()">
+              {{group.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
 
-                <mat-select color="accent" [(ngModel)]="selectedGroup">
-                    <mat-option class=".not-empty-select" *ngFor="let group of groups" [value]="group.name"
-                        (click)="getVal()">{{group.name}}
-                    </mat-option>
-                </mat-select>
-
-            </div>
-        </div>
-
-        <div style="display: flex; flex-direction: row; align-items: center;">
-            <p>{{dataUsed}}</p>
-            <p>&nbsp;GB</p>
-            <p>&nbsp;/&nbsp;</p>{{dataOverall}}
-            <p>&nbsp;GB</p>
-        </div>
-
+      </div>
     </div>
-    <div>
-        <button mat-flat-button color="accent" class="mat-elevation-z9" (click)="createFolder()">Create folder</button>
-        <button mat-flat-button color="accent" class="mat-elevation-z9" style="margin: 2% 2% 1% 2%"
-            (click)="uploadFile()">Upload file</button>
-        <button mat-flat-button color="accent" class="mat-elevation-z9" (click)="downloadFromURL()">Download from
-            URL</button>
+
+    <div style="display: flex; flex-direction: row; align-items: center;">
+      <p>{{dataUsed}}</p>
+      <p>&nbsp;GB</p>
+      <p>&nbsp;/&nbsp;</p>{{dataOverall}}
+      <p>&nbsp;GB</p>
     </div>
-    <div>
-        <div class="table-custom mat-elevation-z9">
-            <mat-table #table [dataSource]="dataSource">
-                <ng-container matColumnDef="select">
-                    <mat-header-cell *matHeaderCellDef> Select </mat-header-cell>
-                    <mat-cell *matCellDef="let row">
-                        <mat-checkbox (click)="$event.stopPropagation()"
-                            (change)="$event ? selection.toggle(row) : null" [checked]="selection.isSelected(row)"
-                            [aria-label]="checkboxLabel(row)">
-                        </mat-checkbox>
-                    </mat-cell>
-                </ng-container>
 
-                <ng-container matColumnDef="symbol">
-                    <mat-header-cell *matHeaderCellDef class="custom-cell"> </mat-header-cell>
-                    <mat-cell *matCellDef="let element" class="custom-cell"> {{element.symbol}} </mat-cell>
-                </ng-container>
+  </div>
+  <div>
+    <button mat-flat-button color="accent" class="mat-elevation-z9" (click)="createFolder()">Create folder</button>
+    <button mat-flat-button color="accent" class="mat-elevation-z9" style="margin: 2% 2% 1% 2%"
+      (click)="uploadFile()">Upload file</button>
+    <button mat-flat-button color="accent" class="mat-elevation-z9" (click)="downloadFromURL()">Download from
+      URL</button>
+  </div>
+  <div>
+    <div class="table-custom mat-elevation-z9">
+      <mat-table #table [dataSource]="dataSource">
+        <ng-container matColumnDef="select">
+          <mat-header-cell *matHeaderCellDef> Select </mat-header-cell>
+          <mat-cell *matCellDef="let row">
+            <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null"
+              [checked]="selection.isSelected(row)" [aria-label]="checkboxLabel(row)">
+            </mat-checkbox>
+          </mat-cell>
+        </ng-container>
 
-                <ng-container matColumnDef="name">
-                    <mat-header-cell *matHeaderCellDef class="custom-cell"> Name </mat-header-cell>
-                    <mat-cell *matCellDef="let element" class="custom-cell"> {{element.name}} </mat-cell>
-                </ng-container>
+        <ng-container matColumnDef="symbol">
+          <mat-header-cell *matHeaderCellDef class="custom-cell"> </mat-header-cell>
+          <mat-cell *matCellDef="let element" class="custom-cell"> {{element.symbol}} </mat-cell>
+        </ng-container>
 
-                <ng-container matColumnDef="date">
-                    <mat-header-cell *matHeaderCellDef class="custom-cell"> Date </mat-header-cell>
-                    <mat-cell *matCellDef="let element" class="custom-cell"> {{element.date}} </mat-cell>
-                </ng-container>
+        <ng-container matColumnDef="name">
+          <mat-header-cell *matHeaderCellDef class="custom-cell"> Name </mat-header-cell>
+          <mat-cell *matCellDef="let element" class="custom-cell"> {{element.name}} </mat-cell>
+        </ng-container>
 
-                <ng-container matColumnDef="size">
-                    <mat-header-cell *matHeaderCellDef class="custom-cell"> Size </mat-header-cell>
-                    <mat-cell *matCellDef="let element" class="custom-cell"> {{element.size}} KB</mat-cell>
-                </ng-container>
-                <ng-container matColumnDef="action">
-                    <mat-header-cell *matHeaderCellDef></mat-header-cell>
-                    <mat-cell *matCellDef="let element">
-                        <button mat-flat-button color="primary" id="actionElement" [matMenuTriggerFor]="menu">
-                            <mat-icon>more_horiz</mat-icon>
-                        </button>
-                    </mat-cell>
-                </ng-container>
-                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-                <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-            </mat-table>
-        </div>
-        <mat-paginator [pageSizeOptions]="[5, 10, 15, 20]" showFirstLastButtons></mat-paginator>
-        <mat-menu #menu="matMenu" xPosition="before">
-            <div *ngFor="let i of menuContext" style="border-radius: 10px;">
-                <button mat-flat-button style="width: 100%; align-content: flex-start;"
-                    (click)="onClickMenuContext(i)">{{i}}</button>
-                <mat-divider></mat-divider>
-            </div>
-        </mat-menu>
+        <ng-container matColumnDef="date">
+          <mat-header-cell *matHeaderCellDef class="custom-cell"> Date </mat-header-cell>
+          <mat-cell *matCellDef="let element" class="custom-cell"> {{element.date}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="size">
+          <mat-header-cell *matHeaderCellDef class="custom-cell"> Size </mat-header-cell>
+          <mat-cell *matCellDef="let element" class="custom-cell"> {{element.size}} KB</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="action">
+          <mat-header-cell *matHeaderCellDef></mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <button mat-flat-button color="primary" id="actionElement" [matMenuTriggerFor]="menu">
+              <mat-icon>more_horiz</mat-icon>
+            </button>
+          </mat-cell>
+        </ng-container>
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      </mat-table>
     </div>
+    <mat-paginator [pageSizeOptions]="[5, 10, 15, 20]" showFirstLastButtons></mat-paginator>
+    <mat-menu #menu="matMenu" xPosition="before">
+      <div *ngFor="let i of menuContext" style="border-radius: 10px;">
+        <button mat-flat-button style="width: 100%; align-content: flex-start;"
+          (click)="onClickMenuContext(i)">{{i}}</button>
+        <mat-divider></mat-divider>
+      </div>
+    </mat-menu>
+  </div>
