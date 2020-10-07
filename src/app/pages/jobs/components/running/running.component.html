@@ -1,0 +1,11 @@
+<div *ngFor="let i of data">
+    <mat-card style="margin-top: 5px;">
+        <div style="display: flex; flex-direction: row; justify-content: space-between; align-items: center; ">
+            <label>{{i.jid}}</label>
+            <p style="word-wrap: break-word;">{{i.type}}:{{i.description}}</p>
+            <p>Elapsed time: {{i.time}}</p>
+            <button mat-flat-button color='primary' (click)="onCancel()">Cancel</button>
+        </div>
+        <mat-progress-bar mode="indeterminate" style="padding-top: 1px;" color='primary'></mat-progress-bar>
+    </mat-card>
+</div>

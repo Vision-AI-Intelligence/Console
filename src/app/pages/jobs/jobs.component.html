@@ -1,1 +1,9 @@
-<p>jobs works!</p>
+<div>
+    <nav mat-tab-nav-bar>
+        <a mat-tab-link *ngFor="let t of tabs" (click)="selectTab(t)" [routerLinkActive]="'active'"> {{t}}
+        </a>
+    </nav>
+    <div style="margin-bottom: 50px;">
+        <router-outlet></router-outlet>
+    </div>
+</div>
