@@ -1,4 +1,4 @@
-<div id="body">
+<div style=" margin-bottom: 50px;">
   <div>
     <p class="title">Invitation of collaboration</p>
     <div class="invitationDiv">
@@ -11,9 +11,121 @@
           text-align: left;
           margin-top: auto;">X-Ray films</p>
           <div class="btnActionsOfInvitation">
-            <button mat-flat-button style="width: 20%; color: #FF9237; background-color: white;"
+            <button mat-flat-button style="color: #FF9237; background-color: white;"
               (click)="onAccept()">Accept</button>
-            <button mat-flat-button style="width: 20%; color: #FF9237; background-color: white;"
+            <button mat-flat-button style="color: #FF9237; background-color: white;"
+              (click)="onReject()">Reject</button>
+          </div>
+        </div>
+      </mat-card>
+      <mat-card class="btnInvitation mat-elevation-z6" color="accent">
+        <div>
+          <p style="font-size: xx-large;
+          text-align: left;
+          margin-top: auto;">Lung X Ray</p>
+          <p style="font-size: large;
+          text-align: left;
+          margin-top: auto;">X-Ray films</p>
+          <div class="btnActionsOfInvitation">
+            <button mat-flat-button style="color: #FF9237; background-color: white;"
+              (click)="onAccept()">Accept</button>
+            <button mat-flat-button style="color: #FF9237; background-color: white;"
+              (click)="onReject()">Reject</button>
+          </div>
+        </div>
+      </mat-card>
+      <mat-card class="btnInvitation mat-elevation-z6" color="accent">
+        <div>
+          <p style="font-size: xx-large;
+          text-align: left;
+          margin-top: auto;">Lung X Ray</p>
+          <p style="font-size: large;
+          text-align: left;
+          margin-top: auto;">X-Ray films</p>
+          <div class="btnActionsOfInvitation">
+            <button mat-flat-button style="color: #FF9237; background-color: white;"
+              (click)="onAccept()">Accept</button>
+            <button mat-flat-button style="color: #FF9237; background-color: white;"
+              (click)="onReject()">Reject</button>
+          </div>
+        </div>
+      </mat-card>
+      <mat-card class="btnInvitation mat-elevation-z6" color="accent">
+        <div>
+          <p style="font-size: xx-large;
+          text-align: left;
+          margin-top: auto;">Lung X Ray</p>
+          <p style="font-size: large;
+          text-align: left;
+          margin-top: auto;">X-Ray films</p>
+          <div class="btnActionsOfInvitation">
+            <button mat-flat-button style="color: #FF9237; background-color: white;"
+              (click)="onAccept()">Accept</button>
+            <button mat-flat-button style="color: #FF9237; background-color: white;"
+              (click)="onReject()">Reject</button>
+          </div>
+        </div>
+      </mat-card>
+      <mat-card class="btnInvitation mat-elevation-z6" color="accent">
+        <div>
+          <p style="font-size: xx-large;
+          text-align: left;
+          margin-top: auto;">Lung X Ray</p>
+          <p style="font-size: large;
+          text-align: left;
+          margin-top: auto;">X-Ray films</p>
+          <div class="btnActionsOfInvitation">
+            <button mat-flat-button style="color: #FF9237; background-color: white;"
+              (click)="onAccept()">Accept</button>
+            <button mat-flat-button style="color: #FF9237; background-color: white;"
+              (click)="onReject()">Reject</button>
+          </div>
+        </div>
+      </mat-card>
+      <mat-card class="btnInvitation mat-elevation-z6" color="accent">
+        <div>
+          <p style="font-size: xx-large;
+          text-align: left;
+          margin-top: auto;">Lung X Ray</p>
+          <p style="font-size: large;
+          text-align: left;
+          margin-top: auto;">X-Ray films</p>
+          <div class="btnActionsOfInvitation">
+            <button mat-flat-button style="color: #FF9237; background-color: white;"
+              (click)="onAccept()">Accept</button>
+            <button mat-flat-button style="color: #FF9237; background-color: white;"
+              (click)="onReject()">Reject</button>
+          </div>
+        </div>
+      </mat-card>
+      <mat-card class="btnInvitation mat-elevation-z6" color="accent">
+        <div>
+          <p style="font-size: xx-large;
+          text-align: left;
+          margin-top: auto;">Lung X Ray</p>
+          <p style="font-size: large;
+          text-align: left;
+          margin-top: auto;">X-Ray films</p>
+          <div class="btnActionsOfInvitation">
+            <button mat-flat-button style="color: #FF9237; background-color: white;"
+              (click)="onAccept()">Accept</button>
+            <button mat-flat-button style="color: #FF9237; background-color: white;"
+              (click)="onReject()">Reject</button>
+          </div>
+        </div>
+      </mat-card>
+      <mat-card class="btnInvitation mat-elevation-z6" color="accent">
+        <div>
+          <p style="font-size: xx-large;
+          text-align: left;
+          margin-top: auto;">Lung X Ray</p>
+          <p style="font-size: large;
+          text-align: left;
+          margin-top: auto;">X-Ray films</p>
+          <div class="btnActionsOfInvitation">
+            <button mat-flat-button style="color: #FF9237; background-color: white;"
+              (click)="onAccept()">Accept</button>
+            <button mat-flat-button style="color: #FF9237; background-color: white;"
               (click)="onReject()">Reject</button>
           </div>
         </div>
@@ -29,7 +141,7 @@
         </mat-icon>
         <!-- <p style="color: black; font-size: x-large;">Create</p> -->
       </button>
-      <button *ngFor="let proj of projects" class="project-button mat-elevation-z6" mat-raised-button
+      <button *ngFor="let proj of projects" [(ngModel)]='pid' class="project-button mat-elevation-z6" mat-raised-button
         style="background-color:#FF9237;" (click)="gotoEdit(proj)">
         <div *ngIf="proj"
           style="width: 100%; height: 100%; display: flex; flex-direction: column; word-wrap: break-word;">

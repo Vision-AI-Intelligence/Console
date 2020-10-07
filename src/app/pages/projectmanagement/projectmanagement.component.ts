@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CreateComponent } from '../../components/dialogs/create/create.component';
 import { Project } from '../../models/project.model';
 import { ProjectService } from '../../services/project/project.service';
@@ -11,16 +11,22 @@ import { ProjectService } from '../../services/project/project.service';
 })
 export class ProjectmanagementComponent implements OnInit {
   dialogWidth = '500px';
+  pid = '';
   constructor(
     private router: Router,
     public dialog: MatDialog,
-    private projectService: ProjectService
+    private projectService: ProjectService,
+    private activatedRoute: ActivatedRoute
   ) { }
 
   public projects = [];
   private dialogRef = null;
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    this.activatedRoute.params.subscribe((params) => {
+      this.pid = params.id;
+    });
+  }
 
   // generateButton() {
   //   this.projects.push({ name: 'Project ' + this.projects.length, id: '' + this.projects.length });
@@ -53,7 +59,7 @@ export class ProjectmanagementComponent implements OnInit {
     return originalString;
   }
   async gotoEdit(proj) {
-    await this.router.navigate(['/editproject/' + proj.pid + '/resources']);
+    await this.router.navigate([`/editproject/${proj.pid}/resources`], { relativeTo: this.activatedRoute });
   }
   onAccept() {
     console.log('accepted');
