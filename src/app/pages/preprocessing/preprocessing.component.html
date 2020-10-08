@@ -1,1 +1,92 @@
-<p>preprocessing works!</p>
+<div style="margin-bottom: 60px;">
+    <!--Show configuration of this bucket-->
+    <div class="bucketsControl">
+        <button mat-flat-button class="btnSelectBucket mat-elevation-z6" color="accent">
+            <!-- <mat-form-field appearance="outline" color="primary"> -->
+            <mat-select [(value)]="selected" style="width: 100%; height: 100%; " color="accent">
+                <mat-option value="option">Option1</mat-option>
+                <mat-option value="option2">Option2</mat-option>
+                <mat-option value="option">Option3</mat-option>
+                <mat-option value="option">Option4</mat-option>
+                <mat-option value="option">Option5</mat-option>
+            </mat-select>
+        </button>
+        <button mat-flat-button class="btnSelectBucket mat-elevation-z6" color="accent">
+            Set options
+        </button>
+    </div>
+
+    <!--body part for cropping image-->
+    <div class="body">
+        <!--core tools for labelling-->
+        <div style="display: flex; flex-direction: row; height: 80%;">
+
+            <!--tools for labelling-->
+            <div style="width: 10%;">
+                <mat-card class=" mat-elevation-z6"
+                    style="height: 100% ;display: flex; flex-direction: column; align-items: center; justify-content: space-around;">
+                    <p style="font-size: larger; font-weight: bold;">Labelling</p>
+                    <button mat-flat-button color="accent">Create box</button>
+                    <button mat-flat-button color="accent">Move box</button>
+                    <button mat-flat-button color="accent">Delete box</button>
+                    <button mat-flat-button color="accent">Change color</button>
+                </mat-card>
+            </div>
+
+            <!--Show current image-->
+            <div style=" width: 70%; text-align: center;">
+                <img src="../../../assets/images/lenna.png" />
+            </div>
+
+            <!--labels-->
+            <div class="labelsContainer">
+                <div>
+                    <p style="font-size: larger; font-weight: bold; text-align: center;">Labels</p>
+                </div>
+                <div>
+                    <mat-card *ngFor="let l of labels"
+                        style="height: 6vh; width: 80%; display: flex; flex-direction: row; justify-content: space-between; margin-bottom: 3px;">
+
+                        <p>{{l.name}}</p>
+                        <button mat-flat-button color="primary" style="outline: none; border: none; align-self: center; width: fit-content; height: fit-content; 
+                            background: none; color: #FF9237;" (click)="deleteLabel()">
+                            <mat-icon>clear</mat-icon>
+                        </button>
+                    </mat-card>
+                </div>
+                <!--custom lab-->
+                <div style="display: flex; flex-direction: row; width: 80%;">
+                    <mat-form-field>
+                        <mat-label>New label</mat-label>
+                        <input matInput #message maxlength="15" placeholder="your label here ahihi....">
+                        <mat-hint align="end">{{message.value.length}} / 15</mat-hint>
+                    </mat-form-field>
+                    <button mat-flat-button color="primary" style="outline: none; border: none; align-self: center; width: fit-content; height: fit-content; 
+                    background: none; color: #FF9237;" (click)="addLabel(message.value)">
+                        <mat-icon>send</mat-icon>
+                    </button>
+                </div>
+
+
+
+            </div>
+        </div>
+
+        <!--Show information of current image-->
+        <div style="margin-top: 5px; height: 10%;">
+            <mat-card class=" mat-elevation-z6"
+                style="height: 6vh ;display: flex; flex-direction: row; align-items: center; justify-content: space-between;">
+                <p>dataset/lena.png</p>
+                <p>512/512</p>
+                <button mat-flat-button color="warn">Save</button>
+                <button mat-flat-button color="accent">
+                    <mat-icon>arrow_left</mat-icon>
+                </button>
+                <button mat-flat-button color="accent">
+                    <mat-icon>arrow_right</mat-icon>
+                </button>
+            </mat-card>
+        </div>
+    </div>
+
+</div>

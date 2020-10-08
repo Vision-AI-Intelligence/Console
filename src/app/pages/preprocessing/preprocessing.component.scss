@@ -1,0 +1,25 @@
+.bucketsControl{
+    height: 10%;
+}
+.btnSelectBucket{
+    width: 7%;
+    height: fit-content;
+    border-radius: 10px;
+    margin-right: 5px;
+}
+.body{
+    display: flex; 
+    flex-direction: column; 
+    margin-top: 5px;
+    height: 90%;
+}
+.labelsContainer{
+    // display: flex;
+    // flex-direction: column;
+    margin-left: auto; 
+    width: 20%;
+    height: 65vh;
+    align-items: center; 
+    text-align: -webkit-center;
+    overflow-y: auto;
+}
