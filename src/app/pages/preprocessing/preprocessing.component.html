@@ -19,14 +19,14 @@
     <!--body part for cropping image-->
     <div class="body">
         <!--core tools for labelling-->
-        <div style="display: flex; flex-direction: row; height: 80%;">
+        <div style="display: flex; flex-direction: row; height: 80%; ">
 
             <!--tools for labelling-->
             <div style="width: 10%;">
                 <mat-card class=" mat-elevation-z6"
                     style="height: 100% ;display: flex; flex-direction: column; align-items: center; justify-content: space-around;">
                     <p style="font-size: larger; font-weight: bold;">Labelling</p>
-                    <button mat-flat-button color="accent">Create box</button>
+                    <button mat-flat-button color="accent" (click)="createBox()">Create box</button>
                     <button mat-flat-button color="accent">Move box</button>
                     <button mat-flat-button color="accent">Delete box</button>
                     <button mat-flat-button color="accent">Change color</button>
@@ -34,8 +34,10 @@
             </div>
 
             <!--Show current image-->
-            <div style=" width: 70%; text-align: center;">
-                <img src="../../../assets/images/lenna.png" />
+            <div #ohShit style="position: relative; width: 70%; text-align: center;" (mousemove)="onMouseMove($event)"
+                (mousedown)="onMouseDown($event)" (mouseup)="onMouseUp($event)">
+                <img #imgRef src="https://i.pinimg.com/originals/3b/8a/d2/3b8ad2c7b1be2caf24321c852103598a.jpg"
+                    style="width: 50vw" />
             </div>
 
             <!--labels-->
