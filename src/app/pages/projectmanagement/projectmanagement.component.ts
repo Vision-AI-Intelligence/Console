@@ -53,7 +53,7 @@ export class ProjectmanagementComponent implements OnInit {
     });
   }
   getSubstring(originalString: string) {
-    if (originalString.length > 15) {
+    if (originalString.length > 14) {
       return originalString.substr(0, 10) + '...';
     }
     return originalString;

@@ -1,35 +1,45 @@
 <div style="margin-bottom: 50px;">
     <p style="font-weight: bold; font-size: large;">Add new collaborator</p>
-    <div style="align-content: center; text-align: center;">
-        <mat-label>Email</mat-label>
+
+
+    <div class="addNewCollab">
+        <mat-label>Search</mat-label>
         <mat-form-field hintLabel="Max 50 characters" appearance="legacy"
             style="margin-left: 5%; margin-right: 5%; width: 50%; height: 20%;">
 
-            <input matInput #input maxlength="50">
+            <input matInput [(ngModel)]="searchInputValue" #input maxlength="50" [matAutocomplete]="auto">
             <mat-hint align="end">{{input.value?.length || 0}}/50</mat-hint>
+            <mat-autocomplete #auto autoActiveFirstOption>
+                <mat-option *ngFor="let u of suggestionUsers">
+                    <mat-card appMaterialElevation class="cardStyle">
+                        <img src="{{u.photoURL}}" alt="user image" class="imgStyle" />
+                        <p>{{u.email}}</p>
+                        <button mat-flat-button color="accent" class="btnStyle">Add</button>
+                    </mat-card>
+                </mat-option>
+            </mat-autocomplete>
         </mat-form-field>
         <button mat-flat-button color="primary" style="width: fit-content; height: fit-content; border-radius: 10px;"
             class="mat-elevation-z6">Add</button>
     </div>
 
+
+
     <p style="font-weight: bold; font-size: large;">Pending Invitation</p>
-    <div *ngFor="let u of userInformation" style="text-align: -webkit-center; " class="selectedCard">
-        <mat-card appMaterialElevation
-            style="margin-top: 2px; display: flex; flex-direction: row; justify-content: space-between; width: 60%; height: 7vh; ">
-            <img src="{{u.photoURL}}" width="30px" height="30px" alt="user image" />
+    <div *ngFor="let u of userInformation" class="selectedCard">
+        <mat-card appMaterialElevation class="cardStyle">
+            <img src="{{u.photoURL}}" alt="user image" class="imgStyle" />
             <p>{{u.email}}</p>
-            <button mat-flat-button color="accent" style="outline: none; border-radius: 10px;">Remove</button>
+            <button mat-flat-button color="accent" class="btnStyle">Remove</button>
         </mat-card>
     </div>
 
     <p style="font-weight: bold; font-size: large;">Collaborators</p>
-    <div *ngFor="let i of userInformation" appMaterialElevation style="text-align: -webkit-center;"
-        class="selectedCard">
-        <mat-card
-            style="margin-top: 2px; display: flex; flex-direction: row; justify-content: space-between; width: 60%; height: 7vh;">
-            <img src="{{i.photoURL}}" width="30px" height="30px" alt="user image" />
+    <div *ngFor="let i of userInformation" appMaterialElevation class="selectedCard">
+        <mat-card class="cardStyle">
+            <img src="{{i.photoURL}}" class="imgStyle" alt="user image" />
             <p>{{i.email}}</p>
-            <button mat-flat-button color="accent" style="outline: none; border-radius: 10px;">Remove</button>
+            <button mat-flat-button color="accent" class="btnStyle">Remove</button>
         </mat-card>
     </div>
 </div>

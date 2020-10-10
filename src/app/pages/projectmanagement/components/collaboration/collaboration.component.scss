@@ -1,7 +1,41 @@
+.addNewCollab{
+    align-content: center; text-align: center;
+}
+.pendingInvitation{
+
+}
+.pendingInvitation:hover{
+    box-shadow: -1px 10px 29px 0px rgba(0,0,0,0.8);
+}
+.collaborators{
+
+}
+.selectedCard{
+    text-align: -webkit-center;
+}
 .selectedCard :hover{
     // box-shadow: 0 8px 8px 8px rgba(0,0,0,.2), 0 8px 8px 0 rgba(0,0,0,.14), 0 8px 8px 0 rgba(0,0,0,.12) !important;
     // transform: translate3d(0,0,0);
     // transition: background .4s cubic-bezier(.25,.8,.25,1),box-shadow 280ms cubic-bezier(.4,0,.2,1);
-
     box-shadow: -1px 10px 29px 0px rgba(0,0,0,0.8);
+    
+}
+.cardStyle{
+    margin-top: 2px; 
+    display: flex; 
+    flex-direction: row; 
+    justify-content: space-between; 
+    width: 60%; 
+    height: 7vh; 
+    align-items: center; 
+}
+.imgStyle{
+    width:  30px;
+    height: 30px;
+    outline: none;
+}
+.btnStyle{
+    outline: none; 
+    border-radius: 10px;
+    align-items: center;
 }

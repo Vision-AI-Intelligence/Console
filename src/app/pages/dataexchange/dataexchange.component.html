@@ -8,17 +8,27 @@
           style="width: 200px; height: 10px; border-radius: 15px; margin-left: 2%;">
         </mat-progress-bar>
       </div>
-      <div style="margin-left: 5%;">
-        <mat-form-field appearance="fill" style="padding: 10px;width: 200px;">
+
+      <!-- <div style="margin-left: 5%;"> -->
+      <!-- <mat-form-field appearance="fill" style="padding: 10px;width: 200px;">
           <mat-label>Selected Bucket</mat-label>
           <mat-select color="accent" [(ngModel)]="selectedGroup">
             <mat-option class=".not-empty-select" *ngFor="let group of groups" [value]="group.name" (click)="getVal()">
               {{group.name}}
             </mat-option>
           </mat-select>
-        </mat-form-field>
+        </mat-form-field> -->
+      <button mat-flat-button class="btnSelectBucket mat-elevation-z6" color="accent">
+        <!-- <mat-form-field appearance="outline" color="primary"> -->
+        <!-- <mat-label>Selected Bucket</mat-label> -->
+        <mat-select color="accent" [(ngModel)]="selectedGroup">
+          <mat-option class=".not-empty-select" *ngFor="let group of groups" [value]="group.name" (click)="getVal()">
+            {{group.name}}
+          </mat-option>
+        </mat-select>
+      </button>
+      <!-- </div> -->
 
-      </div>
     </div>
 
     <div style="display: flex; flex-direction: row; align-items: center;">
