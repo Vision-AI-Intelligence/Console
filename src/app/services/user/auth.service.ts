@@ -16,7 +16,7 @@ export class UserAuthentication {
   user: User;
   private userDetails: any;
 
-  private idToken: string;
+  public idToken: string;
   constructor(
     public afAuth: AngularFireAuth,
     public router: Router,
@@ -113,22 +113,29 @@ export class UserAuthentication {
 
   // xây dựng sẵn cho việc get một user bất kỳ bằng email
   async getUserRandom() {
-    this.http.get(this.server.endpoint + 'users', {
+    return await this.http.get(this.server.endpoint + 'users', {
       headers: {
         authorization: this.idToken
       }
-    });
+    }).toPromise();
   }
   result: any;
   // search một user với keyword
-  searchUser(keyword: string) {
+  async searchUser(keyword: string) {
     console.log(keyword);
     console.log(this.idToken);
-    return this.http.get(this.server.endpoint + 'users/listing?keyword=' + keyword, {
+    return await this.http.get(this.server.endpoint + 'users/listing?keyword=' + keyword, {
       headers: {
         authorization: this.idToken
       },
     }).toPromise();
+  }
 
+  async getUserInfo(uid: string) {
+    return await this.http.get(this.server.endpoint + 'users/info?uid=' + uid, {
+      headers: {
+        authorization: this.idToken
+      }
+    }).toPromise();
   }
 }
