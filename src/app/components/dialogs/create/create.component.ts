@@ -22,8 +22,8 @@ export class CreateComponent implements OnInit {
   }
   get checkInvalid() {
     if (
-      this.data.pid === '' ||
-      this.data.pid == null ||
+      this.data.id === '' ||
+      this.data.id == null ||
       this.data.description === '' ||
       this.data.description == null ||
       this.data.name === '' ||

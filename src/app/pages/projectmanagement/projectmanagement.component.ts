@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
+import { UserAuthentication } from 'src/app/services/user/auth.service';
 import { CreateComponent } from '../../components/dialogs/create/create.component';
 import { Project } from '../../models/project.model';
 import { ProjectService } from '../../services/project/project.service';
@@ -11,21 +12,28 @@ import { ProjectService } from '../../services/project/project.service';
 })
 export class ProjectmanagementComponent implements OnInit {
   dialogWidth = '500px';
-  pid = '';
+  id = '';
   constructor(
     private router: Router,
     public dialog: MatDialog,
     private projectService: ProjectService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private userAuthentication: UserAuthentication
   ) { }
 
   public projects = [];
   private dialogRef = null;
-
-  ngOnInit(): void {
+  private data: any;
+  async ngOnInit() {
     this.activatedRoute.params.subscribe((params) => {
-      this.pid = params.id;
+      this.id = params.id;
     });
+    this.data = await this.projectService.GetProjects();
+    console.log(this.data);
+    for (let i in this.data["projects"]) {
+      this.projects.push(this.data["projects"][i]);
+    }
+    console.log(this.projects);
   }
 
   // generateButton() {
@@ -33,7 +41,7 @@ export class ProjectmanagementComponent implements OnInit {
   // }
   async onCreate() {
     const inputData = {
-      pid: '',
+      id: '',
       name: '',
       description: '',
     };
@@ -44,9 +52,9 @@ export class ProjectmanagementComponent implements OnInit {
       data: inputData,
     });
     this.dialogRef.afterClosed().subscribe((data) => {
-      if (data.pid !== '' && data.pid !== undefined
+      if (data.id !== '' && data.id !== undefined
         && data.name !== '' && data.description !== '' && data !== '' && data !== undefined && data !== null) {
-        this.projectService.createProject(data);
+        this.projectService.CreateProject(data);
         this.projects.push(data);
         console.log(this.projects);
       }
@@ -59,7 +67,7 @@ export class ProjectmanagementComponent implements OnInit {
     return originalString;
   }
   async gotoEdit(proj) {
-    await this.router.navigate([`/editproject/${proj.pid}/resources`], { relativeTo: this.activatedRoute });
+    await this.router.navigate([`/editproject/${proj.id}/resources`], { relativeTo: this.activatedRoute });
   }
   onAccept() {
     console.log('accepted');

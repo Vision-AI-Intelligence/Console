@@ -5,6 +5,6 @@ import { Injectable } from '@angular/core';
 })
 export class ServerService {
 
-  public endpoint = 'http://server.visionintelligence.ml/v1/';
+  public endpoint = 'https://server.visionintelligence.ml/v1/';
   constructor() { }
 }
