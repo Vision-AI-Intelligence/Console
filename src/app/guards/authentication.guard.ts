@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 // tslint:disable-next-line: max-line-length
 import { CanActivate, CanActivateChild, CanDeactivate, CanLoad, Route, UrlSegment, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { UserAuthentication } from '../services/user/auth.service';
 
 @Injectable({
@@ -19,12 +20,20 @@ export class AuthenticationGuard implements CanActivate, CanActivateChild, CanDe
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    if (this.token === undefined || this.token === null || this.token === '') {
-      console.log('Token: ' + this.token);
-      this.router.navigate(['home']);
-      return false;
-    }
-    return true;
+
+      return this.userAuthentication.idToken$.pipe(map((idToken)=>{
+          if(idToken === null || idToken ===undefined){
+            return false;
+          }
+          this.userAuthentication.idToken = idToken;
+          return true;
+      }));
+    // if (this.token === undefined || this.token === null || this.token === '') {
+    //   console.log('Token: ' + this.token);
+    //   this.router.navigate(['home']);
+    //   return false;
+    // }
+    // return true;
   }
   canActivateChild(
     next: ActivatedRouteSnapshot,

@@ -25,14 +25,18 @@ export class UserAuthentication {
     private server: ServerService,
   ) {
     this.isAuth();
+    this.idToken$ = this.afAuth.idToken;
     this.afAuth.idToken.subscribe((value) => {
       this.idToken = value;
     });
+
   }
 
   isLogin$: Observable<any>;
   isLogin = false;
   tempName: string = null;
+  idToken$: Observable<any>;
+
   private setUser() {
     this.user = {
       ...this.userDetails
