@@ -5,7 +5,7 @@
 }
 .title{
   font-size: 25pt; 
-  margin-left: 1%;
+  margin-left: 10px;
 }
 #custom-button {
   display: flex;
@@ -55,4 +55,35 @@
   justify-content: center;
   list-style: none;
   word-wrap: break-word;
+}
+.invitationDiv{
+  display: flex;
+  flex-direction: row;
+  word-wrap: break-word;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  flex-basis: 100%;
+
+}
+.btnInvitation{
+  width: 15%;
+  min-width: 10%;
+  height: 100%;
+  border: none;
+  outline: none;
+  margin: 0.5%;
+  border-radius: 15px;
+  background-color: #FF9237;
+  color: #fff;
+  white-space: pre-wrap;
+  justify-content: space-between;
+}
+.btnActionsOfInvitation{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+button {
+  // overflow-x: hidden !important;
+  white-space: pre-wrap !important;
 }

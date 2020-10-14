@@ -6,8 +6,9 @@ import { DataexchangeComponent } from './dataexchange.component';
 import {
   MaterialModule
 } from '../../material.module';
+import { DownloadurlComponent } from './components/dialogs/downloadurl/downloadurl.component';
 @NgModule({
-  declarations: [DataexchangeComponent],
+  declarations: [DataexchangeComponent, DownloadurlComponent],
   imports: [
     CommonModule,
     DataexchangeRoutingModule,

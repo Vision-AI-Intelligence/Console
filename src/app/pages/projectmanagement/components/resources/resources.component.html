@@ -1,1 +1,20 @@
-<p>resources works!</p>
+<div>
+    <div>
+        <p style="font-weight: bold;">Data Storage</p>
+        <p>{{currentStorage}} GB / {{totalStorage}} GB</p>
+    </div>
+    <mat-progress-bar mode="determinate" value="{{(currentStorage*100)/totalStorage}}"></mat-progress-bar>
+    <button mat-flat-button color='accent' style="margin-top: 10px; border-radius: 10px;"
+        class="mat-elevation-z6">Scale</button>
+    <p style="font-weight: bold;">AI Jobs Quotas</p>
+    <div>
+        <p>Job: {{currentJob}} / {{totalJob}}</p>
+        <mat-progress-bar mode="determinate" value="{{(currentJob*100)/totalJob}}"></mat-progress-bar>
+    </div>
+    <div>
+        <p>Runtime: {{currentTime}} / {{totalTime}} minutes</p>
+        <mat-progress-bar mode="determinate" value="{{(currentTime*100)/totalTime}}"></mat-progress-bar>
+    </div>
+    <button mat-flat-button color='accent' style="margin-top: 10px; border-radius: 10px;"
+        class="mat-elevation-z6">Extend quotas</button>
+</div>

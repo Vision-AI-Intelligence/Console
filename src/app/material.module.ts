@@ -18,6 +18,9 @@ import {
   MatCheckboxModule,
   MatPaginatorModule,
   MatTableModule,
+  MatCardModule,
+  MatSlideToggleModule,
+  MatAutocompleteModule
 } from '@angular/material';
 import { FormsModule } from '@angular/forms';
 
@@ -42,7 +45,10 @@ import { FormsModule } from '@angular/forms';
     MatSelectModule,
     MatCheckboxModule,
     MatPaginatorModule,
-    MatTableModule
+    MatTableModule,
+    MatCardModule,
+    MatSlideToggleModule,
+    MatAutocompleteModule
   ],
   exports: [
     MatIconModule,
@@ -62,7 +68,10 @@ import { FormsModule } from '@angular/forms';
     MatSelectModule,
     MatCheckboxModule,
     MatPaginatorModule,
-    MatTableModule
+    MatTableModule,
+    MatCardModule,
+    MatSlideToggleModule,
+    MatAutocompleteModule
   ]
 })
 export class MaterialModule { }

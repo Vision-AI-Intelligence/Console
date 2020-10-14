@@ -1,8 +1,9 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { SelectionModel } from '@angular/cdk/collections';
 import { MatTableDataSource } from '@angular/material/table';
-import { MatPaginator } from '@angular/material';
+import { MatDialog, MatDialogRef, MatPaginator } from '@angular/material';
 import { FormControl } from '@angular/forms';
+import { DownloadurlComponent } from './components/dialogs/downloadurl/downloadurl.component';
 
 export interface DataExchange {
   position: number;
@@ -88,7 +89,12 @@ export class DataexchangeComponent implements OnInit, AfterViewInit {
     items: 'big rubber1'
   }];
   menuContext = ['Info', 'Copy', 'Move', 'Rename', 'Zip', 'Download'];
-  constructor() { }
+  dialogWidth = '500px';
+  private dialogRef = null;
+  private downloadedURLs = [];
+  constructor(
+    public dialog: MatDialog,
+  ) { }
   selectedGroup = this.groups[0].name;
 
   getVal() {
@@ -125,8 +131,25 @@ export class DataexchangeComponent implements OnInit, AfterViewInit {
   uploadFile() {
     console.log('Upload file clickec!');
   }
-  downloadFromURL() {
-    console.log('Download from URL clicked!');
+  async downloadFromURL() {
+    this.dialogRef = this.dialog.open(DownloadurlComponent, {
+      width: this.dialogWidth,
+      data: DownloadurlComponent
+    });
+    await this.dialogRef.afterClosed().subscribe((data) => {
+      if (data.fileName !== '' && data.fileName !== undefined
+        && data.URL !== '' && data.URL !== undefined
+        && data !== undefined && data !== '') {
+        this.downloadedURLs.push({
+          fileName: data.fileName,
+          URL: data.URL
+        });
+        console.log(data.fileName);
+        console.log(data.URL);
+        // console.log(data);
+        console.log(this.downloadedURLs);
+      }
+    });
   }
   onClickMenuContext(menuContent: any) {
     switch (menuContent) {
