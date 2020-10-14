@@ -30,8 +30,9 @@ export class ProjectmanagementComponent implements OnInit {
     });
     this.data = await this.projectService.GetProjects();
     console.log(this.data);
-    for (let i in this.data["projects"]) {
-      this.projects.push(this.data["projects"][i]);
+    console.log('token: ' + await this.userAuthentication.idToken);
+    for (let i of this.data["projects"]) {
+      this.projects.push(i);
     }
     console.log(this.projects);
   }
@@ -61,6 +62,9 @@ export class ProjectmanagementComponent implements OnInit {
     });
   }
   getSubstring(originalString: string) {
+    if (originalString === undefined || originalString === '' || originalString === null) {
+      return;
+    }
     if (originalString.length > 14) {
       return originalString.substr(0, 10) + '...';
     }
