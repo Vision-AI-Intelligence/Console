@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
+import { MiscService } from '../../services/misc.service';
 import { UserAuthentication } from 'src/app/services/user/auth.service';
 import { CreateComponent } from '../../components/dialogs/create/create.component';
 import { Project } from '../../models/project.model';
@@ -18,7 +19,8 @@ export class ProjectmanagementComponent implements OnInit {
     public dialog: MatDialog,
     private projectService: ProjectService,
     private activatedRoute: ActivatedRoute,
-    private userAuthentication: UserAuthentication
+    private userAuthentication: UserAuthentication,
+    public miscService: MiscService
   ) { }
 
   public projects = [];
@@ -31,15 +33,10 @@ export class ProjectmanagementComponent implements OnInit {
     this.data = await this.projectService.GetProjects();
     console.log(this.data);
     console.log('token: ' + await this.userAuthentication.idToken);
-    for (let i of this.data["projects"]) {
+    for (let i of this.data.projects) {
       this.projects.push(i);
     }
-    console.log(this.projects);
   }
-
-  // generateButton() {
-  //   this.projects.push({ name: 'Project ' + this.projects.length, id: '' + this.projects.length });
-  // }
   async onCreate() {
     const inputData = {
       id: '',
@@ -61,15 +58,7 @@ export class ProjectmanagementComponent implements OnInit {
       }
     });
   }
-  getSubstring(originalString: string) {
-    if (originalString === undefined || originalString === '' || originalString === null) {
-      return;
-    }
-    if (originalString.length > 14) {
-      return originalString.substr(0, 10) + '...';
-    }
-    return originalString;
-  }
+
   async gotoEdit(proj) {
     await this.router.navigate([`/editproject/${proj.id}/resources`], { relativeTo: this.activatedRoute });
   }

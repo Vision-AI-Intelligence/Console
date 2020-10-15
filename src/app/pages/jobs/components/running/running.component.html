@@ -1,11 +1,40 @@
 <div *ngFor="let i of data">
     <mat-card style="margin-top: 5px;">
-        <div style="display: flex; flex-direction: row; justify-content: space-between; align-items: center; ">
+
+
+        <div style="display: flex; flex-direction: row; justify-content: space-between;  align-items: center; ">
             <label>{{i.jid}}</label>
-            <p style="word-wrap: break-word;">{{i.type}}:{{i.description}}</p>
-            <p>Elapsed time: {{i.time}}</p>
+            <p style="word-wrap: break-word; text-align: left ; margin: auto;">{{i.type}}:{{i.description}}</p>
+            <p style="margin: auto;">Elapsed time: {{i.time}}</p>
             <button mat-flat-button color='primary' (click)="onCancel()">Cancel</button>
         </div>
         <mat-progress-bar mode="indeterminate" style="padding-top: 1px;" color='primary'></mat-progress-bar>
+
+        <!-- <table mat-table [dataSource]="dataSource">
+            <ng-container matColumnDef="JobId">
+                <th mat-header-cell *matHeaderCellDef> Job Id </th>
+                <td mat-cell *matCellDef="let element"> {{element.jid}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="Description">
+                <th mat-header-cell *matHeaderCellDef> Description </th>
+                <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="Time">
+                <th mat-header-cell *matHeaderCellDef> Time </th>
+                <td mat-cell *matCellDef="let element"> {{element.time}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="Type">
+                <th mat-header-cell *matHeaderCellDef> Type </th>
+                <td mat-cell *matCellDef="let element"> {{element.type}} </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table> -->
+
+
     </mat-card>
 </div>
