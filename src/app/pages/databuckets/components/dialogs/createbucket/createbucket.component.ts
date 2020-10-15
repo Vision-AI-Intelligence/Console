@@ -16,11 +16,12 @@ export class CreatebucketComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.data.isPublic = this.isPublic;
   }
   onCreateBucket() {
     this.dialogRef.close(this.data);
   }
   onToggle(value: any) {
-    console.log(value);
+    this.isPublic = !this.isPublic;
   }
 }

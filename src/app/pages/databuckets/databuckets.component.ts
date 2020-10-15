@@ -12,13 +12,16 @@ export class DatabucketsComponent implements OnInit {
 
   buckets = [
     {
-      bid: 'bucket-001'
+      bid: 'bucket-001',
+      isPublic: 'true'
     },
     {
-      bid: 'bucket-002'
+      bid: 'bucket-002',
+      isPublic: 'false'
     },
     {
-      bid: 'bucket-003'
+      bid: 'bucket-003',
+      isPublic: 'true'
     }
   ];
   menuContext = ['Info', 'Delete'];
@@ -34,21 +37,18 @@ export class DatabucketsComponent implements OnInit {
   ngOnInit(): void {
   }
   async createBucket() {
-    const inputData = {
-      bid: '',
-      isPublic: 'true'
-    };
     this.dialogRef = this.dialog.open(CreatebucketComponent, {
       width: this.dialogWidth,
-      // hasBackdrop: true,
-      data: inputData,
+      data: CreatebucketComponent,
     });
     this.dialogRef.afterClosed().subscribe((data) => {
       if (data.bid !== '' && data.bid !== undefined
         && data !== '' && data !== undefined && data !== null) {
         this.bucketService.createBucket(data);
-        this.buckets.push(data);
-        console.log(this.buckets);
+        this.buckets.push({
+          bid: data.bid,
+          isPublic: data.isPublic
+        });
       }
     });
   }

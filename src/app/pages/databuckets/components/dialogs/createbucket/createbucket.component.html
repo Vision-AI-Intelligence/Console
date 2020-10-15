@@ -8,18 +8,20 @@
             </div> -->
             <label>Bucket ID (Unique)</label>
             <div style="display: flex; flex-direction: row;">
-                <input matInput type="text" [(ngModel)]="data.bid" required>
+                <input matInput type="text" [(ngModel)]="data.bid" ngDefaultControl required>
                 <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="data.bid=''">
                     <mat-icon>close</mat-icon>
                 </button>
             </div>
-
         </mat-form-field>
-    </mat-dialog-content>
 
+    </mat-dialog-content>
     <label>Is Public</label>
-    <mat-slide-toggle style="margin-left: 2%" [(ngModel)]="isPublic" (change)="onToggle(isPublic)">{{isPublic}}
+    <mat-slide-toggle style="margin-left: 2%" [(ngModel)]="data.isPublic" ngDefaultControl
+        (change)="onToggle(isPublic)">
+        {{data.isPublic}}
     </mat-slide-toggle>
+
 
 
     <mat-dialog-actions style="justify-content: flex-end;">

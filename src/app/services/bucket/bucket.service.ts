@@ -8,6 +8,6 @@ export class BucketService {
 
   constructor() { }
   async createBucket(data: Bucket) {
-    console.log(data);
+
   }
 }
