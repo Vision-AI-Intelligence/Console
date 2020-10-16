@@ -25,12 +25,12 @@
     </mat-tab>
   </mat-tab-group> -->
   <nav mat-tab-nav-bar>
-    <a mat-tab-link *ngFor="let link of links" (click)="selectTab(link)" [routerLinkActive]="'active'"
-      [active]="activeLink == link"> {{link}}
+    <a mat-tab-link *ngFor="let link of links" (click)="selectTab(link)" [active]="activeLink == link">
+      {{link}}
     </a>
 
   </nav>
-  <div>
+  <div style="margin-bottom: 50px;">
     <router-outlet></router-outlet>
   </div>
 </div>

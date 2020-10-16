@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { NotfoundComponent } from '../app/pages/notfound/notfound.component';
-
+import { AuthenticationGuard } from '../app/guards/authentication.guard';
 const routes: Routes = [
   { path: 'home', loadChildren: () => import('./pages/home/home.module').then(m => m.HomeModule) },
   { path: '', loadChildren: () => import('./pages/home/home.module').then(m => m.HomeModule) },
@@ -11,7 +11,7 @@ const routes: Routes = [
   { path: 'serving', loadChildren: () => import('./pages/serving/serving.module').then(m => m.ServingModule) },
   { path: 'configuration', loadChildren: () => import('./pages/configuration/configuration.module').then(m => m.ConfigurationModule) },
   // tslint:disable-next-line: max-line-length
-  { path: 'projectmanagement', loadChildren: () => import('./pages/projectmanagement/projectmanagement.module').then(m => m.ProjectmanagementModule) },
+  { path: 'projectmanagement', loadChildren: () => import('./pages/projectmanagement/projectmanagement.module').then(m => m.ProjectmanagementModule), canActivate: [AuthenticationGuard] },
   { path: 'dataexchange', loadChildren: () => import('./pages/dataexchange/dataexchange.module').then(m => m.DataexchangeModule) },
   { path: 'preprocessing', loadChildren: () => import('./pages/preprocessing/preprocessing.module').then(m => m.PreprocessingModule) },
   { path: 'aijobs', loadChildren: () => import('./pages/aijobs/aijobs.module').then(m => m.AijobsModule) },
@@ -24,6 +24,8 @@ const routes: Routes = [
   { path: '404', component: NotfoundComponent },
   // tslint:disable-next-line: max-line-length
   { path: 'editproject', loadChildren: () => import('./pages/projectmanagement/editproject/editproject.module').then(m => m.EditprojectModule) },
+  { path: 'databuckets', loadChildren: () => import('./pages/databuckets/databuckets.module').then(m => m.DatabucketsModule) },
+  { path: 'jobs', loadChildren: () => import('./pages/jobs/jobs.module').then(m => m.JobsModule) },
   { path: '**', redirectTo: '404' },
 ];
 

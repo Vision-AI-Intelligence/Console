@@ -1,5 +1,5 @@
 export class Project {
-    pid?: string;
+    id?: string;
     name?: string;
     description?: string;
 }

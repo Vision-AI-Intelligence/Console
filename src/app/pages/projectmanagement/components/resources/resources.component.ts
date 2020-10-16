@@ -7,6 +7,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ResourcesComponent implements OnInit {
 
+  currentStorage = 25;
+  totalStorage = 40;
+
+  currentJob = 1;
+  totalJob = 10;
+
+  currentTime = 300;
+  totalTime = 1000;
   constructor() { }
 
   ngOnInit(): void {

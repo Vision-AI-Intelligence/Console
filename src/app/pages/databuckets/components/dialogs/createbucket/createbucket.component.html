@@ -1,0 +1,32 @@
+<h2>{{title}}</h2>
+<div class="container">
+    <mat-dialog-content>
+        <mat-form-field style="display: flex; flex-direction: column; justify-content: space-around;">
+            <!-- <div style="display: flex; flex-direction: column; justify-content: center;">
+                <label>Bucket ID</label>
+                <label>(Unique)</label>
+            </div> -->
+            <label>Bucket ID (Unique)</label>
+            <div style="display: flex; flex-direction: row;">
+                <input matInput type="text" [(ngModel)]="data.bid" ngDefaultControl required>
+                <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="data.bid=''">
+                    <mat-icon>close</mat-icon>
+                </button>
+            </div>
+        </mat-form-field>
+
+    </mat-dialog-content>
+    <label>Is Public</label>
+    <mat-slide-toggle style="margin-left: 2%" [(ngModel)]="data.isPublic" ngDefaultControl
+        (change)="onToggle(isPublic)">
+        {{data.isPublic}}
+    </mat-slide-toggle>
+
+
+
+    <mat-dialog-actions style="justify-content: flex-end;">
+        <button mat-flat-button matDialogClose style="border: 1px solid #7e7e7e; color: #FF9237;">Close</button>
+        <button mat-flat-button color="accent" [matDialogClose]="true" (click)="onCreateBucket()"
+            cdkFocusInitial>Create</button>
+    </mat-dialog-actions>
+</div>

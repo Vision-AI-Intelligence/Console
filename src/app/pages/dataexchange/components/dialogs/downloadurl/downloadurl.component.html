@@ -1,0 +1,30 @@
+<h2>{{title}}</h2>
+<div class="container">
+    <mat-dialog-content>
+        <mat-form-field style="display: flex; flex-direction: column; justify-content: space-around;">
+            <label>File name</label>
+            <div style="display: flex; flex-direction: row;">
+                <input matInput type="text" [(ngModel)]="data.fileName" required>
+                <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear"
+                    (click)="data.fileName=''">
+                    <mat-icon>close</mat-icon>
+                </button>
+            </div>
+
+        </mat-form-field>
+        <mat-form-field style="display: flex; flex-direction: column; justify-content: space-around;">
+            <label>URL</label>
+            <div style="display: flex; flex-direction: row;">
+                <input matInput type="text" [(ngModel)]="data.URL" required>
+                <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="data.URL=''">
+                    <mat-icon>close</mat-icon>
+                </button>
+            </div>
+        </mat-form-field>
+    </mat-dialog-content>
+    <mat-dialog-actions style="justify-content: flex-end;">
+        <button mat-flat-button matDialogClose style="border: 1px solid #7e7e7e; color: #FF9237;">Close</button>
+        <button mat-flat-button color="accent" [matDialogClose]="true" (click)="onDownload()"
+            cdkFocusInitial>Download</button>
+    </mat-dialog-actions>
+</div>
