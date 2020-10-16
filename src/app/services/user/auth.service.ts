@@ -8,6 +8,7 @@ import { auth } from 'firebase';
 import * as firebase from 'firebase';
 import { HttpClient } from '@angular/common/http';
 import { ServerService } from '../server.service';
+import { MiscService } from '../misc.service';
 @Injectable({
   providedIn: 'root'
 })
@@ -23,6 +24,7 @@ export class UserAuthentication {
     public snackBar: MatSnackBar,
     public http: HttpClient,
     private server: ServerService,
+    private miscService: MiscService
   ) {
     this.isAuth();
     this.idToken$ = this.afAuth.idToken;
@@ -58,10 +60,7 @@ export class UserAuthentication {
       const credential = await this.afAuth.signInWithPopup(new auth.GoogleAuthProvider());
       this.idToken = await credential.user.getIdToken();
       if (this.idToken.length < 1) {
-        this.snackBar.open('Login Failed, Please try it again!!!', '❌', {
-          duration: 3000, horizontalPosition: 'center',
-          verticalPosition: 'bottom'
-        });
+        this.miscService.showSnackbarFail('Login');
       }
 
       setTimeout(
@@ -79,11 +78,7 @@ export class UserAuthentication {
               return;
             }
           }
-          this.snackBar.open('Login Successfully', '✔️', {
-            duration: 3000,
-            horizontalPosition: 'center',
-            verticalPosition: 'bottom'
-          });
+          this.miscService.showSnackbarSuccessful('Login');
           console.log(this.idToken);
           this.router.navigate(['home']);
 
@@ -93,22 +88,13 @@ export class UserAuthentication {
         }, 3000
       );
     } catch (error) {
-      this.snackBar.open('Login Failed, Please try it again!!!', '❌', {
-        duration: 3000, horizontalPosition: 'center',
-        verticalPosition: 'bottom'
-      });
+      this.miscService.showSnackbarFail('Login');
     }
 
   }
 
   async signOut() {
-    await this.afAuth.signOut().then(() => {
-      this.snackBar.open('OK bye', '😘', {
-        duration: 3000,
-        horizontalPosition: 'center',
-        verticalPosition: 'bottom'
-      });
-    });
+    this.miscService.showSnackbarLogout();
     this.userDetails = null;
     this.user = null;
     this.idToken = '';
