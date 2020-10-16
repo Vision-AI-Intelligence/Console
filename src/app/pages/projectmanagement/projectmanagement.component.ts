@@ -26,6 +26,8 @@ export class ProjectmanagementComponent implements OnInit {
   public projects = [];
   private dialogRef = null;
   private data: any;
+  menuContext = ['Open', 'Update', 'Delete'];
+  selectedProject = '';
   async ngOnInit() {
     this.activatedRoute.params.subscribe((params) => {
       this.id = params.id;
@@ -59,6 +61,9 @@ export class ProjectmanagementComponent implements OnInit {
     });
   }
 
+  // async gotoEdit(proj) {
+  //   await this.router.navigate([`/editproject/${proj.id}/resources`], { relativeTo: this.activatedRoute });
+  // }
   async gotoEdit(proj) {
     await this.router.navigate([`/editproject/${proj.id}/resources`], { relativeTo: this.activatedRoute });
   }
@@ -67,5 +72,17 @@ export class ProjectmanagementComponent implements OnInit {
   }
   onReject() {
     console.log('rejected');
+  }
+  async onClickMenuContext(menuContent, proj) {
+    switch (menuContent) {
+      case this.menuContext[0]:
+        await this.gotoEdit(proj); break;
+      case this.menuContext[1]:
+        this.selectedProject = String(menuContent);
+        console.log(menuContent + ' clicked!'); break;
+      case this.menuContext[2]:
+        this.selectedProject = String(menuContent);
+        console.log(menuContent + ' clicked!'); break;
+    }
   }
 }

@@ -142,7 +142,7 @@
         <!-- <p style="color: black; font-size: x-large;">Create</p> -->
       </button>
       <button *ngFor="let proj of projects" [(ngModel)]='id' class="project-button mat-elevation-z6" mat-raised-button
-        style="background-color:#FF9237;" (click)="gotoEdit(proj)">
+        style="background-color:#FF9237;" [matMenuTriggerFor]="menu">
         <div *ngIf="proj"
           style="width: 100%; height: 100%; display: flex; flex-direction: column; word-wrap: break-word;">
           <p style="font-size: large;
@@ -152,8 +152,16 @@
           text-align: left;
           margin-top: auto;">{{miscService.getSubstring(proj["description"])}}</p>
         </div>
-
+        <mat-menu #menu="matMenu" xPosition="before">
+          <div *ngFor="let i of menuContext" style="border-radius: 10px;">
+            <button mat-flat-button style="width: 100%; align-content: flex-start;"
+              (click)="onClickMenuContext(i, proj)">{{i}}</button>
+            <mat-divider></mat-divider>
+          </div>
+        </mat-menu>
       </button>
+
+
     </div>
   </div>
 
