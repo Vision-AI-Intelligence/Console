@@ -6,6 +6,8 @@ import { UserAuthentication } from 'src/app/services/user/auth.service';
 import { CreateComponent } from '../../components/dialogs/create/create.component';
 import { Project } from '../../models/project.model';
 import { ProjectService } from '../../services/project/project.service';
+import { DeleteprojectComponent } from './components/dialogs/deleteproject/deleteproject.component';
+import { UpdateprojectComponent } from './components/dialogs/updateproject/updateproject.component';
 @Component({
   selector: 'app-projectmanagement',
   templateUrl: './projectmanagement.component.html',
@@ -13,6 +15,7 @@ import { ProjectService } from '../../services/project/project.service';
 })
 export class ProjectmanagementComponent implements OnInit {
   dialogWidth = '500px';
+  proj: any;
   id = '';
   constructor(
     private router: Router,
@@ -30,7 +33,7 @@ export class ProjectmanagementComponent implements OnInit {
   selectedProject = '';
   async ngOnInit() {
     this.activatedRoute.params.subscribe((params) => {
-      this.id = params.id;
+      this.proj.id = params.id;
     });
     this.data = await this.projectService.GetProjects();
     console.log(this.data);
@@ -60,6 +63,25 @@ export class ProjectmanagementComponent implements OnInit {
       }
     });
   }
+  async onDelete(project: Project) {
+    const dialogRef = this.dialog.open(DeleteprojectComponent, { width: this.dialogWidth, data: project });
+    dialogRef.afterClosed().subscribe((data) => {
+      // console.log(data);
+      this.projectService.DeleteProject(data.id);
+    });
+  }
+  async onUpdate(project: Project) {
+    const dialogRef = this.dialog.open(UpdateprojectComponent, { width: this.dialogWidth, data: project });
+    // if ((this.data.id === undefined || this.data.id === '') && (this.data.name === undefined || this.data.name === '')) {
+    //   return;
+    // }
+    dialogRef.afterClosed().subscribe((data) => {
+      console.log(data);
+      this.projectService.UpdateProject(data);
+      this.miscService.showSnackbarSuccessful('Update');
+
+    });
+  }
 
   // async gotoEdit(proj) {
   //   await this.router.navigate([`/editproject/${proj.id}/resources`], { relativeTo: this.activatedRoute });
@@ -78,11 +100,9 @@ export class ProjectmanagementComponent implements OnInit {
       case this.menuContext[0]:
         await this.gotoEdit(proj); break;
       case this.menuContext[1]:
-        this.selectedProject = String(menuContent);
-        console.log(menuContent + ' clicked!'); break;
+        await this.onUpdate(proj); break;
       case this.menuContext[2]:
-        this.selectedProject = String(menuContent);
-        console.log(menuContent + ' clicked!'); break;
+        await this.onDelete(proj); break;
     }
   }
 }
