@@ -83,6 +83,23 @@ export class ProjectService {
       console.log('[DELETE] project ' + error);
     }
   }
+  async GetInvitation(projectId: string) {
+    try {
+      if (this.userAuthentication.idToken === undefined || this.userAuthentication.idToken === null) {
+        return;
+      }
+      return this.http.get(this.server.endpoint + 'projects/invite', {
+        headers: {
+          authorization: this.userAuthentication.idToken
+        },
+        params: {
+          pid: projectId
+        }
+      }).toPromise();
+    } catch (error) {
+      console.log('[GET] projects/invitation ' + error);
+    }
+  }
   async CreateInvitation(projectId: string, fromId: string, toId: string) {
     try {
       if (this.userAuthentication.idToken === undefined || this.userAuthentication.idToken === null) {

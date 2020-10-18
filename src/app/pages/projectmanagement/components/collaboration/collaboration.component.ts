@@ -58,17 +58,43 @@ export class CollaborationComponent implements OnInit, AfterViewInit {
 
   }
 
-  ngOnInit(): void {
+  async ngOnInit() {
+    this.getInvitations();
   }
   async onAddCollaborator() {
     try {
       let to = this.suggestionUsers.filter((value) => value.email === this.searchInputValue)[0];
-      await this.projectService.CreateInvitation(this.projectService.pid, this.userService.userDetails.uid, to.uid);
-      this.userInformation.push(await this.projectService.GetCollaborators(this.projectService.pid));
-      console.log(this.userInformation);
+      let createInvitation = await this.projectService.CreateInvitation(this.projectService.pid, this.userService.userDetails.uid, to.uid);
+      if (createInvitation['message'] != 'OK') {
+        this.miscService.showSnackbarFail(`Invite ${to.email}`);
+        return;
+      }
+      this.getInvitations();
       this.miscService.showSnackbarSuccessful(`Collaborator ${to.email} was added`);
     } catch (err) {
       console.log(err);
     }
+  }
+  async getInvitations() {
+    let getInvitation = await this.projectService.GetInvitation(this.projectService.pid);
+    if (await getInvitation['result'].length != 0) {
+      this.miscService.showSnackbarNotification('No invitations yet, please invite someone');
+    }
+    console.log(getInvitation['result']);
+    // while (this.userInformation.length > 0) { //not good for performance => stupid solution -_-
+    //   this.userInformation.pop();
+    // }
+    for (const i of getInvitation['result']) {
+      let userInfo = await this.userService.getUserInfo(i.to);
+      if ((this.userInformation.filter((usr) => usr.email === userInfo['email'])).length > 0) {
+        continue;
+      }
+      this.userInformation.push({
+        email: userInfo['email'],
+        photoURL: userInfo['photoURL']
+      });
+    }
+
+    console.log(this.userInformation);
   }
 }
