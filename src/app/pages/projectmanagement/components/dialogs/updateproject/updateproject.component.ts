@@ -14,7 +14,7 @@ export class UpdateprojectComponent implements OnInit {
     public projectService: ProjectService,
     private router: Router,
     private dialogRef: MatDialogRef<UpdateprojectComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: Project
+    @Inject(MAT_DIALOG_DATA) public data: any
   ) { }
 
   ngOnInit() {

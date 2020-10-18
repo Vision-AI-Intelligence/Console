@@ -78,14 +78,10 @@ export class ProjectmanagementComponent implements OnInit {
   }
   async onUpdate(project: Project) {
     const dialogRef = this.dialog.open(UpdateprojectComponent, { width: this.dialogWidth, data: project });
-    if (this.data.name === undefined || this.data.name === '') {
-      return;
-    }
-    dialogRef.afterClosed().subscribe((data) => {
+    dialogRef.afterClosed().subscribe(async (data) => {
       console.log(data);
-      this.projectService.UpdateProject(data);
+      await this.projectService.UpdateProject(data);
       this.miscService.showSnackbarSuccessful('Update');
-
     });
   }
 
