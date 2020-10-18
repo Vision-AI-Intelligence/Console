@@ -38,6 +38,9 @@ export class ProjectmanagementComponent implements OnInit {
     this.activatedRoute.params.subscribe((params) => {
       this.proj.id = params.id;
     });
+    await this.onLoadProjects();
+  }
+  async onLoadProjects() {
     this.data = await this.projectService.GetProjects();
     console.log(this.data);
     console.log('token: ' + await this.userAuthentication.idToken);

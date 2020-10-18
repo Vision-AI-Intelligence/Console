@@ -12,7 +12,7 @@
             <mat-autocomplete #auto autoActiveFirstOption>
                 <mat-option *ngFor="let u of suggestionUsers" [value]='u.email'>
                     <mat-card appMaterialElevation class="customOption">
-                        <img src="{{u.photoURL}}" alt="user image" class="imgStyle" style="border-radius:25px" />
+                        <img src="{{u.photoURL}}" alt="user image" class="imgStyle"/>
                         <p>{{u.email}}</p>
                         <!-- <button mat-flat-button color="accent" class="btnStyle">Add</button> -->
                     </mat-card>
@@ -26,19 +26,19 @@
 
 
     <p style="font-weight: bold; font-size: large;">Pending Invitation</p>
-    <div *ngFor="let u of userInformation" class="selectedCard">
+    <div *ngFor="let p of pendingInvitation" class="selectedCard">
         <mat-card appMaterialElevation class="cardStyle">
-            <img src="{{u.photoURL}}" alt="user image" class="imgStyle" />
-            <p>{{u.email}}</p>
-            <button mat-flat-button color="accent" class="btnStyle">Remove</button>
+            <img src="{{p.photoURL}}" alt="user image" class="imgStyle" />
+            <p>{{p.email}}</p>
+            <button mat-flat-button color="accent" class="btnStyle" (click)="onRemove(p.invitationId)">Remove</button>
         </mat-card>
     </div>
 
     <p style="font-weight: bold; font-size: large;">Collaborators</p>
-    <div *ngFor="let i of userInformation" appMaterialElevation class="selectedCard">
+    <div *ngFor="let c of collaborators" appMaterialElevation class="selectedCard">
         <mat-card class="cardStyle">
-            <img src="{{i.photoURL}}" class="imgStyle" alt="user image" />
-            <p>{{i.email}}</p>
+            <img src="{{c.photoURL}}" class="imgStyle" alt="user image" />
+            <p>{{c.email}}</p>
             <button mat-flat-button color="accent" class="btnStyle">Remove</button>
         </mat-card>
     </div>

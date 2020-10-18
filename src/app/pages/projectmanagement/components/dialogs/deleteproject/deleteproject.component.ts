@@ -11,7 +11,7 @@ export class DeleteprojectComponent implements OnInit {
 
   constructor(
     private dialogRef: MatDialogRef<DeleteprojectComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: Project
+    @Inject(MAT_DIALOG_DATA) public data: any
   ) { }
 
   ngOnInit(): void {

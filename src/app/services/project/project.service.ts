@@ -118,7 +118,7 @@ export class ProjectService {
       console.log('[CREATE] projects/invitation ' + error);
     }
   }
-  async DeleteInvitation(pid: string, invitationId: string) {
+  async DeleteInvitation(projectId: string, iId: string) {
     try {
       if (this.userAuthentication.idToken === undefined || this.userAuthentication.idToken === null) {
         return;
@@ -128,8 +128,8 @@ export class ProjectService {
           authorization: this.userAuthentication.idToken
         },
         params: {
-          pid: pid,
-          invitationId: invitationId
+          pid: projectId,
+          invitationId: iId
         }
       },
       ).toPromise();

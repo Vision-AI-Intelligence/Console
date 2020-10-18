@@ -1,9 +1,11 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material';
 import { Observable, fromEvent } from 'rxjs';
 import { map, debounceTime } from 'rxjs/operators';
 import { MiscService } from 'src/app/services/misc.service';
 import { ProjectService } from 'src/app/services/project/project.service';
 import { UserAuthentication } from '../../../../services/user/auth.service';
+import { DeleteprojectComponent } from '../dialogs/deleteproject/deleteproject.component';
 @Component({
   selector: 'app-collaboration',
   templateUrl: './collaboration.component.html',
@@ -12,31 +14,20 @@ import { UserAuthentication } from '../../../../services/user/auth.service';
 export class CollaborationComponent implements OnInit, AfterViewInit {
   @ViewChild('input') searchInput: ElementRef;
 
-  userInformation = [
-    // {
-    //   photoURL: '../../../../../assets/images/user.png',
-    //   email: 'abc@gmail.com'
-    // },
-    // {
-    //   photoURL: '../../../../../assets/images/user.png',
-    //   email: 'lorem.ipsum@gmail.com'
-    // },
-    // {
-    //   photoURL: '../../../../../assets/images/user.png',
-    //   email: 'user01@gmail.com'
-    // }
-  ];
+  userInformation = [];
   pendingInvitation = [];
   collaborators = [];
 
   defaultElevation = 2;
   searchInputValue = '';
   suggestionUsers: any;
+  dialogWidth: '500px';
 
   constructor(
     private userService: UserAuthentication,
     private projectService: ProjectService,
-    private miscService: MiscService
+    private miscService: MiscService,
+    public dialog: MatDialog,
   ) { }
 
   async ngAfterViewInit() {
@@ -69,7 +60,7 @@ export class CollaborationComponent implements OnInit, AfterViewInit {
         this.miscService.showSnackbarFail(`Invite ${to.email}`);
         return;
       }
-      this.getInvitations();
+      await this.getInvitations();
       this.miscService.showSnackbarSuccessful(`Collaborator ${to.email} was added`);
     } catch (err) {
       console.log(err);
@@ -77,24 +68,31 @@ export class CollaborationComponent implements OnInit, AfterViewInit {
   }
   async getInvitations() {
     let getInvitation = await this.projectService.GetInvitation(this.projectService.pid);
-    if (await getInvitation['result'].length != 0) {
+    if (await getInvitation['result'].length === 0) {
       this.miscService.showSnackbarNotification('No invitations yet, please invite someone');
     }
-    console.log(getInvitation['result']);
-    // while (this.userInformation.length > 0) { //not good for performance => stupid solution -_-
-    //   this.userInformation.pop();
-    // }
     for (const i of getInvitation['result']) {
       let userInfo = await this.userService.getUserInfo(i.to);
-      if ((this.userInformation.filter((usr) => usr.email === userInfo['email'])).length > 0) {
+      if ((this.pendingInvitation.filter((usr) => usr.email === userInfo['email'])).length > 0) {
         continue;
       }
-      this.userInformation.push({
+      this.pendingInvitation.push({
+        uid: userInfo['uid'],
+        invitationId: i['id'],
         email: userInfo['email'],
         photoURL: userInfo['photoURL']
       });
     }
-
-    console.log(this.userInformation);
+    console.log(this.pendingInvitation);
+  }
+  async onRemove(invitationId: string) {
+    const dialogRef = this.dialog.open(DeleteprojectComponent, { width: this.dialogWidth, data: invitationId });
+    dialogRef.afterClosed().subscribe(async (data) => {
+      console.log(data);
+      console.log(this.projectService.pid);
+      await this.projectService.DeleteInvitation(this.projectService.pid, data);
+      this.miscService.showSnackbarSuccessful(`Deleted ${invitationId}`);
+      await this.getInvitations(); // it still doesn't work
+    });
   }
 }
