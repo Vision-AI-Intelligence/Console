@@ -128,4 +128,11 @@ export class UserAuthentication {
       }
     }).toPromise();
   }
+  async getInvitations() {
+    return await this.http.get(this.server.endpoint + 'users/invite', {
+      headers: {
+        authorization: this.idToken
+      },
+    }).toPromise();
+  }
 }

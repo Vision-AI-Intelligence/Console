@@ -34,11 +34,13 @@ export class ProjectmanagementComponent implements OnInit {
   public data: any;
   menuContext = ['Open', 'Update', 'Delete'];
   selectedProject = '';
+  public collaboratorInvitations = [];
   async ngOnInit() {
     this.activatedRoute.params.subscribe((params) => {
       this.proj.id = params.id;
     });
     await this.onLoadProjects();
+    await this.onLoadInvitations();
   }
   async onLoadProjects() {
     this.data = await this.projectService.GetProjects();
@@ -46,6 +48,13 @@ export class ProjectmanagementComponent implements OnInit {
     console.log('token: ' + await this.userAuthentication.idToken);
     for (let i of this.data.projects) {
       this.projects.push(i);
+    }
+  }
+  async onLoadInvitations() {
+    let temp: any;
+    temp = await this.userAuthentication.getInvitations();
+    for (const t of temp['invitations']) {
+      this.collaboratorInvitations.push(t);
     }
   }
   async onCreate() {
@@ -92,8 +101,11 @@ export class ProjectmanagementComponent implements OnInit {
     this.projectService.pid = proj.id;
     await this.router.navigate([`/editproject/${proj.id}/resources`], { relativeTo: this.activatedRoute });
   }
-  onAccept() {
-    console.log('accepted');
+  async onAccept(invitation: any) {
+    console.log(invitation.project);
+    console.log(invitation.id);
+    await this.projectService.AcceptInvitation(invitation.project, invitation.id);
+    this.miscService.showSnackbarSuccessful(`${invitation.to} accepted`);
   }
   onReject() {
     console.log('rejected');

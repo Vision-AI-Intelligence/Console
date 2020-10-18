@@ -137,18 +137,18 @@ export class ProjectService {
       console.log('[DELETE] projects/invitation ' + error);
     }
   }
-  async AcceptInvitation(pid: string, invitationId: string) {
+  async AcceptInvitation(projectId: string, iId: string) {
     try {
       if (this.userAuthentication.idToken === undefined || this.userAuthentication.idToken === null) {
         return;
       }
-      return this.http.post(this.server.endpoint + 'projects/invite', {
+      return this.http.post(this.server.endpoint + 'projects/invite/accept', {
         headers: {
           authorization: this.userAuthentication.idToken
         },
         params: {
-          pid: pid,
-          invitationId: invitationId
+          pid: projectId,
+          invitationId: iId
         }
       },
       ).toPromise();
