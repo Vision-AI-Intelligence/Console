@@ -15,7 +15,7 @@ import { MiscService } from '../misc.service';
 export class UserAuthentication {
 
   user: User;
-  private userDetails: any;
+  public userDetails: any;
 
   public idToken: string;
   constructor(

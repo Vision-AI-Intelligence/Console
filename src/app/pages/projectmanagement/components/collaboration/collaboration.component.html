@@ -10,17 +10,17 @@
             <input matInput [(ngModel)]="searchInputValue" #input maxlength="50" [matAutocomplete]="auto">
             <mat-hint align="end">{{input.value?.length || 0}}/50</mat-hint>
             <mat-autocomplete #auto autoActiveFirstOption>
-                <mat-option *ngFor="let u of suggestionUsers">
-                    <mat-card appMaterialElevation class="cardStyle">
-                        <img src="{{u.photoURL}}" alt="user image" class="imgStyle" />
+                <mat-option *ngFor="let u of suggestionUsers" [value]='u.email'>
+                    <mat-card appMaterialElevation class="customOption">
+                        <img src="{{u.photoURL}}" alt="user image" class="imgStyle" style="border-radius:25px" />
                         <p>{{u.email}}</p>
-                        <button mat-flat-button color="accent" class="btnStyle">Add</button>
+                        <!-- <button mat-flat-button color="accent" class="btnStyle">Add</button> -->
                     </mat-card>
                 </mat-option>
             </mat-autocomplete>
         </mat-form-field>
         <button mat-flat-button color="primary" style="width: fit-content; height: fit-content; border-radius: 10px;"
-            class="mat-elevation-z6">Add</button>
+            class="mat-elevation-z6" (click)="onAddCollaborator()">Add</button>
     </div>
 
 

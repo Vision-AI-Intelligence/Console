@@ -8,6 +8,7 @@ import { UserAuthentication } from '../user/auth.service';
 })
 export class ProjectService {
 
+  public pid: string;
   constructor(
     private http: HttpClient,
     private server: ServerService,
@@ -82,15 +83,15 @@ export class ProjectService {
       console.log('[DELETE] project ' + error);
     }
   }
-  async CreateInvitation(pid: string, from: string, to: string) {
+  async CreateInvitation(projectId: string, fromId: string, toId: string) {
     try {
       if (this.userAuthentication.idToken === undefined || this.userAuthentication.idToken === null) {
         return;
       }
       return this.http.post(this.server.endpoint + 'projects/invite', {
-        pid: pid,
-        from: from,
-        to: to
+        pid: projectId,
+        from: fromId,
+        to: toId
       }, {
         headers: {
           authorization: this.userAuthentication.idToken
@@ -138,7 +139,7 @@ export class ProjectService {
       console.log('[ACCEPT] projects/invitation ' + error);
     }
   }
-  async GetCollaborators(pid: string) {
+  async GetCollaborators(projectId: string) {
     try {
       if (this.userAuthentication.idToken === undefined || this.userAuthentication.idToken === null) {
         return;
@@ -147,7 +148,7 @@ export class ProjectService {
         headers: {
           authorization: this.userAuthentication.idToken
         }, params: {
-          pid: pid
+          pid: projectId
         }
       },
       ).toPromise();

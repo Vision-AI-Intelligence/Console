@@ -1,8 +1,9 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserAuthentication } from 'src/app/services/user/auth.service';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { User } from '../../models/user.model';
+import { ProjectmanagementComponent } from 'src/app/pages/projectmanagement/projectmanagement.component';
 @Component({
   selector: 'app-toolbar',
   templateUrl: './toolbar.component.html',
@@ -15,15 +16,22 @@ export class ToolbarComponent implements OnInit {
   @Output() SidenavToggle = new EventEmitter();
 
   menuContext = ['traffic-vid', 'x-ray-img', 'flowers'];
+  temp: any;
   selectedProject = 'Selected a project';
   constructor(
     public userAuth: UserAuthentication,
     private router: Router,
-    private afAuth: AngularFireAuth) {
+    private afAuth: AngularFireAuth,
+    private projectManagement: ProjectmanagementComponent) {
     afAuth.user.subscribe(usr => this.userDetails = usr);
-  }
+    // if (this.projectManagement.data !== undefined) {
+    //   this.menuContext = this.projectManagement.data;
 
-  ngOnInit() {
+    //   console.log(this.menuContext);
+    // }
+  }
+  async ngOnInit() {
+
   }
 
   onSidenavToggle() {

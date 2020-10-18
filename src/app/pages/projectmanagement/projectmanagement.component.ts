@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Injectable, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MiscService } from '../../services/misc.service';
@@ -8,6 +8,9 @@ import { Project } from '../../models/project.model';
 import { ProjectService } from '../../services/project/project.service';
 import { DeleteprojectComponent } from './components/dialogs/deleteproject/deleteproject.component';
 import { UpdateprojectComponent } from './components/dialogs/updateproject/updateproject.component';
+@Injectable({
+  providedIn: 'root'
+})
 @Component({
   selector: 'app-projectmanagement',
   templateUrl: './projectmanagement.component.html',
@@ -28,7 +31,7 @@ export class ProjectmanagementComponent implements OnInit {
 
   public projects = [];
   private dialogRef = null;
-  private data: any;
+  public data: any;
   menuContext = ['Open', 'Update', 'Delete'];
   selectedProject = '';
   async ngOnInit() {
@@ -65,16 +68,16 @@ export class ProjectmanagementComponent implements OnInit {
   }
   async onDelete(project: Project) {
     const dialogRef = this.dialog.open(DeleteprojectComponent, { width: this.dialogWidth, data: project });
-    dialogRef.afterClosed().subscribe((data) => {
+    dialogRef.afterClosed().subscribe(async (data) => {
       // console.log(data);
       this.projectService.DeleteProject(data.id);
     });
   }
   async onUpdate(project: Project) {
     const dialogRef = this.dialog.open(UpdateprojectComponent, { width: this.dialogWidth, data: project });
-    // if ((this.data.id === undefined || this.data.id === '') && (this.data.name === undefined || this.data.name === '')) {
-    //   return;
-    // }
+    if (this.data.name === undefined || this.data.name === '') {
+      return;
+    }
     dialogRef.afterClosed().subscribe((data) => {
       console.log(data);
       this.projectService.UpdateProject(data);
@@ -87,6 +90,7 @@ export class ProjectmanagementComponent implements OnInit {
   //   await this.router.navigate([`/editproject/${proj.id}/resources`], { relativeTo: this.activatedRoute });
   // }
   async gotoEdit(proj) {
+    this.projectService.pid = proj.id;
     await this.router.navigate([`/editproject/${proj.id}/resources`], { relativeTo: this.activatedRoute });
   }
   onAccept() {
