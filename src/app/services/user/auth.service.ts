@@ -16,7 +16,7 @@ export class UserAuthentication {
 
   user: User;
   public userDetails: any;
-
+  public uid: any;
   public idToken: string;
   constructor(
     public afAuth: AngularFireAuth,
@@ -84,6 +84,7 @@ export class UserAuthentication {
 
           this.userDetails = this.afAuth.currentUser; // kiểm tra xem user nãy subscribe có phải là nó hong
           console.log(this.userDetails);
+          this.uid = (await this.afAuth.currentUser).uid;
           this.setUser();
         }, 3000
       );

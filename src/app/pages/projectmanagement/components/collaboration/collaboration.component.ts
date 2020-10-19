@@ -51,11 +51,12 @@ export class CollaborationComponent implements OnInit, AfterViewInit {
 
   async ngOnInit() {
     this.getInvitations();
+    this.getCollaborators();
   }
   async onAddCollaborator() {
     try {
       let to = this.suggestionUsers.filter((value) => value.email === this.searchInputValue)[0];
-      let createInvitation = await this.projectService.CreateInvitation(this.projectService.pid, this.userService.userDetails.uid, to.uid);
+      let createInvitation = await this.projectService.CreateInvitation(this.projectService.pid, this.userService.uid, to.uid);
       if (createInvitation['message'] != 'OK') {
         this.miscService.showSnackbarFail(`Invite ${to.email}`);
         return;
@@ -85,14 +86,34 @@ export class CollaborationComponent implements OnInit, AfterViewInit {
     }
     console.log(this.pendingInvitation);
   }
-  async onRemove(invitationId: string) {
+  async onRemoveInvitation(invitationId: string) {
     const dialogRef = this.dialog.open(DeleteprojectComponent, { width: this.dialogWidth, data: invitationId });
     dialogRef.afterClosed().subscribe(async (data) => {
-      console.log(data);
-      console.log(this.projectService.pid);
       await this.projectService.DeleteInvitation(this.projectService.pid, data);
       this.miscService.showSnackbarSuccessful(`Deleted ${invitationId}`);
       await this.getInvitations(); // it still doesn't work
+    });
+  }
+  async getCollaborators() {
+    let temp: any;
+    temp = await this.projectService.GetCollaborators(this.projectService.pid);
+    if (temp === undefined || temp === null || temp.collaborators.length === 0) {
+      this.miscService.showSnackbarNotification(`${this.projectService.pid} does not have any collaborators`);
+    }
+    for (let c of temp.collaborators) {
+      let userInfo = await this.userService.getUserInfo(c);
+      this.collaborators.push({
+        uid: userInfo['uid'],
+        email: userInfo['email'],
+        photoURL: userInfo['photoURL']
+      });
+    }
+  }
+  async onRemoveCollaborator(collabInfo: any) {
+    const dialogRef = this.dialog.open(DeleteprojectComponent, { width: this.dialogWidth, data: collabInfo });
+    dialogRef.afterClosed().subscribe(async (data) => {
+      this.projectService.DeleteCollaborators(this.projectService.pid, data.uid)
+        .then(() => this.miscService.showSnackbarSuccessful(`Removed ${data.uid}`));
     });
   }
 }

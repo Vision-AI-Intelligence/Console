@@ -49,6 +49,8 @@ export class ProjectmanagementComponent implements OnInit {
     for (let i of this.data.projects) {
       this.projects.push(i);
     }
+    // tslint:disable-next-line: no-unused-expression
+    this.projectService.pInfo = this.data.projects;
   }
   async onLoadInvitations() {
     let temp: any;
@@ -107,8 +109,10 @@ export class ProjectmanagementComponent implements OnInit {
     await this.projectService.AcceptInvitation(invitation.project, invitation.id);
     this.miscService.showSnackbarSuccessful(`${invitation.to} accepted`);
   }
-  onReject() {
-    console.log('rejected');
+  onReject(invitation: any) {
+    this.projectService.DeleteInvitation(invitation.project, invitation.id).then(
+      () => this.miscService.showSnackbarSuccessful(`Rejected ${invitation.project}`)
+    );
   }
   async onClickMenuContext(menuContent, proj) {
     switch (menuContent) {

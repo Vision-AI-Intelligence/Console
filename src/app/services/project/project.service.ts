@@ -9,6 +9,7 @@ import { UserAuthentication } from '../user/auth.service';
 export class ProjectService {
 
   public pid: string;
+  public pInfo: any;
   constructor(
     private http: HttpClient,
     private server: ServerService,
@@ -143,14 +144,13 @@ export class ProjectService {
         return;
       }
       return this.http.post(this.server.endpoint + 'projects/invite/accept', {
+        pid: projectId,
+        invitationId: iId
+      }, {
         headers: {
           authorization: this.userAuthentication.idToken
-        },
-        params: {
-          pid: projectId,
-          invitationId: iId
         }
-      },
+      }
       ).toPromise();
     } catch (error) {
       console.log('[ACCEPT] projects/invitation ' + error);
@@ -173,7 +173,7 @@ export class ProjectService {
       console.log('[GET] projects/collaborators ' + error);
     }
   }
-  async DeleteCollaborators(pid: string, cid: string) {
+  async DeleteCollaborators(projectId: string, collabId: string) {
     try {
       if (this.userAuthentication.idToken === undefined || this.userAuthentication.idToken === null) {
         return;
@@ -182,7 +182,8 @@ export class ProjectService {
         headers: {
           authorization: this.userAuthentication.idToken
         }, params: {
-
+          pid: projectId,
+          cid: collabId
         }
       },
       ).toPromise();

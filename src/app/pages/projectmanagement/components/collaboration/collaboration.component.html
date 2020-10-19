@@ -30,7 +30,7 @@
         <mat-card appMaterialElevation class="cardStyle">
             <img src="{{p.photoURL}}" alt="user image" class="imgStyle" />
             <p>{{p.email}}</p>
-            <button mat-flat-button color="accent" class="btnStyle" (click)="onRemove(p.invitationId)">Remove</button>
+            <button mat-flat-button color="accent" class="btnStyle" (click)="onRemoveInvitation(p.invitationId)">Remove</button>
         </mat-card>
     </div>
 
@@ -39,7 +39,7 @@
         <mat-card class="cardStyle">
             <img src="{{c.photoURL}}" class="imgStyle" alt="user image" />
             <p>{{c.email}}</p>
-            <button mat-flat-button color="accent" class="btnStyle">Remove</button>
+            <button mat-flat-button color="accent" class="btnStyle" (click)="onRemoveCollaborator(c)">Remove</button>
         </mat-card>
     </div>
 </div>
