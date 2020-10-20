@@ -46,6 +46,9 @@ export class ProjectmanagementComponent implements OnInit {
     this.data = await this.projectService.GetProjects();
     console.log(this.data);
     console.log('token: ' + await this.userAuthentication.idToken);
+    while(this.projects.length!=0){
+      this.projects.pop();
+    }
     for (let i of this.data.projects) {
       this.projects.push(i);
     }
@@ -55,6 +58,9 @@ export class ProjectmanagementComponent implements OnInit {
   async onLoadInvitations() {
     let temp: any;
     temp = await this.userAuthentication.getInvitations();
+    while(this.collaboratorInvitations.length!=0){
+      this.collaboratorInvitations.pop();
+    }
     for (const t of temp['invitations']) {
       this.collaboratorInvitations.push(t);
     }
@@ -109,6 +115,7 @@ export class ProjectmanagementComponent implements OnInit {
     await this.projectService.AcceptInvitation(invitation.project, invitation.id);
     this.miscService.showSnackbarSuccessful(`${invitation.to} accepted`);
     await this.onLoadInvitations();
+    await this.onLoadProjects();
   }
   onReject(invitation: any) {
     this.projectService.DeleteInvitation(invitation.project, invitation.id).then(
