@@ -28,8 +28,9 @@ export class UserAuthentication {
   ) {
     this.isAuth();
     this.idToken$ = this.afAuth.idToken;
-    this.afAuth.idToken.subscribe((value) => {
+    this.afAuth.idToken.subscribe(async(value) => {
       this.idToken = value;
+      this.uid = (await this.afAuth.currentUser).uid;
     });
 
   }
