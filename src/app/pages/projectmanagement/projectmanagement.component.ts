@@ -109,11 +109,14 @@ export class ProjectmanagementComponent implements OnInit {
     console.log(invitation.id);
     await this.projectService.AcceptInvitation(invitation.project, invitation.id);
     this.miscService.showSnackbarSuccessful(`${invitation.to} accepted`);
+    await this.onLoadInvitations();
   }
   onReject(invitation: any) {
     this.projectService.DeleteInvitation(invitation.project, invitation.id).then(
-      () => this.miscService.showSnackbarSuccessful(`Rejected ${invitation.project}`)
-    );
+      async () => {
+        this.miscService.showSnackbarSuccessful(`Rejected ${invitation.project}`);
+        await this.onLoadInvitations();
+    });
   }
   async onClickMenuContext(menuContent, proj) {
     switch (menuContent) {

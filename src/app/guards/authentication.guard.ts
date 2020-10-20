@@ -28,12 +28,7 @@ export class AuthenticationGuard implements CanActivate, CanActivateChild, CanDe
           this.userAuthentication.idToken = idToken;
           return true;
       }));
-    // if (this.token === undefined || this.token === null || this.token === '') {
-    //   console.log('Token: ' + this.token);
-    //   this.router.navigate(['home']);
-    //   return false;
-    // }
-    // return true;
+
   }
   canActivateChild(
     next: ActivatedRouteSnapshot,
