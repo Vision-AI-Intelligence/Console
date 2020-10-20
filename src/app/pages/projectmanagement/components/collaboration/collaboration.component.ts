@@ -56,6 +56,9 @@ export class CollaborationComponent implements OnInit, AfterViewInit {
   async onAddCollaborator() {
     try {
       let to = this.suggestionUsers.filter((value) => value.email === this.searchInputValue)[0];
+      // console.log(this.projectService.pid);
+      // console.log(this.userService.uid);
+      // console.log(to.uid);
       let createInvitation = await this.projectService.CreateInvitation(this.projectService.pid, this.userService.uid, to.uid);
       if (createInvitation['message'] != 'OK') {
         this.miscService.showSnackbarFail(`Invite ${to.email}`);

@@ -5,6 +5,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { User } from '../../models/user.model';
 import { ProjectmanagementComponent } from 'src/app/pages/projectmanagement/projectmanagement.component';
 import { ProjectService } from 'src/app/services/project/project.service';
+import { MiscService } from 'src/app/services/misc.service';
 @Component({
   selector: 'app-toolbar',
   templateUrl: './toolbar.component.html',
@@ -23,7 +24,8 @@ export class ToolbarComponent implements OnInit {
     private router: Router,
     private afAuth: AngularFireAuth,
     private projectManagement: ProjectmanagementComponent,
-    public projectService: ProjectService
+    public projectService: ProjectService,
+    public miscService: MiscService
   ) {
     afAuth.user.subscribe(usr => this.userDetails = usr);
     // if (this.projectManagement.data !== undefined) {
@@ -40,21 +42,22 @@ export class ToolbarComponent implements OnInit {
     this.SidenavToggle.emit();
   }
   onClickMenuContext(menuContent) {
-    switch (menuContent) {
-      case this.menuContext[0]:
-        this.selectedProject = String(menuContent);
-        console.log(menuContent + ' clicked!'); break;
-      case this.menuContext[1]:
-        this.selectedProject = String(menuContent);
-        console.log(menuContent + ' clicked!'); break;
-      case this.menuContext[2]:
-        this.selectedProject = String(menuContent);
-        console.log(menuContent + ' clicked!'); break;
+    for (let i of this.menuContext) {
+      if (i === menuContent) {
+        this.selectedProject = i;
+        this.projectService.pid = i;
+        console.log(`${i} clicked!`);
+        console.log(this.projectService.pid);
+      }
     }
   }
   async getProjectId() {
-    console.log(this.projectService.pid);
-    await this.projectService.pInfo.map((i) => this.menuContext.push(i.id));
-    console.log(this.menuContext);
+    if (this.projectService.pInfo === undefined || this.projectService.pInfo === null) {
+      setTimeout(
+        async () => {
+          await this.projectService.pInfo.map((i) => this.menuContext.push(i.id));
+        }, 5000
+      );
+    }
   }
 }

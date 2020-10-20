@@ -9,6 +9,7 @@ import * as firebase from 'firebase';
 import { HttpClient } from '@angular/common/http';
 import { ServerService } from '../server.service';
 import { MiscService } from '../misc.service';
+import { ProjectService } from '../project/project.service';
 @Injectable({
   providedIn: 'root'
 })
@@ -24,12 +25,13 @@ export class UserAuthentication {
     public snackBar: MatSnackBar,
     public http: HttpClient,
     private server: ServerService,
-    private miscService: MiscService
+    private miscService: MiscService,
   ) {
     this.isAuth();
     this.idToken$ = this.afAuth.idToken;
-    this.afAuth.idToken.subscribe((value) => {
+    this.afAuth.idToken.subscribe(async (value) => {
       this.idToken = value;
+      this.uid = (await this.afAuth.currentUser).uid;
     });
 
   }

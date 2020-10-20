@@ -51,6 +51,7 @@ export class ProjectmanagementComponent implements OnInit {
     }
     // tslint:disable-next-line: no-unused-expression
     this.projectService.pInfo = this.data.projects;
+    // console.log(this.projectService.pInfo);
   }
   async onLoadInvitations() {
     let temp: any;

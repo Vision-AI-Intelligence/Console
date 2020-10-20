@@ -5,7 +5,7 @@
             <mat-icon>menu</mat-icon>
         </button>
         <span>Vision Intelligent Console</span>
-        <button mat-flat-button id="btnSelectProject" [matMenuTriggerFor]="menu">{{selectedProject}}</button>
+        <button mat-flat-button id="btnSelectProject" [matMenuTriggerFor]="menu">{{miscService.getSubstring(selectedProject)}}</button>
         <mat-menu #menu="matMenu" xPosition="before">
             <div *ngFor="let i of menuContext" style="border-radius: 10px;">
                 <button mat-flat-button style="width: 100%; align-content: flex-start;"

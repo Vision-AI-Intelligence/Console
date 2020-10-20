@@ -14,7 +14,9 @@ export class ProjectService {
     private http: HttpClient,
     private server: ServerService,
     private userAuthentication: UserAuthentication
-  ) { }
+  ) {
+    // console.log(this.pInfo);
+  }
 
   async GetProjects() {
     try {

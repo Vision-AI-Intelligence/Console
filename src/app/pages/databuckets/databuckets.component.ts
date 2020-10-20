@@ -11,18 +11,18 @@ import { CreatebucketComponent } from './components/dialogs/createbucket/createb
 export class DatabucketsComponent implements OnInit {
 
   buckets = [
-    {
-      bid: 'bucket-001',
-      isPublic: 'true'
-    },
-    {
-      bid: 'bucket-002',
-      isPublic: 'false'
-    },
-    {
-      bid: 'bucket-003',
-      isPublic: 'true'
-    }
+    // {
+    //   bid: 'bucket-001',
+    //   isPublic: 'true'
+    // },
+    // {
+    //   bid: 'bucket-002',
+    //   isPublic: 'false'
+    // },
+    // {
+    //   bid: 'bucket-003',
+    //   isPublic: 'true'
+    // }
   ];
   menuContext = ['Info', 'Delete'];
 
@@ -50,6 +50,7 @@ export class DatabucketsComponent implements OnInit {
           isPublic: data.isPublic
         });
       }
+      console.log(this.buckets);
     });
   }
   onClickMenuContext(menuContent: any) {
