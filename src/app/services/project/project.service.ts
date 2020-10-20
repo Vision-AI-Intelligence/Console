@@ -8,6 +8,8 @@ import { UserAuthentication } from '../user/auth.service';
 })
 export class ProjectService {
 
+  public pid: string;
+  public pInfo: any;
   constructor(
     private http: HttpClient,
     private server: ServerService,
@@ -82,15 +84,32 @@ export class ProjectService {
       console.log('[DELETE] project ' + error);
     }
   }
-  async CreateInvitation(pid: string, from: string, to: string) {
+  async GetInvitation(projectId: string) {
+    try {
+      if (this.userAuthentication.idToken === undefined || this.userAuthentication.idToken === null) {
+        return;
+      }
+      return this.http.get(this.server.endpoint + 'projects/invite', {
+        headers: {
+          authorization: this.userAuthentication.idToken
+        },
+        params: {
+          pid: projectId
+        }
+      }).toPromise();
+    } catch (error) {
+      console.log('[GET] projects/invitation ' + error);
+    }
+  }
+  async CreateInvitation(projectId: string, fromId: string, toId: string) {
     try {
       if (this.userAuthentication.idToken === undefined || this.userAuthentication.idToken === null) {
         return;
       }
       return this.http.post(this.server.endpoint + 'projects/invite', {
-        pid: pid,
-        from: from,
-        to: to
+        pid: projectId,
+        from: fromId,
+        to: toId
       }, {
         headers: {
           authorization: this.userAuthentication.idToken
@@ -100,7 +119,7 @@ export class ProjectService {
       console.log('[CREATE] projects/invitation ' + error);
     }
   }
-  async DeleteInvitation(pid: string, invitationId: string) {
+  async DeleteInvitation(projectId: string, iId: string) {
     try {
       if (this.userAuthentication.idToken === undefined || this.userAuthentication.idToken === null) {
         return;
@@ -110,8 +129,8 @@ export class ProjectService {
           authorization: this.userAuthentication.idToken
         },
         params: {
-          pid: pid,
-          invitationId: invitationId
+          pid: projectId,
+          invitationId: iId
         }
       },
       ).toPromise();
@@ -119,26 +138,25 @@ export class ProjectService {
       console.log('[DELETE] projects/invitation ' + error);
     }
   }
-  async AcceptInvitation(pid: string, invitationId: string) {
+  async AcceptInvitation(projectId: string, iId: string) {
     try {
       if (this.userAuthentication.idToken === undefined || this.userAuthentication.idToken === null) {
         return;
       }
-      return this.http.post(this.server.endpoint + 'projects/invite', {
+      return this.http.post(this.server.endpoint + 'projects/invite/accept', {
+        pid: projectId,
+        invitationId: iId
+      }, {
         headers: {
           authorization: this.userAuthentication.idToken
-        },
-        params: {
-          pid: pid,
-          invitationId: invitationId
         }
-      },
+      }
       ).toPromise();
     } catch (error) {
       console.log('[ACCEPT] projects/invitation ' + error);
     }
   }
-  async GetCollaborators(pid: string) {
+  async GetCollaborators(projectId: string) {
     try {
       if (this.userAuthentication.idToken === undefined || this.userAuthentication.idToken === null) {
         return;
@@ -147,7 +165,7 @@ export class ProjectService {
         headers: {
           authorization: this.userAuthentication.idToken
         }, params: {
-          pid: pid
+          pid: projectId
         }
       },
       ).toPromise();
@@ -155,7 +173,7 @@ export class ProjectService {
       console.log('[GET] projects/collaborators ' + error);
     }
   }
-  async DeleteCollaborators(pid: string, cid: string) {
+  async DeleteCollaborators(projectId: string, collabId: string) {
     try {
       if (this.userAuthentication.idToken === undefined || this.userAuthentication.idToken === null) {
         return;
@@ -164,7 +182,8 @@ export class ProjectService {
         headers: {
           authorization: this.userAuthentication.idToken
         }, params: {
-
+          pid: projectId,
+          cid: collabId
         }
       },
       ).toPromise();

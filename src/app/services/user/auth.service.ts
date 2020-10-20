@@ -15,8 +15,8 @@ import { MiscService } from '../misc.service';
 export class UserAuthentication {
 
   user: User;
-  private userDetails: any;
-
+  public userDetails: any;
+  public uid: any;
   public idToken: string;
   constructor(
     public afAuth: AngularFireAuth,
@@ -28,8 +28,9 @@ export class UserAuthentication {
   ) {
     this.isAuth();
     this.idToken$ = this.afAuth.idToken;
-    this.afAuth.idToken.subscribe((value) => {
+    this.afAuth.idToken.subscribe(async(value) => {
       this.idToken = value;
+      this.uid = (await this.afAuth.currentUser).uid;
     });
 
   }
@@ -84,6 +85,7 @@ export class UserAuthentication {
 
           this.userDetails = this.afAuth.currentUser; // kiểm tra xem user nãy subscribe có phải là nó hong
           console.log(this.userDetails);
+          this.uid = (await this.afAuth.currentUser).uid;
           this.setUser();
         }, 3000
       );
@@ -126,6 +128,13 @@ export class UserAuthentication {
       headers: {
         authorization: this.idToken
       }
+    }).toPromise();
+  }
+  async getInvitations() {
+    return await this.http.get(this.server.endpoint + 'users/invite', {
+      headers: {
+        authorization: this.idToken
+      },
     }).toPromise();
   }
 }

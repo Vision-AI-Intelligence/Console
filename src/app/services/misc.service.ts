@@ -37,6 +37,13 @@ export class MiscService {
       verticalPosition: 'bottom'
     });
   }
+  public showSnackbarNotification(val: string): void {
+    this.snackBar.open(`${val}`, '⚠️', {
+      duration: 3000,
+      horizontalPosition: 'center',
+      verticalPosition: 'bottom'
+    });
+  }
   async showSnackbarLogout() {
     await this.afAuth.signOut().then(() => {
       this.snackBar.open('OK bye', '😘', {

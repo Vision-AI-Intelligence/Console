@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Injectable, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MiscService } from '../../services/misc.service';
@@ -8,6 +8,9 @@ import { Project } from '../../models/project.model';
 import { ProjectService } from '../../services/project/project.service';
 import { DeleteprojectComponent } from './components/dialogs/deleteproject/deleteproject.component';
 import { UpdateprojectComponent } from './components/dialogs/updateproject/updateproject.component';
+@Injectable({
+  providedIn: 'root'
+})
 @Component({
   selector: 'app-projectmanagement',
   templateUrl: './projectmanagement.component.html',
@@ -28,18 +31,38 @@ export class ProjectmanagementComponent implements OnInit {
 
   public projects = [];
   private dialogRef = null;
-  private data: any;
+  public data: any;
   menuContext = ['Open', 'Update', 'Delete'];
   selectedProject = '';
+  public collaboratorInvitations = [];
   async ngOnInit() {
     this.activatedRoute.params.subscribe((params) => {
       this.proj.id = params.id;
     });
+    await this.onLoadProjects();
+    await this.onLoadInvitations();
+  }
+  async onLoadProjects() {
     this.data = await this.projectService.GetProjects();
     console.log(this.data);
     console.log('token: ' + await this.userAuthentication.idToken);
+    while(this.projects.length!=0){
+      this.projects.pop();
+    }
     for (let i of this.data.projects) {
       this.projects.push(i);
+    }
+    // tslint:disable-next-line: no-unused-expression
+    this.projectService.pInfo = this.data.projects;
+  }
+  async onLoadInvitations() {
+    let temp: any;
+    temp = await this.userAuthentication.getInvitations();
+    while(this.collaboratorInvitations.length!=0){
+      this.collaboratorInvitations.pop();
+    }
+    for (const t of temp['invitations']) {
+      this.collaboratorInvitations.push(t);
     }
   }
   async onCreate() {
@@ -65,21 +88,17 @@ export class ProjectmanagementComponent implements OnInit {
   }
   async onDelete(project: Project) {
     const dialogRef = this.dialog.open(DeleteprojectComponent, { width: this.dialogWidth, data: project });
-    dialogRef.afterClosed().subscribe((data) => {
+    dialogRef.afterClosed().subscribe(async (data) => {
       // console.log(data);
       this.projectService.DeleteProject(data.id);
     });
   }
   async onUpdate(project: Project) {
     const dialogRef = this.dialog.open(UpdateprojectComponent, { width: this.dialogWidth, data: project });
-    // if ((this.data.id === undefined || this.data.id === '') && (this.data.name === undefined || this.data.name === '')) {
-    //   return;
-    // }
-    dialogRef.afterClosed().subscribe((data) => {
+    dialogRef.afterClosed().subscribe(async (data) => {
       console.log(data);
-      this.projectService.UpdateProject(data);
+      await this.projectService.UpdateProject(data);
       this.miscService.showSnackbarSuccessful('Update');
-
     });
   }
 
@@ -87,13 +106,23 @@ export class ProjectmanagementComponent implements OnInit {
   //   await this.router.navigate([`/editproject/${proj.id}/resources`], { relativeTo: this.activatedRoute });
   // }
   async gotoEdit(proj) {
+    this.projectService.pid = proj.id;
     await this.router.navigate([`/editproject/${proj.id}/resources`], { relativeTo: this.activatedRoute });
   }
-  onAccept() {
-    console.log('accepted');
+  async onAccept(invitation: any) {
+    console.log(invitation.project);
+    console.log(invitation.id);
+    await this.projectService.AcceptInvitation(invitation.project, invitation.id);
+    this.miscService.showSnackbarSuccessful(`${invitation.to} accepted`);
+    await this.onLoadInvitations();
+    await this.onLoadProjects();
   }
-  onReject() {
-    console.log('rejected');
+  onReject(invitation: any) {
+    this.projectService.DeleteInvitation(invitation.project, invitation.id).then(
+      async () => {
+        this.miscService.showSnackbarSuccessful(`Rejected ${invitation.project}`);
+        await this.onLoadInvitations();
+    });
   }
   async onClickMenuContext(menuContent, proj) {
     switch (menuContent) {

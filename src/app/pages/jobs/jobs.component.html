@@ -1,6 +1,6 @@
 <div>
     <nav mat-tab-nav-bar>
-        <a mat-tab-link *ngFor="let t of tabs" (click)="selectTab(t)" [routerLinkActive]="'active'"> {{t}}
+        <a mat-tab-link *ngFor="let t of tabs" (click)="selectTab(t)" [active]="activeLink==t"> {{t}}
         </a>
     </nav>
     <!-- <mat-tab-group>
