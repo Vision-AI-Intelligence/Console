@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material';
+import { CookieService } from 'ngx-cookie-service';
 import { Observable, fromEvent } from 'rxjs';
 import { map, debounceTime } from 'rxjs/operators';
 import { MiscService } from 'src/app/services/misc.service';
@@ -28,9 +29,13 @@ export class CollaborationComponent implements OnInit, AfterViewInit {
     private projectService: ProjectService,
     private miscService: MiscService,
     public dialog: MatDialog,
+    private cookieService: CookieService
   ) { }
 
   async ngAfterViewInit() {
+
+
+    console.log(this.projectService.pid);
 
     fromEvent(this.searchInput.nativeElement, 'keyup').pipe(
       map((event) => event), debounceTime(200),
@@ -50,8 +55,9 @@ export class CollaborationComponent implements OnInit, AfterViewInit {
   }
 
   async ngOnInit() {
-    this.getInvitations();
-    this.getCollaborators();
+    this.projectService.pid = this.cookieService.get("project-id");
+    await this.getInvitations();
+    await this.getCollaborators();
   }
   async onAddCollaborator() {
     try {
@@ -74,6 +80,9 @@ export class CollaborationComponent implements OnInit, AfterViewInit {
     let getInvitation = await this.projectService.GetInvitation(this.projectService.pid);
     if (await getInvitation['result'].length === 0) {
       this.miscService.showSnackbarNotification('No invitations yet, please invite someone');
+    }
+    while(this.pendingInvitation.length>0){
+      this.pendingInvitation.pop();
     }
     for (const i of getInvitation['result']) {
       let userInfo = await this.userService.getUserInfo(i.to);
@@ -100,8 +109,11 @@ export class CollaborationComponent implements OnInit, AfterViewInit {
   async getCollaborators() {
     let temp: any;
     temp = await this.projectService.GetCollaborators(this.projectService.pid);
-    if (temp === undefined || temp === null || temp.collaborators.length === 0) {
+    if (temp === undefined || temp === null) {
       this.miscService.showSnackbarNotification(`${this.projectService.pid} does not have any collaborators`);
+    }
+    while(this.collaborators.length > 0){
+      this.collaborators.pop();
     }
     for (let c of temp.collaborators) {
       let userInfo = await this.userService.getUserInfo(c);
@@ -116,7 +128,12 @@ export class CollaborationComponent implements OnInit, AfterViewInit {
     const dialogRef = this.dialog.open(DeleteprojectComponent, { width: this.dialogWidth, data: collabInfo });
     dialogRef.afterClosed().subscribe(async (data) => {
       this.projectService.DeleteCollaborators(this.projectService.pid, data.uid)
-        .then(() => this.miscService.showSnackbarSuccessful(`Removed ${data.uid}`));
+        .then(async () => {
+
+          await this.getInvitations();
+          this.miscService.showSnackbarSuccessful(`Removed ${data.uid}`)
+
+        });
     });
   }
 }
