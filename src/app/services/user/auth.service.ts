@@ -9,6 +9,7 @@ import * as firebase from 'firebase';
 import { HttpClient } from '@angular/common/http';
 import { ServerService } from '../server.service';
 import { MiscService } from '../misc.service';
+import { ProjectService } from '../project/project.service';
 @Injectable({
   providedIn: 'root'
 })
@@ -18,6 +19,7 @@ export class UserAuthentication {
   public userDetails: any;
   public uid: any;
   public idToken: string;
+  public projects: Array<any> = [];
   constructor(
     public afAuth: AngularFireAuth,
     public router: Router,
@@ -29,8 +31,16 @@ export class UserAuthentication {
     this.isAuth();
     this.idToken$ = this.afAuth.idToken;
     this.afAuth.idToken.subscribe(async(value) => {
+
       this.idToken = value;
       this.uid = (await this.afAuth.currentUser).uid;
+      if(value !== null) {
+        console.log(await this.getProjects());
+        while(this.projects.length>0){
+          this.projects.pop();
+        }
+        this.projects = (await this.getProjects())['projects'] as Array<any>;
+      }
     });
 
   }
@@ -87,7 +97,11 @@ export class UserAuthentication {
           console.log(this.userDetails);
           this.uid = (await this.afAuth.currentUser).uid;
           this.setUser();
-        }, 3000
+          while(this.projects.length>0){
+            this.projects.pop();
+          }
+          this.projects = (await this.getProjects())['projects'] as Array<any>;
+        }, 2000
       );
     } catch (error) {
       this.miscService.showSnackbarFail('Login');
@@ -96,11 +110,14 @@ export class UserAuthentication {
   }
 
   async signOut() {
+
     this.miscService.showSnackbarLogout();
-    this.userDetails = null;
-    this.user = null;
-    this.idToken = '';
-    this.router.navigate(['home']);
+    // this.userDetails = null;
+    // this.user = null;
+    // this.idToken = '';
+    // this.router.navigate(['home']);
+    await this.afAuth.signOut();
+    window.location.reload();
   }
 
   // xây dựng sẵn cho việc get một user bất kỳ bằng email
@@ -136,5 +153,19 @@ export class UserAuthentication {
         authorization: this.idToken
       },
     }).toPromise();
+  }
+  async getProjects() {
+    try {
+      if (this.idToken === undefined || this.idToken === null) {
+        return;
+      }
+      return await this.http.get(this.server.endpoint + 'projects', {
+        headers: {
+          authorization:  this.idToken
+        }
+      }).toPromise();
+    } catch (error) {
+      console.log('[GET] project' + error);
+    }
   }
 }

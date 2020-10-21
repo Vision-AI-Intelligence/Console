@@ -1,5 +1,5 @@
 <main>
-  <app-toolbar (SidenavToggle)="sidenav.toggle()"></app-toolbar>
+  <app-toolbar (SidenavToggle)="sidenav.toggle()" [projectList]="getProjects()"></app-toolbar>
   <mat-sidenav-container style="top: 60px;">
 
     <mat-sidenav #sidenav>

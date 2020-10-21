@@ -8,6 +8,7 @@ import { Project } from '../../models/project.model';
 import { ProjectService } from '../../services/project/project.service';
 import { DeleteprojectComponent } from './components/dialogs/deleteproject/deleteproject.component';
 import { UpdateprojectComponent } from './components/dialogs/updateproject/updateproject.component';
+import { CookieService } from 'ngx-cookie-service';
 @Injectable({
   providedIn: 'root'
 })
@@ -26,7 +27,8 @@ export class ProjectmanagementComponent implements OnInit {
     private projectService: ProjectService,
     private activatedRoute: ActivatedRoute,
     private userAuthentication: UserAuthentication,
-    public miscService: MiscService
+    public miscService: MiscService,
+    private cookieService:CookieService
   ) { }
 
   public projects = [];
@@ -90,6 +92,7 @@ export class ProjectmanagementComponent implements OnInit {
     const dialogRef = this.dialog.open(DeleteprojectComponent, { width: this.dialogWidth, data: project });
     dialogRef.afterClosed().subscribe(async (data) => {
       // console.log(data);
+      await this.onLoadProjects();
       this.projectService.DeleteProject(data.id);
     });
   }
@@ -98,6 +101,7 @@ export class ProjectmanagementComponent implements OnInit {
     dialogRef.afterClosed().subscribe(async (data) => {
       console.log(data);
       await this.projectService.UpdateProject(data);
+      await this.onLoadProjects();
       this.miscService.showSnackbarSuccessful('Update');
     });
   }
@@ -107,6 +111,7 @@ export class ProjectmanagementComponent implements OnInit {
   // }
   async gotoEdit(proj) {
     this.projectService.pid = proj.id;
+    this.cookieService.set("project-id",proj.id);
     await this.router.navigate([`/editproject/${proj.id}/resources`], { relativeTo: this.activatedRoute });
   }
   async onAccept(invitation: any) {
