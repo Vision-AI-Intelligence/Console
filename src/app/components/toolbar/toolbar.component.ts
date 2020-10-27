@@ -6,6 +6,7 @@ import { User } from '../../models/user.model';
 import { ProjectmanagementComponent } from 'src/app/pages/projectmanagement/projectmanagement.component';
 import { ProjectService } from 'src/app/services/project/project.service';
 import { CookieService } from 'ngx-cookie-service';
+import { MiscService } from 'src/app/services/misc.service';
 @Component({
   selector: 'app-toolbar',
   templateUrl: './toolbar.component.html',
@@ -34,7 +35,8 @@ export class ToolbarComponent implements OnInit {
     private afAuth: AngularFireAuth,
     private projectManagement: ProjectmanagementComponent,
     private cookieService: CookieService,
-    public projectService: ProjectService
+    public projectService: ProjectService,
+    public miscService: MiscService
   ) {
     afAuth.user.subscribe(usr => this.userDetails = usr);
     // if (this.projectManagement.data !== undefined) {

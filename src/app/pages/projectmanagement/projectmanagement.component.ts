@@ -28,7 +28,7 @@ export class ProjectmanagementComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private userAuthentication: UserAuthentication,
     public miscService: MiscService,
-    private cookieService:CookieService
+    private cookieService: CookieService
   ) { }
 
   public projects = [];
@@ -48,7 +48,7 @@ export class ProjectmanagementComponent implements OnInit {
     this.data = await this.projectService.GetProjects();
     console.log(this.data);
     console.log('token: ' + await this.userAuthentication.idToken);
-    while(this.projects.length!=0){
+    while (this.projects.length != 0) {
       this.projects.pop();
     }
     for (let i of this.data.projects) {
@@ -61,7 +61,7 @@ export class ProjectmanagementComponent implements OnInit {
   async onLoadInvitations() {
     let temp: any;
     temp = await this.userAuthentication.getInvitations();
-    while(this.collaboratorInvitations.length!=0){
+    while (this.collaboratorInvitations.length != 0) {
       this.collaboratorInvitations.pop();
     }
     for (const t of temp['invitations']) {
@@ -80,11 +80,16 @@ export class ProjectmanagementComponent implements OnInit {
       hasBackdrop: true,
       data: inputData,
     });
-    this.dialogRef.afterClosed().subscribe((data) => {
+    this.dialogRef.afterClosed().subscribe(async (data) => {
       if (data.id !== '' && data.id !== undefined
         && data.name !== '' && data.description !== '' && data !== '' && data !== undefined && data !== null) {
-        this.projectService.CreateProject(data);
+        const result = await this.projectService.CreateProject(data);
+        if (result['message'] !== 'OK') {
+          this.miscService.showSnackbarFail(`${data.id} created `);
+          return;
+        }
         this.projects.push(data);
+        this.miscService.showSnackbarSuccessful(`${data.id} created `);
         console.log(this.projects);
       }
     });
@@ -93,17 +98,29 @@ export class ProjectmanagementComponent implements OnInit {
     const dialogRef = this.dialog.open(DeleteprojectComponent, { width: this.dialogWidth, data: project });
     dialogRef.afterClosed().subscribe(async (data) => {
       // console.log(data);
+
+
+      let result = await this.projectService.DeleteProject(data.id);
+      console.log(result);
+      if (result['message'] !== 'OK') {
+        this.miscService.showSnackbarFail(`${data.id} deleted `);
+        return;
+      }
+      this.miscService.showSnackbarSuccessful(`${data.id} deleted `);
       await this.onLoadProjects();
-      this.projectService.DeleteProject(data.id);
     });
   }
   async onUpdate(project: Project) {
     const dialogRef = this.dialog.open(UpdateprojectComponent, { width: this.dialogWidth, data: project });
     dialogRef.afterClosed().subscribe(async (data) => {
       console.log(data);
-      await this.projectService.UpdateProject(data);
+      let result = await this.projectService.UpdateProject(data);
+      if (result['message'] !== 'OK') {
+        this.miscService.showSnackbarFail(`${data.id} updated `);
+        return;
+      }
+      this.miscService.showSnackbarSuccessful(`${data.id} updated `);
       await this.onLoadProjects();
-      this.miscService.showSnackbarSuccessful('Update');
     });
   }
 
@@ -112,7 +129,7 @@ export class ProjectmanagementComponent implements OnInit {
   // }
   async gotoEdit(proj) {
     this.projectService.pid = proj.id;
-    this.cookieService.set("project-id",proj.id);
+    this.cookieService.set("project-id", proj.id);
     await this.router.navigate([`/editproject/${proj.id}/resources`], { relativeTo: this.activatedRoute });
   }
   async onAccept(invitation: any) {
@@ -128,7 +145,7 @@ export class ProjectmanagementComponent implements OnInit {
       async () => {
         this.miscService.showSnackbarSuccessful(`Rejected ${invitation.project}`);
         await this.onLoadInvitations();
-    });
+      });
   }
   async onClickMenuContext(menuContent, proj) {
     switch (menuContent) {

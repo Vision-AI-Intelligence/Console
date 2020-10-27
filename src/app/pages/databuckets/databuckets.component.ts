@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
+import { MiscService } from 'src/app/services/misc.service';
 import { BucketService } from '../../services/bucket/bucket.service';
 import { CreatebucketComponent } from './components/dialogs/createbucket/createbucket.component';
 @Component({
@@ -28,13 +30,18 @@ export class DatabucketsComponent implements OnInit {
 
   // public bucketData = [];
   private dialogRef = null;
+  projectId: any;
   constructor(
     public dialog: MatDialog,
     private router: Router,
-    private bucketService: BucketService
+    private bucketService: BucketService,
+    private cookieService: CookieService,
+    private miscService: MiscService
   ) { }
   dialogWidth = '500px';
-  ngOnInit(): void {
+  async ngOnInit() {
+    this.projectId = this.cookieService.get('project-id');
+    await this.onLoadBuckets();
   }
   async createBucket() {
     this.dialogRef = this.dialog.open(CreatebucketComponent, {
@@ -52,6 +59,18 @@ export class DatabucketsComponent implements OnInit {
       }
       console.log(this.buckets);
     });
+  }
+  async onLoadBuckets() {
+    if (this.projectId === undefined) {
+      this.miscService.showSnackbarNotification('Choose your project, please!!!');
+      return;
+    }
+    let result = await this.bucketService.getBucket(this.projectId);
+    if (result['buckets'].length === 0) {
+      this.miscService.showSnackbarNotification('Do not have any buckets in this project');
+    }
+
+    console.log(result);
   }
   onClickMenuContext(menuContent: any) {
     switch (menuContent) {
