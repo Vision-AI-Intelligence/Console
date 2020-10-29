@@ -81,7 +81,7 @@ export class CollaborationComponent implements OnInit, AfterViewInit {
     if (await getInvitation['result'].length === 0) {
       this.miscService.showSnackbarNotification('No invitations yet, please invite someone');
     }
-    while(this.pendingInvitation.length>0){
+    while (this.pendingInvitation.length != 0) {
       this.pendingInvitation.pop();
     }
     for (const i of getInvitation['result']) {
@@ -101,6 +101,10 @@ export class CollaborationComponent implements OnInit, AfterViewInit {
   async onRemoveInvitation(invitationId: string) {
     const dialogRef = this.dialog.open(DeleteprojectComponent, { width: this.dialogWidth, data: invitationId });
     dialogRef.afterClosed().subscribe(async (data) => {
+      console.log(data);
+      if (this.projectService.pid === undefined || data === undefined || data === '') {
+        return;
+      }
       await this.projectService.DeleteInvitation(this.projectService.pid, data);
       this.miscService.showSnackbarSuccessful(`Deleted ${invitationId}`);
       await this.getInvitations(); // it still doesn't work
@@ -112,7 +116,7 @@ export class CollaborationComponent implements OnInit, AfterViewInit {
     if (temp === undefined || temp === null) {
       this.miscService.showSnackbarNotification(`${this.projectService.pid} does not have any collaborators`);
     }
-    while(this.collaborators.length > 0){
+    while (this.collaborators.length > 0) {
       this.collaborators.pop();
     }
     for (let c of temp.collaborators) {
@@ -127,12 +131,15 @@ export class CollaborationComponent implements OnInit, AfterViewInit {
   async onRemoveCollaborator(collabInfo: any) {
     const dialogRef = this.dialog.open(DeleteprojectComponent, { width: this.dialogWidth, data: collabInfo });
     dialogRef.afterClosed().subscribe(async (data) => {
+      if (data.uid === undefined) {
+        return;
+      }
       this.projectService.DeleteCollaborators(this.projectService.pid, data.uid)
         .then(async () => {
 
-          await this.getInvitations();
-          this.miscService.showSnackbarSuccessful(`Removed ${data.uid}`)
 
+          this.miscService.showSnackbarSuccessful(`Removed ${data.uid}`);
+          await this.getInvitations();
         });
     });
   }

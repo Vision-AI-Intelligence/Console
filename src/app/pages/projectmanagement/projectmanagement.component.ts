@@ -39,24 +39,34 @@ export class ProjectmanagementComponent implements OnInit {
   public collaboratorInvitations = [];
   async ngOnInit() {
     this.activatedRoute.params.subscribe((params) => {
-      this.proj.id = params.id;
+      this.projectService.pid = params.id;
     });
     await this.onLoadProjects();
     await this.onLoadInvitations();
   }
   async onLoadProjects() {
     this.data = await this.projectService.GetProjects();
-    console.log(this.data);
     console.log('token: ' + await this.userAuthentication.idToken);
+
+    let temp = await this.projectService.GetProjectsCollaborated();
+
     while (this.projects.length != 0) {
       this.projects.pop();
     }
     for (let i of this.data.projects) {
       this.projects.push(i);
     }
+    if (temp === undefined || temp['projects'] < 1) {
+      return;
+    }
+    for (let j of temp['projects']) {
+      this.projects.push(j);
+    }
+    // console.log(this.projects);
+
     // tslint:disable-next-line: no-unused-expression
-    this.projectService.pInfo = this.data.projects;
-    // console.log(this.projectService.pInfo);
+    this.projectService.pInfo = this.projects;
+    console.log(this.projectService.pInfo);
   }
   async onLoadInvitations() {
     let temp: any;
@@ -90,7 +100,6 @@ export class ProjectmanagementComponent implements OnInit {
         }
         this.projects.push(data);
         this.miscService.showSnackbarSuccessful(`${data.id} created `);
-        console.log(this.projects);
       }
     });
   }
@@ -101,7 +110,6 @@ export class ProjectmanagementComponent implements OnInit {
 
 
       let result = await this.projectService.DeleteProject(data.id);
-      console.log(result);
       if (result['message'] !== 'OK') {
         this.miscService.showSnackbarFail(`${data.id} deleted `);
         return;
@@ -113,7 +121,6 @@ export class ProjectmanagementComponent implements OnInit {
   async onUpdate(project: Project) {
     const dialogRef = this.dialog.open(UpdateprojectComponent, { width: this.dialogWidth, data: project });
     dialogRef.afterClosed().subscribe(async (data) => {
-      console.log(data);
       let result = await this.projectService.UpdateProject(data);
       if (result['message'] !== 'OK') {
         this.miscService.showSnackbarFail(`${data.id} updated `);
@@ -130,7 +137,7 @@ export class ProjectmanagementComponent implements OnInit {
   async gotoEdit(proj) {
     this.projectService.pid = proj.id;
     this.cookieService.set("project-id", proj.id);
-    await this.router.navigate([`/editproject/${proj.id}/resources`], { relativeTo: this.activatedRoute });
+    await this.router.navigate([`/editproject/${this.projectService.pid}/resources`], { relativeTo: this.activatedRoute });
   }
   async onAccept(invitation: any) {
     console.log(invitation.project);

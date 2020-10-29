@@ -57,7 +57,6 @@ export class DatabucketsComponent implements OnInit {
           isPublic: data.isPublic
         });
       }
-      console.log(this.buckets);
     });
   }
   async onLoadBuckets() {
@@ -69,8 +68,11 @@ export class DatabucketsComponent implements OnInit {
     if (result['buckets'].length === 0) {
       this.miscService.showSnackbarNotification('Do not have any buckets in this project');
     }
-
-    console.log(result);
+    for (const b of result['buckets']) {
+      this.buckets.push({
+        bid: b
+      });
+    }
   }
   onClickMenuContext(menuContent: any) {
     switch (menuContent) {

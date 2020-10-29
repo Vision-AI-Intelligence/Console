@@ -47,8 +47,10 @@ export class ToolbarComponent implements OnInit {
   }
   ngOnInit() {
     // this.getProjectId();
-    let projectId = this.cookieService.get("project-id");
-    this.selectedProject = projectId == "" ? "Select a project" : projectId;
+    let projectId = this.cookieService.get('project-id');
+    // console.log(projectId);
+    this.selectedProject = projectId === '' ? 'Select a project' : projectId;
+    // console.log(this.selectedProject);
   }
 
   onSidenavToggle() {
@@ -59,14 +61,14 @@ export class ToolbarComponent implements OnInit {
     this.cookieService.set("project-id", menuContent);
     window.location.reload();
   }
-  getProjectId() {
-    if (this.projectService.pInfo === undefined || this.projectService.pInfo === null) {
-      setTimeout(
-        async () => {
-          console.log(this.projectService.pInfo);
-          // await this.projectService.pInfo.map((i) => this.menuContext.push(i.id));
-        }, 5000
-      );
-    }
-  }
+  // getProjectId() {
+  //   if (this.projectService.pInfo === undefined || this.projectService.pInfo === null) {
+  //     setTimeout(
+  //       async () => {
+  //         console.log(this.projectService.pInfo);
+  //         // await this.projectService.pInfo.map((i) => this.menuContext.push(i.id));
+  //       }, 5000
+  //     );
+  //   }
+  // }
 }

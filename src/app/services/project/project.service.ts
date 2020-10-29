@@ -32,6 +32,21 @@ export class ProjectService {
       console.log('[GET] project' + error);
     }
   }
+
+  async GetProjectsCollaborated() {
+    try {
+      if (this.userAuthentication.idToken === undefined || this.userAuthentication.idToken === null) {
+        return;
+      }
+      return await this.http.get(this.server.endpoint + 'projects/accept', {
+        headers: {
+          authorization: this.userAuthentication.idToken
+        },
+      }).toPromise();
+    } catch (error) {
+      console.log('[GET] project' + error);
+    }
+  }
   async CreateProject(data: Project) {
     try {
       if (this.userAuthentication.idToken === undefined || this.userAuthentication.idToken === null) {
