@@ -15,6 +15,7 @@ export class JobsComponent implements OnInit {
   tabs = ['Running', 'Failed', 'Completed'];
   activeLink = this.tabs[0];
   ngOnInit(): void {
+    
   }
   selectTab(tab: any) {
     console.log(tab);
@@ -39,4 +40,6 @@ export class JobsComponent implements OnInit {
         break;
     }
   }
+
+  
 }

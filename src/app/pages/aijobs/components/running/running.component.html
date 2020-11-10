@@ -3,9 +3,13 @@
 
 
         <div style="display: flex; flex-direction: row; justify-content: space-between;  align-items: center; ">
-            <label style="text-align: left ; width: 30%;" >{{i.jid}}</label>
-            <p style="word-wrap: break-word; text-align: left ; margin: auto;width: 50%;">{{i.type}}:{{i.description}}</p>
-            <p style="margin: auto;width: 20%;">Elapsed time: {{i.time}}</p>
+            <label style="text-align: left ; width: 5%;">{{i.aijid}}</label>
+            <p style="word-wrap: break-word; text-align: left ; margin: auto;width: 20%;">{{i.description}}</p>
+            <p style="text-align: left ;margin: auto;width: 20%;">Elapsed time: {{i.elapsedTime}}</p>
+            <p style="text-align: left ;margin: auto;width: 10%;">Epochs: {{i.epochs}}</p>
+            <p style="text-align: left;margin: auto;width: 40%;">Loss: {{i.loss}}</p>
+
+
             <button mat-flat-button color='primary' (click)="onCancel()">Cancel</button>
         </div>
         <mat-progress-bar mode="indeterminate" style="padding-top: 1px;" color='primary'></mat-progress-bar>

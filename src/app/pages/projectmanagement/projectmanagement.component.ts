@@ -9,6 +9,7 @@ import { ProjectService } from '../../services/project/project.service';
 import { DeleteprojectComponent } from './components/dialogs/deleteproject/deleteproject.component';
 import { UpdateprojectComponent } from './components/dialogs/updateproject/updateproject.component';
 import { CookieService } from 'ngx-cookie-service';
+import { timeInterval } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
@@ -43,6 +44,9 @@ export class ProjectmanagementComponent implements OnInit {
     });
     await this.onLoadProjects();
     await this.onLoadInvitations();
+    await this.hideSpinkit()
+    this.unhideNoneSpinkit()
+    
   }
   async onLoadProjects() {
     this.data = await this.projectService.GetProjects();
@@ -163,5 +167,16 @@ export class ProjectmanagementComponent implements OnInit {
       case this.menuContext[2]:
         await this.onDelete(proj); break;
     }
+  }
+
+  async hideSpinkit():Promise<void>{
+    await new Promise( resolve => setTimeout(resolve, 1000))
+
+    let elem : HTMLElement = document.getElementById('myspinkit')
+    elem.setAttribute("style", "display:none;")
+  }
+  unhideNoneSpinkit():void{
+    let elem : HTMLElement = document.getElementById('noneMyspinkit')
+    elem.setAttribute("style", "display:block;")
   }
 }

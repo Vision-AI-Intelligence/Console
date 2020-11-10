@@ -39,10 +39,6 @@ const routes: Routes = [
     canActivate: [AuthenticationGuard]
   },
   {
-    path: 'aijobs', loadChildren: () => import('./pages/aijobs/aijobs.module').then(m => m.AijobsModule),
-    canActivate: [AuthenticationGuard]
-  },
-  {
     path: 'modeldesigner', loadChildren: () => import('./pages/modeldesigner/modeldesigner.module').then(m => m.ModeldesignerModule),
     canActivate: [AuthenticationGuard]
   },
@@ -78,6 +74,14 @@ const routes: Routes = [
   },
   {
     path: 'jobs', loadChildren: () => import('./pages/jobs/jobs.module').then(m => m.JobsModule),
+    canActivate: [AuthenticationGuard]
+  },
+  {
+    path: 'aijobs', loadChildren: () => import('./pages/aijobs/aijobs.module').then(m => m.AijobsModule),
+    canActivate: [AuthenticationGuard]
+  },
+  {
+    path: 'meme', loadChildren: () => import('./pages/meme/meme.module').then(m => m.MemeModule),
     canActivate: [AuthenticationGuard]
   },
   { path: '**', redirectTo: '404' },
