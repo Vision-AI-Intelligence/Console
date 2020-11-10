@@ -48,7 +48,7 @@ import { FormsModule } from '@angular/forms';
     MatTableModule,
     MatCardModule,
     MatSlideToggleModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
   ],
   exports: [
     MatIconModule,
@@ -71,7 +71,7 @@ import { FormsModule } from '@angular/forms';
     MatTableModule,
     MatCardModule,
     MatSlideToggleModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
   ]
 })
 export class MaterialModule { }

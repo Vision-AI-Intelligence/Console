@@ -1,5 +1,9 @@
 import { AfterViewInit, Component, OnInit, Renderer2, ViewChild } from '@angular/core';
-
+import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material';
+import { MiscService } from 'src/app/services/misc.service';
+import { ProjectService } from 'src/app/services/project/project.service';
+import {Project} from '../../models/project.model'
+import {BucketOptionsComponent} from './components/dialog/bucket-options/bucket-options.component'
 
 @Component({
   selector: 'app-preprocessing',
@@ -63,18 +67,48 @@ export class PreprocessingComponent implements OnInit, AfterViewInit {
   bboxLists = [];
   currentBox: any = null;
   createbox: boolean = false;
+
+  private dialogRef = null;
+  dialogWidth = '500px';
+  public projects = [];
+
   constructor(
-    private renderer: Renderer2
+    private renderer: Renderer2,
+    public dialog: MatDialog,
+    private projectService: ProjectService,
+    public miscService: MiscService,
   ) { }
+  
   ngAfterViewInit(): void {
     console.log(this.ohShit);
     console.log(this.imgRef["nativeElement"].naturalHeight); // naturalHeight, naturalWidth, clientHeight, clientWidth
     console.log(this.imgRef["nativeElement"].naturalWidth);
   }
 
-  ngOnInit(
-  ): void {
-
+  ngOnInit(): void {}
+  bucketOptionDialog():void{
+    const inputData = {
+      id: '',
+      name: '',
+      description: '',
+    };
+    this.dialogRef = this.dialog.open(BucketOptionsComponent, {
+      width: this.dialogWidth,
+      hasBackdrop: true,
+      data: inputData,
+    });
+    // this.dialogRef.afterClosed().subscribe(async (data) => {
+    //   if (data.id !== '' && data.id !== undefined
+    //     && data.name !== '' && data.description !== '' && data !== '' && data !== undefined && data !== null) {
+    //     const result = await this.projectService.CreateProject(data);
+    //     if (result['message'] !== 'OK') {
+    //       this.miscService.showSnackbarFail(`${data.id} created `);
+    //       return;
+    //     }
+    //     this.projects.push(data);
+    //     this.miscService.showSnackbarSuccessful(`${data.id} created `);
+    //   }
+    // });
   }
   createBox() {
     this.createbox = true;

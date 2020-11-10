@@ -18,6 +18,7 @@ import { UpdateComponent } from './components/dialogs/update/update.component';
 import { CreateComponent } from '../app/components/dialogs/create/create.component';
 import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
 import { HttpClientModule } from '@angular/common/http';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,7 +27,7 @@ import { HttpClientModule } from '@angular/common/http';
     DeleteComponent,
     UpdateComponent,
     CreateComponent,
-    BreadcrumbComponent,
+    BreadcrumbComponent
   ],
   imports: [
     BrowserModule,
@@ -37,7 +38,7 @@ import { HttpClientModule } from '@angular/common/http';
     HomeModule,
     DataprocessingModule,
     MaterialModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   entryComponents: [UpdateComponent, CreateComponent],
   providers: [],
