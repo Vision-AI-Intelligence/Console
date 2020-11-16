@@ -65,7 +65,7 @@ export class CollaborationComponent implements OnInit, AfterViewInit {
       // console.log(this.projectService.pid);
       // console.log(this.userService.uid);
       // console.log(to.uid);
-      let createInvitation = await this.projectService.CreateInvitation(this.projectService.pid, this.userService.uid, to.uid);
+      let createInvitation = await this.projectService.createInvitation(this.projectService.pid, this.userService.uid, to.uid);
       if (createInvitation['message'] != 'OK') {
         this.miscService.showSnackbarFail(`Invite ${to.email}`);
         return;
@@ -77,7 +77,7 @@ export class CollaborationComponent implements OnInit, AfterViewInit {
     }
   }
   async getInvitations() {
-    let getInvitation = await this.projectService.GetInvitation(this.projectService.pid);
+    let getInvitation = await this.projectService.getInvitation(this.projectService.pid);
     if (await getInvitation['result'].length === 0) {
       this.miscService.showSnackbarNotification('No invitations yet, please invite someone');
     }
@@ -105,14 +105,14 @@ export class CollaborationComponent implements OnInit, AfterViewInit {
       if (this.projectService.pid === undefined || data === undefined || data === '') {
         return;
       }
-      await this.projectService.DeleteInvitation(this.projectService.pid, data);
+      await this.projectService.deleteInvitation(this.projectService.pid, data);
       this.miscService.showSnackbarSuccessful(`Deleted ${invitationId}`);
       await this.getInvitations(); // it still doesn't work
     });
   }
   async getCollaborators() {
     let temp: any;
-    temp = await this.projectService.GetCollaborators(this.projectService.pid);
+    temp = await this.projectService.getCollaborators(this.projectService.pid);
     if (temp === undefined || temp === null) {
       this.miscService.showSnackbarNotification(`${this.projectService.pid} does not have any collaborators`);
     }
@@ -134,7 +134,7 @@ export class CollaborationComponent implements OnInit, AfterViewInit {
       if (data.uid === undefined) {
         return;
       }
-      this.projectService.DeleteCollaborators(this.projectService.pid, data.uid)
+      this.projectService.deleteCollaborators(this.projectService.pid, data.uid)
         .then(async () => {
 
 

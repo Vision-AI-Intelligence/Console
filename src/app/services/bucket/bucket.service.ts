@@ -33,7 +33,7 @@ export class BucketService {
       console.log('[CREATE] project ' + error);
     }
   }
-  async GetFilesNFoldersFromDirectory(projectId: string, bucketId: string, directory: string) {
+  async getFilesNFoldersFromDirectory(projectId: string, bucketId: string, directory: string) {
     try {
       return await this.http.get(this.server.endpoint + 'bucket', {
         headers: {
@@ -51,7 +51,7 @@ export class BucketService {
   }
 
   // check file's | folder's information
-  async GetMetadataFromFileOrFolder(projectId: string, bucketId: string, nameOfItem: string) {
+  async getMetadataFromFileOrFolder(projectId: string, bucketId: string, nameOfItem: string) {
     try {
       return await this.http.get(this.server.endpoint + 'bucket/metadata', {
         headers: {
@@ -69,7 +69,7 @@ export class BucketService {
   }
 
   // view config of bucket
-  async GetBucketOptions(projectId: string, bucketId: string) {
+  async getBucketOptions(projectId: string, bucketId: string) {
     try {
       return await this.http.get(this.server.endpoint + 'bucket/options', {
         headers: {
@@ -86,7 +86,7 @@ export class BucketService {
   }
 
   // modify bucket's options
-  async ModifyBucketOptions(projectId: string, bucketId: string, opts: Array<any>) {
+  async modifyBucketOptions(projectId: string, bucketId: string, opts: Array<any>) {
     try {
       return await this.http.post(this.server.endpoint + 'bucket/options', {
         pid: projectId,
@@ -101,7 +101,7 @@ export class BucketService {
       console.log('[UPDATE] bucket -> options ' + error);
     }
   }
-  async UploadFile(file: FormData, projectId: string, bucketId: string, directory: string) {
+  async uploadFile(file: FormData, projectId: string, bucketId: string, directory: string) {
     try {
       return await this.http.post(this.server.endpoint + 'bucket/upload', file, {
         headers: {
@@ -118,7 +118,7 @@ export class BucketService {
     }
   }
 
-  async MakeNewDirectory(projectId: string, bucketId: string, directoryName: string, currentDirectory: string) {
+  async makeNewDirectory(projectId: string, bucketId: string, directoryName: string, currentDirectory: string) {
     try {
       return this.http.post(this.server.endpoint + 'bucket/mkdir', {
         pid: projectId,
@@ -134,7 +134,7 @@ export class BucketService {
       console.log('[POST] bucket -> make new dir ' + error);
     }
   }
-  async MoveFileOrDirectory(projectId: string, bucketId: string, source: string, destination: string) {
+  async moveFileOrDirectory(projectId: string, bucketId: string, source: string, destination: string) {
     try {
       return await this.http.put(this.server.endpoint + 'bucket/mv', {
         pid: projectId,
@@ -150,7 +150,7 @@ export class BucketService {
       console.log('[PUT] bucket -> move file|dir ' + error);
     }
   }
-  async CopyFileOrDirectory(projectId: string, bucketId: string, source: string, destination: string) {
+  async copyFileOrDirectory(projectId: string, bucketId: string, source: string, destination: string) {
     try {
       return await this.http.put(this.server.endpoint + 'bucket/cp', {
         pid: projectId,
@@ -166,7 +166,7 @@ export class BucketService {
       console.log('[PUT] bucket -> copy file|directory ' + error);
     }
   }
-  async RemoveFileOrDirectory(projectId: string, bucketId: string, directory: string) {
+  async removeFileOrDirectory(projectId: string, bucketId: string, directory: string) {
     try {
       return await this.http.put(this.server.endpoint + 'bucket/rm', {
         pid: projectId,
@@ -181,7 +181,7 @@ export class BucketService {
       console.log('[PUT] bucket -> remove file|directory ' + error);
     }
   }
-  async DownloadFileOrDirectory(projectId: string, bucketId: string, file: string) {
+  async downloadFileOrDirectory(projectId: string, bucketId: string, file: string) {
     try {
       return await this.http.get(this.server.endpoint + 'bucket/download', {
         headers: {
@@ -198,7 +198,7 @@ export class BucketService {
     }
   }
 
-  async GetListOfJobs(projectId: string) {
+  async getListOfJobs(projectId: string) {
     try {
       return await this.http.get(this.server.endpoint + 'bucket/jobs', {
         headers: {
@@ -213,7 +213,7 @@ export class BucketService {
     }
   }
 
-  async ZipFilesOrFolders(projectId: string, bucketId: string, source: string, destination: string) {
+  async zipFilesOrFolders(projectId: string, bucketId: string, source: string, destination: string) {
     try {
       return await this.http.put(this.server.endpoint + 'bucket/zip', {
         pid: projectId,
@@ -230,7 +230,7 @@ export class BucketService {
     }
   }
 
-  async UnzipFilesOrFolders(projectId: string, bucketId: string, source: string, destination: string) {
+  async unzipFilesOrFolders(projectId: string, bucketId: string, source: string, destination: string) {
     try {
       return await this.http.put(this.server.endpoint + 'bucket/unzip', {
         pid: projectId,
@@ -248,7 +248,7 @@ export class BucketService {
   }
 
   // current not available
-  async DownloadJob(projectId: string, bucketId: string, urlOfSource: string, destination: string) {
+  async downloadJob(projectId: string, bucketId: string, urlOfSource: string, destination: string) {
     try {
     } catch (error) {
       console.log('[]');

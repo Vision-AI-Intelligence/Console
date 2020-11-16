@@ -46,13 +46,13 @@ export class ProjectmanagementComponent implements OnInit {
     await this.onLoadInvitations();
     await this.hideSpinkit()
     this.unhideNoneSpinkit()
-    
+
   }
   async onLoadProjects() {
-    this.data = await this.projectService.GetProjects();
+    this.data = await this.projectService.getProjects();
     console.log('token: ' + await this.userAuthentication.idToken);
 
-    let temp = await this.projectService.GetProjectsCollaborated();
+    let temp = await this.projectService.getProjectsCollaborated();
 
     while (this.projects.length != 0) {
       this.projects.pop();
@@ -97,7 +97,7 @@ export class ProjectmanagementComponent implements OnInit {
     this.dialogRef.afterClosed().subscribe(async (data) => {
       if (data.id !== '' && data.id !== undefined
         && data.name !== '' && data.description !== '' && data !== '' && data !== undefined && data !== null) {
-        const result = await this.projectService.CreateProject(data);
+        const result = await this.projectService.createProject(data);
         if (result['message'] !== 'OK') {
           this.miscService.showSnackbarFail(`${data.id} created `);
           return;
@@ -113,7 +113,7 @@ export class ProjectmanagementComponent implements OnInit {
       // console.log(data);
 
 
-      let result = await this.projectService.DeleteProject(data.id);
+      let result = await this.projectService.deleteProject(data.id);
       if (result['message'] !== 'OK') {
         this.miscService.showSnackbarFail(`${data.id} deleted `);
         return;
@@ -125,7 +125,7 @@ export class ProjectmanagementComponent implements OnInit {
   async onUpdate(project: Project) {
     const dialogRef = this.dialog.open(UpdateprojectComponent, { width: this.dialogWidth, data: project });
     dialogRef.afterClosed().subscribe(async (data) => {
-      let result = await this.projectService.UpdateProject(data);
+      let result = await this.projectService.updateProject(data);
       if (result['message'] !== 'OK') {
         this.miscService.showSnackbarFail(`${data.id} updated `);
         return;
@@ -146,13 +146,13 @@ export class ProjectmanagementComponent implements OnInit {
   async onAccept(invitation: any) {
     console.log(invitation.project);
     console.log(invitation.id);
-    await this.projectService.AcceptInvitation(invitation.project, invitation.id);
+    await this.projectService.acceptInvitation(invitation.project, invitation.id);
     this.miscService.showSnackbarSuccessful(`${invitation.to} accepted`);
     await this.onLoadInvitations();
     await this.onLoadProjects();
   }
   onReject(invitation: any) {
-    this.projectService.DeleteInvitation(invitation.project, invitation.id).then(
+    this.projectService.deleteInvitation(invitation.project, invitation.id).then(
       async () => {
         this.miscService.showSnackbarSuccessful(`Rejected ${invitation.project}`);
         await this.onLoadInvitations();
@@ -169,14 +169,14 @@ export class ProjectmanagementComponent implements OnInit {
     }
   }
 
-  async hideSpinkit():Promise<void>{
-    await new Promise( resolve => setTimeout(resolve, 1000))
+  async hideSpinkit(): Promise<void> {
+    await new Promise(resolve => setTimeout(resolve, 1000))
 
-    let elem : HTMLElement = document.getElementById('myspinkit')
+    let elem: HTMLElement = document.getElementById('myspinkit')
     elem.setAttribute("style", "display:none;")
   }
-  unhideNoneSpinkit():void{
-    let elem : HTMLElement = document.getElementById('noneMyspinkit')
+  unhideNoneSpinkit(): void {
+    let elem: HTMLElement = document.getElementById('noneMyspinkit')
     elem.setAttribute("style", "display:block;")
   }
 }

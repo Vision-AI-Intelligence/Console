@@ -18,7 +18,7 @@ export class ProjectService {
     // console.log(this.pInfo);
   }
 
-  async GetProjects() {
+  async getProjects() {
     try {
       if (this.userAuthentication.idToken === undefined || this.userAuthentication.idToken === null) {
         return;
@@ -33,7 +33,7 @@ export class ProjectService {
     }
   }
 
-  async GetProjectsCollaborated() {
+  async getProjectsCollaborated() {
     try {
       if (this.userAuthentication.idToken === undefined || this.userAuthentication.idToken === null) {
         return;
@@ -47,7 +47,7 @@ export class ProjectService {
       console.log('[GET] project' + error);
     }
   }
-  async CreateProject(data: Project) {
+  async createProject(data: Project) {
     try {
       if (this.userAuthentication.idToken === undefined || this.userAuthentication.idToken === null) {
         return;
@@ -65,7 +65,7 @@ export class ProjectService {
       console.log('[CREATE] project ' + error);
     }
   }
-  async UpdateProject(data: Project) {
+  async updateProject(data: Project) {
     try {
       if (this.userAuthentication.idToken === undefined || this.userAuthentication.idToken === null) {
         return;
@@ -84,7 +84,7 @@ export class ProjectService {
     }
   }
 
-  async DeleteProject(pid: string) {
+  async deleteProject(pid: string) {
     try {
       if (this.userAuthentication.idToken === undefined || this.userAuthentication.idToken === null || pid === '' || pid === undefined) {
         return;
@@ -101,7 +101,7 @@ export class ProjectService {
       console.log('[DELETE] project ' + error);
     }
   }
-  async GetInvitation(projectId: string) {
+  async getInvitation(projectId: string) {
     try {
       if (this.userAuthentication.idToken === undefined || this.userAuthentication.idToken === null) {
         return;
@@ -118,7 +118,7 @@ export class ProjectService {
       console.log('[GET] projects/invitation ' + error);
     }
   }
-  async CreateInvitation(projectId: string, fromId: string, toId: string) {
+  async createInvitation(projectId: string, fromId: string, toId: string) {
     try {
       if (this.userAuthentication.idToken === undefined || this.userAuthentication.idToken === null) {
         return;
@@ -136,7 +136,7 @@ export class ProjectService {
       console.log('[CREATE] projects/invitation ' + error);
     }
   }
-  async DeleteInvitation(projectId: string, iId: string) {
+  async deleteInvitation(projectId: string, iId: string) {
     try {
       if (this.userAuthentication.idToken === undefined || this.userAuthentication.idToken === null) {
         return;
@@ -155,7 +155,7 @@ export class ProjectService {
       console.log('[DELETE] projects/invitation ' + error);
     }
   }
-  async AcceptInvitation(projectId: string, iId: string) {
+  async acceptInvitation(projectId: string, iId: string) {
     try {
       if (this.userAuthentication.idToken === undefined || this.userAuthentication.idToken === null) {
         return;
@@ -173,7 +173,7 @@ export class ProjectService {
       console.log('[ACCEPT] projects/invitation ' + error);
     }
   }
-  async GetCollaborators(projectId: string) {
+  async getCollaborators(projectId: string) {
     try {
       if (this.userAuthentication.idToken === undefined || this.userAuthentication.idToken === null) {
         return;
@@ -190,7 +190,7 @@ export class ProjectService {
       console.log('[GET] projects/collaborators ' + error);
     }
   }
-  async DeleteCollaborators(projectId: string, collabId: string) {
+  async deleteCollaborators(projectId: string, collabId: string) {
     try {
       if (this.userAuthentication.idToken === undefined || this.userAuthentication.idToken === null) {
         return;
