@@ -7,7 +7,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ModeldesignerComponent implements OnInit {
 
-  constructor() { }
+  model = 'option1';
+  bucket = 'option1';
+  constructor() {
+  }
 
   ngOnInit(): void {
   }
